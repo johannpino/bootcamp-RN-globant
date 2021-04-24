@@ -19,7 +19,6 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
         <a className="waves-effect waves-light btn">button</a>
-        <a className="waves-effect waves-light btn">button 2</a>
         <p className={styles.description}>
           Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
