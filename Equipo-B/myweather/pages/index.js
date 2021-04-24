@@ -1,7 +1,23 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import fetch from "isomorphic-unfetch";
 
 export default function Home() {
+  const [data, setData] = useState(null);
+  const consultarAPI = async () => {
+    const apiKey = "5c2928819e91e1b61db39f58e3ea69d8";
+    const lat = "-34.7634885";
+    const lon = "-56.393682";
+    const lang = "sp";
+    const urlOnecall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=${lang}`;
+    await fetch(urlOnecall)
+      .then((r) => r.json())
+      .then((data) => {
+        setData(data);
+      });
+  };
+  consultarAPI();
   return (
     <div className={styles.container}>
       <Head>
@@ -16,7 +32,7 @@ export default function Home() {
       <nav>
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">
-            Logo
+            MyWeather
           </a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
@@ -32,9 +48,7 @@ export default function Home() {
         </div>
       </nav>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>{data.current.weather[0].description}</h1>
         <a className="waves-effect waves-light btn">button</a>
         <p className={styles.description}>
           Get started by editing{" "}
