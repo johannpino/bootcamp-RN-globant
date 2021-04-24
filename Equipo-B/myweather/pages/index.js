@@ -13,7 +13,24 @@ export default function Home() {
         ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
-
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">
+            Logo
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="sass.html">Sass</a>
+            </li>
+            <li>
+              <a href="badges.html">Components</a>
+            </li>
+            <li>
+              <a href="collapsible.html">JavaScript</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
