@@ -121,7 +121,8 @@ const TiempoDetallado = ({ data }) => {
                     </li>
                     <li class="collection-item">
                       <i className="tiny material-icons"> ac_unit</i> Sensación
-                      térmica: <strong>{FtoC(current.feels_like)}º</strong>
+                      térmica:{" "}
+                      <strong>{KelvinToCelsius(current.feels_like)}º</strong>
                     </li>
                   </ul>
                 </div>
