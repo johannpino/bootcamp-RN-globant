@@ -119,7 +119,7 @@ const TiempoDetallado = ({ data }) => {
                       <i className="tiny material-icons"> brightness_high</i>{" "}
                       Índice UV: <strong>{current.uvi} de 10</strong>
                     </li>
-                    <li class="collection-item">
+                    <li className="collection-item">
                       <i className="tiny material-icons"> ac_unit</i> Sensación
                       térmica:{" "}
                       <strong>{KelvinToCelsius(current.feels_like)}º</strong>
