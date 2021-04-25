@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
@@ -23,7 +23,12 @@ export default function Home() {
         });
     }
   };
-  consultarAPI();
+
+  //Llamar API
+  useEffect(() => {
+    consultarAPI();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -36,11 +41,7 @@ export default function Home() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
       <main className={styles.main}>
-        {data ? (
-          <h1 className={styles.title}>
-            {data.current.weather[0].description}
-          </h1>
-        ) : null}
+        {data ? null : <h1 className={styles.title}>Cargando...</h1>}
         {/* if (data === null ) return null; */}
       </main>
     </div>
