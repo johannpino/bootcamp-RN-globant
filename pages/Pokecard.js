@@ -1,0 +1,20 @@
+import React, { Component } from "react";
+
+const POK_API =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+class Pokecard extends Component {
+  render() {
+    let pokeImg = `${POK_API}${this.props.id}.png`;
+    return (
+      <div className="Pokecards">
+        <h1>{this.props.name}</h1>
+        <img src={pokeImg} alt={this.props.name} />
+        <div>Type: {this.props.type}</div>
+        <div>EXP: {this.props.exp}</div>
+      </div>
+    );
+  }
+}
+
+export default Pokecard;
