@@ -6,7 +6,7 @@ import fetch from "isomorphic-unfetch";
 
 export default function Home() {
   const [data, setData] = useState(null);
-  const consultarAPI = async () => {
+  const consultarAPI = () => {
     const apiKey = "5c2928819e91e1b61db39f58e3ea69d8";
     let lat;
     let lon;
@@ -46,7 +46,7 @@ export default function Home() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
       <main className={styles.main}>
-        {data ? null : <h1 className={styles.title}>Cargando...</h1>}
+        {data ? null : <div className="loader">Loading...</div>}
         <TiempoDetallado data={data} />
         {/* if (data === null ) return null; */}
       </main>
