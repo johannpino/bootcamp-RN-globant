@@ -1,4 +1,5 @@
 import React from "react";
+
 const TiempoDetallado = ({ data }) => {
   const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
@@ -29,7 +30,7 @@ const TiempoDetallado = ({ data }) => {
             <div className="card-content">
               <div className="row">
                 <div className="col s12">
-                  <strong>
+                  <strong data-testid="titulo">
                     El tiempo en {splitTimeZone(data.timezone)} hoy
                   </strong>
                 </div>
@@ -38,23 +39,31 @@ const TiempoDetallado = ({ data }) => {
             <div className="card-content">
               <div className="row">
                 <div className="col s4">
-                  <h2>{KelvinToCelsius(current.temp)}º</h2>
+                  <h2 data-testid="temperatura">
+                    {KelvinToCelsius(current.temp)}º
+                  </h2>
                 </div>
                 <div className="col s3">
                   <div className="row">
                     <div className="col s1">
                       <p>
-                        <i className="material-icons">keyboard_arrow_up</i>
+                        <i className="material-icons" data-testid="icon-up">
+                          keyboard_arrow_up
+                        </i>
                       </p>
                     </div>
                     <div className="col s3">
                       <p>
-                        <i className="material-icons">wb_sunny</i>
+                        <i className="material-icons" data-testid="icon-sun-2">
+                          wb_sunny
+                        </i>
                       </p>
                     </div>
                     <div className="col s3">
                       <p>
-                        <strong>{timeConverter(current.sunrise)}</strong>
+                        <strong data-testid="sunrise-time">
+                          {timeConverter(current.sunrise)}
+                        </strong>
                       </p>
                     </div>
                   </div>
@@ -63,17 +72,23 @@ const TiempoDetallado = ({ data }) => {
                   <div className="row">
                     <div className="col s1">
                       <p>
-                        <i className="material-icons">keyboard_arrow_down</i>
+                        <i className="material-icons" data-testid="icon-down">
+                          keyboard_arrow_down
+                        </i>
                       </p>
                     </div>
                     <div className="col s3">
                       <p>
-                        <i className="material-icons">wb_sunny</i>
+                        <i className="material-icons" data-testid="icon-sun">
+                          wb_sunny
+                        </i>
                       </p>
                     </div>
                     <div className="col s3">
                       <p>
-                        <strong>{timeConverter(current.sunset)}</strong>
+                        <strong data-testid="sunset-time">
+                          {timeConverter(current.sunset)}
+                        </strong>
                       </p>
                     </div>
                   </div>
@@ -94,35 +109,76 @@ const TiempoDetallado = ({ data }) => {
                 <div className="col s6">
                   <ul className="collection">
                     <li className="collection-item">
-                      <i className="tiny material-icons"> invert_colors</i>{" "}
+                      <i
+                        className="tiny material-icons"
+                        data-testid="humidity-icon"
+                      >
+                        invert_colors
+                      </i>{" "}
                       Humedad:
-                      <strong> {current.humidity}</strong>%
+                      <strong data-testid="humidity">
+                        {" "}
+                        {current.humidity}%
+                      </strong>
                     </li>
                     <li className="collection-item">
-                      <i className="tiny material-icons"> compare_arrows</i>{" "}
-                      Presión: <strong> {current.humidity}mb</strong>
+                      <i
+                        className="tiny material-icons"
+                        data-testid="pressure-icon"
+                      >
+                        compare_arrows
+                      </i>{" "}
+                      Presión:{" "}
+                      <strong data-testid="pressure">
+                        {current.pressure}mb
+                      </strong>
                     </li>
                     <li className="collection-item">
-                      <i className="tiny material-icons"> remove_red_eye</i>{" "}
+                      <i
+                        className="tiny material-icons"
+                        data-testid="visibility-icon"
+                      >
+                        remove_red_eye
+                      </i>{" "}
                       Visibilidad:{" "}
-                      <strong>{current.visibility / 1000}km</strong>
+                      <strong data-testid="visibility">
+                        {current.visibility / 1000}km
+                      </strong>
                     </li>
                   </ul>
                 </div>
                 <div className="col s6">
                   <ul className="collection">
                     <li className="collection-item">
-                      <i className="tiny material-icons"> wrap_text</i> Viento:{" "}
-                      <strong>{current.wind_speed}km/h</strong>
+                      <i
+                        className="tiny material-icons"
+                        data-testid="wind-icon"
+                      >
+                        wrap_text
+                      </i>{" "}
+                      Viento:{" "}
+                      <strong data-testid="wind">
+                        {current.wind_speed}km/h
+                      </strong>
                     </li>
                     <li className="collection-item">
-                      <i className="tiny material-icons"> brightness_high</i>{" "}
-                      Índice UV: <strong>{current.uvi} de 10</strong>
+                      <i className="tiny material-icons" data-testid="uv-icon">
+                        brightness_high
+                      </i>{" "}
+                      Índice UV:{" "}
+                      <strong data-testid="uv">{current.uvi} de 10</strong>
                     </li>
                     <li className="collection-item">
-                      <i className="tiny material-icons"> ac_unit</i> Sensación
-                      térmica:{" "}
-                      <strong>{KelvinToCelsius(current.feels_like)}º</strong>
+                      <i
+                        className="tiny material-icons"
+                        data-testid="feelslike-icon"
+                      >
+                        ac_unit
+                      </i>{" "}
+                      Sensación térmica:{" "}
+                      <strong data-testid="feelslike">
+                        {KelvinToCelsius(current.feels_like)}º
+                      </strong>
                     </li>
                   </ul>
                 </div>
