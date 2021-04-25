@@ -1,6 +1,6 @@
 import React from "react";
 const TiempoDetallado = ({ data }) => {
-  const FtoC = (temp) => {
+  const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
   };
 
@@ -38,7 +38,7 @@ const TiempoDetallado = ({ data }) => {
             <div className="card-content">
               <div className="row">
                 <div className="col s4">
-                  <h2>{FtoC(current.temp)}º</h2>
+                  <h2>{KelvinToCelsius(current.temp)}º</h2>
                 </div>
                 <div className="col s3">
                   <div className="row">
