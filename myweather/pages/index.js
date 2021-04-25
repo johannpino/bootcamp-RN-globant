@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TiempoDetallado from "../components/TiempoDetallado";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
@@ -42,6 +43,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {data ? null : <h1 className={styles.title}>Cargando...</h1>}
+        <TiempoDetallado data={data} />
         {/* if (data === null ) return null; */}
       </main>
     </div>
