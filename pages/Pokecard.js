@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 
-const POK_API =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+// const POK_API =
+// "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+const POK_API = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
+
+let changeNum = (number) => (number <= 999 ? `00${number}`.slice(-3) : number);
 
 class Pokecard extends Component {
   render() {
-    let pokeImg = `${POK_API}${this.props.id}.png`;
+    let pokeImg = `${POK_API}${changeNum(this.props.id)}.png`;
     return (
       <div className="Pokecards">
-        <h1>{this.props.name}</h1>
+        <h1 className="Pokecard-title">{this.props.name}</h1>
         <img src={pokeImg} alt={this.props.name} />
-        <div>Type: {this.props.type}</div>
-        <div>EXP: {this.props.exp}</div>
+        <div className="Pokecard-data">Type: {this.props.type}</div>
+        <div className="Pokecard-data">EXP: {this.props.exp}</div>
       </div>
     );
   }
