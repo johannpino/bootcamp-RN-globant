@@ -4,7 +4,7 @@ const TiempoDetallado = ({ data }) => {
     return Math.floor(temp - 273);
   };
 
-  const splitDate = (string) => {
+  const splitTimeZone = (string) => {
     let res = string.split("/");
     return res[1];
   };
@@ -39,58 +39,105 @@ const TiempoDetallado = ({ data }) => {
   const { current } = data;
   return (
     <>
-      <div class="col s12 m7">
-        <div class="card horizontal">
-          <div class="card-stacked">
-            <div class="card-content">
+      <div className="col s12 m7">
+        <div className="card horizontal">
+          <div className="card-stacked">
+            <div className="card-content">
               <div className="row">
                 <div className="col s12">
-                  <strong>El tiempo en {splitDate(data.timezone)} hoy</strong>
+                  <strong>
+                    El tiempo en {splitTimeZone(data.timezone)} hoy
+                  </strong>
                 </div>
               </div>
             </div>
-            <div class="card-content">
+            <div className="card-content">
               <div className="row">
-                <div className="col s6">
-                  <h1>{FtoC(current.temp)}º</h1>
+                <div className="col s4">
+                  <h2>{FtoC(current.temp)}º</h2>
                 </div>
-                <div className="col s6">
-                  <p>
-                    Amanecer: <strong>{timeConverter(current.sunrise)}</strong>
-                  </p>
-                  <p>
-                    Atardecer: <strong>{timeConverter(current.sunset)}</strong>
-                  </p>
+                <div className="col s3">
+                  <div className="row">
+                    <div className="col s1">
+                      <p>
+                        <i className="material-icons">keyboard_arrow_up</i>
+                      </p>
+                    </div>
+                    <div className="col s3">
+                      <p>
+                        <i className="material-icons">wb_sunny</i>
+                      </p>
+                    </div>
+                    <div className="col s3">
+                      <p>
+                        <strong>{timeConverter(current.sunrise)}</strong>
+                      </p>
+                    </div>
+                  </div>
                 </div>
+                <div className="col s3">
+                  <div className="row">
+                    <div className="col s1">
+                      <p>
+                        <i className="material-icons">keyboard_arrow_down</i>
+                      </p>
+                    </div>
+                    <div className="col s3">
+                      <p>
+                        <i className="material-icons">wb_sunny</i>
+                      </p>
+                    </div>
+                    <div className="col s3">
+                      <p>
+                        <strong>{timeConverter(current.sunset)}</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <style jsx>{`
+                  p {
+                    margin-top: 1rem;
+                    padding-left: 1rem;
+                  }
+                  h2 {
+                    margin-top: -1rem;
+                  }
+                `}</style>
               </div>
             </div>
-            <div class="card-content">
+            <div className="card-content">
               <div className="row">
                 <div className="col s6">
-                  <ul class="collection">
-                    <li class="collection-item">
-                      Humedad
+                  <ul className="collection">
+                    <li className="collection-item">
+                      <i className="tiny material-icons"> invert_colors</i>{" "}
+                      Humedad:
                       <strong> {current.humidity}</strong>%
                     </li>
-                    <li class="collection-item">
-                      Presión <strong> {current.humidity}mb</strong>
+                    <li className="collection-item">
+                      <i className="tiny material-icons"> compare_arrows</i>{" "}
+                      Presión: <strong> {current.humidity}mb</strong>
                     </li>
-                    <li class="collection-item">
-                      Visibilidad <strong>{current.visibility / 1000}km</strong>
+                    <li className="collection-item">
+                      <i className="tiny material-icons"> remove_red_eye</i>{" "}
+                      Visibilidad:{" "}
+                      <strong>{current.visibility / 1000}km</strong>
                     </li>
                   </ul>
                 </div>
                 <div className="col s6">
-                  <ul class="collection">
-                    <li class="collection-item">
-                      Viento <strong>{current.wind_speed}km/h</strong>
+                  <ul className="collection">
+                    <li className="collection-item">
+                      <i className="tiny material-icons"> wrap_text</i> Viento:{" "}
+                      <strong>{current.wind_speed}km/h</strong>
+                    </li>
+                    <li className="collection-item">
+                      <i className="tiny material-icons"> brightness_high</i>{" "}
+                      Índice UV: <strong>{current.uvi} de 10</strong>
                     </li>
                     <li class="collection-item">
-                      Índice UV <strong>{current.uvi} de 10</strong>
-                    </li>
-                    <li class="collection-item">
-                      Sensación térmica{" "}
-                      <strong>{FtoC(current.feels_like)}º</strong>
+                      <i className="tiny material-icons"> ac_unit</i> Sensación
+                      térmica: <strong>{FtoC(current.feels_like)}º</strong>
                     </li>
                   </ul>
                 </div>
