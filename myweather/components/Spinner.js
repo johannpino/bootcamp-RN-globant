@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import { WeatherContext } from "../context/weatherContext";
+import React from "react";
 
-const Spinner = () => {
-  const { data } = useContext(WeatherContext);
+const Spinner = ({ data }) => {
   return <>{data ? null : <div className="loader">Loading...</div>}</>;
 };
 

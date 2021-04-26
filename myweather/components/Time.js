@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import { WeatherContext } from "../context/weatherContext";
+import React from "react";
 
-const Time = () => {
-  const { data } = useContext(WeatherContext);
+const Time = ({ data }) => {
   const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
   };
@@ -10,6 +8,10 @@ const Time = () => {
   const splitTimeZone = (string) => {
     let res = string.split("/");
     return res[1];
+  };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   const formatTime = (time) => (time < 10 ? `0${time}` : time);
@@ -27,90 +29,58 @@ const Time = () => {
   }
   const { current } = data;
   const [day] = data.daily;
+
   return (
     <>
-      <div className="row">
-        <div className="col s12 m14">
-          <div className="card horizontal deep-purple lighten-1">
-            <div className="card-content white-text">
-              <div className="row">
-                <div className="col s12">
-                  <p className="flow-text" data-testid="titleTest">
-                    Tiempo en {splitTimeZone(data.timezone)}
-                  </p>
-                </div>
-                <div className="col s8">
-                  <div className="row">
-                    <div className="col s12">
-                      <p data-testid="timeTest">
-                        A partir de las {timeConverter(current.dt)}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col s10">
-                      <h2 data-testid="temperatureTest">
-                        {KelvinToCelsius(current.temp)}°C
-                      </h2>
-                    </div>
-                    <div className="col s2">
-                      <div className="row">
-                        <div className="col s6">
-                          <img
-                            src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
-                            data-testid="imgTest"
-                          ></img>
-                        </div>
-                        <style jsx>{`
-                          img {
-                            width: 100px;
-                            heigth: auto;
-                            margin-top: 1rem;
-                            margin-left: 5rem;
-                          }
-                        `}</style>
-                        <div className="col s6"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col s8">
-                    <h5 data-testid="descriptionTest">
-                      {current.weather[0].description}
-                    </h5>
-                  </div>
-                  <div className="col s4">
-                    <div className="row">
-                      <div className="col s4">
-                        <p data-testid="minTempTest">
-                          min: {KelvinToCelsius(day.temp.min)}°C
-                        </p>
-                      </div>
-                      <div className="col s3">
-                        <p data-testid="maxTempTest">
-                          max: {KelvinToCelsius(day.temp.max)}°C
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col s12">
-                    <p data-testid="rainTest">
-                      {day.pop}% probabilidad de lluvia en el dia.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col s12"></div>
-              </div>
-              <div className="row"></div>
+      <div className="card horizontal deep-purple lighten-1">
+        <div className="card-content white-text">
+          <div className="row">
+            <div className="col s6">
+              <p className="flow-text" data-testid="titleTest">
+                Tiempo en {splitTimeZone(data.timezone)}
+              </p>
+              <p data-testid="timeTest" className="low-opacity">
+                A partir de las {timeConverter(current.dt)}
+              </p>
+            </div>
+            <div className="col s6">
+              <img
+                src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
+                data-testid="imgTest"
+              ></img>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s8">
+              <strong data-testid="temperatureTest">
+                {KelvinToCelsius(current.temp)}°
+              </strong>
+              <p data-testid="minTempTest">
+                Min: {KelvinToCelsius(day.temp.min)}°
+              </p>
+              <p data-testid="maxTempTest">
+                Max: {KelvinToCelsius(day.temp.max)}°
+              </p>
+            </div>
+            <div className="col s4">
+              <h5 data-testid="descriptionTest">
+                {capitalizeFirstLetter(current.weather[0].description)}
+              </h5>
+              <p data-testid="rainTest">
+                {day.pop}% probabilidad de lluvia en el día
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        img {
+          margin-left: 10rem;
+        }
+        strong {
+          font-size: 3rem;
+        }
+      `}</style>
     </>
   );
 };

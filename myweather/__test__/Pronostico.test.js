@@ -9,7 +9,7 @@ afterEach(cleanup);
 
 test("<Pronostico/> renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Pronostico />, div);
+  ReactDOM.render(<Pronostico data={data} />, div);
 });
 
 test("<Pronostico/> renders input correctly", () => {

@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import { WeatherContext } from "../context/weatherContext";
+import React from "react";
 
-export const Pronostico = () => {
-  const { data } = useContext(WeatherContext);
-
+export const Pronostico = ({ data }) => {
   if (!data) {
     return null;
   }

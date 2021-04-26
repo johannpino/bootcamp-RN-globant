@@ -37,7 +37,7 @@ afterEach(cleanup);
 
 test("<TiempoDetallado/> renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<TiempoDetallado />, div);
+  ReactDOM.render(<TiempoDetallado data={data} />, div);
 });
 
 test("<TiempoDetallado/> renders input correctly", () => {
