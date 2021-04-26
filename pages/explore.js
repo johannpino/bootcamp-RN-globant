@@ -14,6 +14,7 @@ const explore = () => {
             { id: 39, name: "Jigglypuff", type: "normal", base_experience: 95 },
             { id: 94, name: "Gengar", type: "poison", base_experience: 225 },
             { id: 133, name: "Eevee", type: "normal", base_experience: 65 },
+            { id: 419, name: "Floatzel", type: "water", base_experience: 49}
           ]
 
     return (
@@ -25,18 +26,12 @@ const explore = () => {
                 flex-wrap: wrap;
             }
 
-            @media screen and (max-width: 440px) {
-                .pokecard-card {
-                    padding: 0 auto;
-                }
-            }
-
             .pokecard-card {
                 width: 176px;
                 background-color: white;
                 padding: 15px;
                 text-align: center;
-                margin: 12px;
+                margin: 12px auto;
                 -webkit-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);
                 -moz-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);
                 box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);

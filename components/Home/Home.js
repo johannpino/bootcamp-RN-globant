@@ -3,18 +3,18 @@ import Link from 'next/link'
 const Home = () => {
     return (
         <div>
-            <h1 class="title">Bienvenido a tu pokedex.</h1>
-            <p class="paragraph">
+            <h1 className="title">Bienvenido a tu pokedex.</h1>
+            <p className="paragraph">
             Aqui encontraras informacion sobre todos los pokemon
              </p>
-            <div class="buttons-div">
+            <div className="buttons-div">
 
                 <Link href="/explore">
-                  <button class="button button1">Explorar</button>
+                  <button className="button button1">Explorar</button>
                 </Link>
 
                 <Link href="/info">
-                  <button class="button button2">Saber mas</button>
+                  <button className="button button2">Saber mas</button>
                 </Link>
                 
             </div>

@@ -1,18 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <div>
-            <nav class="navbar">
-                <div class="hamburger">
-                    <div class="line line1"></div>
-                    <div class="line line2"></div>
-                    <div class="line line3"></div>
-                </div>
+            <nav className="navbar">
                 <Link href="/">
-                    <img src="logo.svg" alt="Globant Bootcamp" class="logo" />
+                    <img src="logo.svg" alt="Globant Bootcamp" className="logo" />
                 </Link>
+                <ul className="navbar-links">
+                    <Link href="/">
+                        <li><a href="" className="navbar-link">Inicio</a></li>
+                    </Link>
+                    <Link href="/explore">
+                        <li><a href="" className="navbar-link">Explorar</a></li>
+                    </Link>
+                    <Link href="/info">
+                        <li><a href="" className="navbar-link">Informacion</a></li>
+                    </Link>              
+                </ul>
             </nav>
         </div>
     )
