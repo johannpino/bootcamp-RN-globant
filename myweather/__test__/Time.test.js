@@ -40,3 +40,15 @@ test("<Time/> renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(<Time></Time>, div);
 });
+
+test("<Time/> Title exists", () => {
+  render(<Time data={data} />);
+  const titleTest = screen.getByTestId("titleTest");
+  expect(titleTest).toBeInTheDocument();
+});
+
+test("<Time/> correct tag", () => {
+  render(<Time data={data} />);
+  const titleTest = screen.getByTestId("titleTest");
+  expect(titleTest.tagName).toBe("P");
+});
