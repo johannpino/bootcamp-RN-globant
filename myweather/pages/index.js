@@ -22,7 +22,7 @@ export default function Home() {
         ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
-      <Header data={data}></Header>
+      <Header></Header>
       <main className={styles.main}>
         <Spinner />
         <Time />
