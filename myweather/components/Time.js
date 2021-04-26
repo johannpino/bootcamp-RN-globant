@@ -24,6 +24,7 @@ const Time = ({ data }) => {
     return null;
   }
   const { current } = data;
+  const [day] = data.daily;
   return (
     <>
       <div className="row">
@@ -56,6 +57,15 @@ const Time = ({ data }) => {
                       <h5 data-testid="descriptionTest">
                         {current.weather[0].description}
                       </h5>
+                    </div>
+                    <div className="col s4">
+                      <div className="row">
+                        <div className="col s4">
+                          <p data-testid="minTempTest">
+                            min: {KelvinToCelsius(day.temp.min)}°C
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
