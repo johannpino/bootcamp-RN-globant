@@ -3,6 +3,7 @@ import TiempoDetallado from "../components/TiempoDetallado";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
+import Time from "../components/Time";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -48,6 +49,7 @@ export default function Home() {
       <main className={styles.main}>
         {data ? null : <div className="loader">Loading...</div>}
         <TiempoDetallado data={data} />
+        <Time data={data} />
         {/* if (data === null ) return null; */}
       </main>
     </div>
