@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
+import { Pronostico } from "../components/Pronostico";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -41,8 +42,7 @@ export default function Home() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
       <main className={styles.main}>
-        {data ? null : <h1 className={styles.title}>Cargando...</h1>}
-        {/* if (data === null ) return null; */}
+        <Pronostico data={data}></Pronostico>
       </main>
     </div>
   );
