@@ -27,25 +27,25 @@ const Time = ({ data }) => {
   const [day] = data.daily;
   return (
     <>
-      <div class="row">
-        <div class="col s12 m14">
-          <div class="card horizontal deep-purple lighten-1">
-            <div class="card-content white-text">
-              <div class="row">
-                <div class="col s12">
-                  <p class="flow-text" data-testid="titleTest">
+      <div className="row">
+        <div className="col s12 m14">
+          <div className="card horizontal deep-purple lighten-1">
+            <div className="card-content white-text">
+              <div className="row">
+                <div className="col s12">
+                  <p className="flow-text" data-testid="titleTest">
                     Tiempo en {splitTimeZone(data.timezone)}
                   </p>
                 </div>
-                <div class="col s8">
-                  <div class="row">
+                <div className="col s8">
+                  <div className="row">
                     <div className="col s12">
                       <p data-testid="timeTest">
                         A partir de las {timeConverter(current.dt)}
                       </p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div className="row">
                     <div className="col s10">
                       <h2 data-testid="temperatureTest">
                         {KelvinToCelsius(current.temp)}°C
@@ -56,7 +56,8 @@ const Time = ({ data }) => {
                         <div className="col s6">
                           <img
                             src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
-                          />
+                            data-testid="imgTest"
+                          ></img>
                         </div>
                         <style jsx>{`
                           img {
@@ -71,7 +72,7 @@ const Time = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   <div className="col s8">
                     <h5 data-testid="descriptionTest">
                       {current.weather[0].description}
@@ -92,7 +93,7 @@ const Time = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   <div className="col s12">
                     <p data-testid="rainTest">
                       {day.pop}% probabilidad de lluvia en el dia.
@@ -100,10 +101,10 @@ const Time = ({ data }) => {
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div className="row">
                 <div className="col s12"></div>
               </div>
-              <div class="row"></div>
+              <div className="row"></div>
             </div>
           </div>
         </div>

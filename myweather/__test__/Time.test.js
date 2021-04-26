@@ -207,3 +207,15 @@ test("<Time/> Correct probability rain content", () => {
   const rainTest = screen.getByTestId("rainTest");
   expect(rainTest.textContent).toBe("0.2% probabilidad de lluvia en el dia.");
 });
+
+test("<Time/> Image exists", () => {
+  render(<Time data={data} />);
+  const imgTest = screen.getByTestId("imgTest");
+  expect(imgTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct image tag", () => {
+  render(<Time data={data} />);
+  const imgTest = screen.getByTestId("imgTest");
+  expect(imgTest.tagName).toBe("IMG");
+});
