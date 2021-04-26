@@ -94,3 +94,21 @@ test("<Time/> Correct temperature content", () => {
   const temperatureTest = screen.getByTestId("temperatureTest");
   expect(temperatureTest.textContent).toBe("18°C");
 });
+
+test("<Time/> Current description exists", () => {
+  render(<Time data={data} />);
+  const descriptionTest = screen.getByTestId("descriptionTest");
+  expect(descriptionTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct description tag", () => {
+  render(<Time data={data} />);
+  const descriptionTest = screen.getByTestId("descriptionTest");
+  expect(descriptionTest.tagName).toBe("H5");
+});
+
+test("<Time/> Correct description content", () => {
+  render(<Time data={data} />);
+  const descriptionTest = screen.getByTestId("descriptionTest");
+  expect(descriptionTest.textContent).toBe("nubes dispersas");
+});

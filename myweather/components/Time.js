@@ -51,6 +51,13 @@ const Time = ({ data }) => {
                       </h2>
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col s8">
+                      <h5 data-testid="descriptionTest">
+                        {current.weather[0].description}
+                      </h5>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
