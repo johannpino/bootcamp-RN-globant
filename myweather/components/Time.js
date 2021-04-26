@@ -1,6 +1,8 @@
-import React from "react";
-import Image from "next/image";
-const Time = ({ data }) => {
+import React, { useContext } from "react";
+import { WeatherContext } from "../context/weatherContext";
+
+const Time = () => {
+  const { data } = useContext(WeatherContext);
   const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
   };
