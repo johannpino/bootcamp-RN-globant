@@ -47,8 +47,32 @@ test("<Time/> Title exists", () => {
   expect(titleTest).toBeInTheDocument();
 });
 
-test("<Time/> correct tag", () => {
+test("<Time/> Correct title tag", () => {
   render(<Time data={data} />);
   const titleTest = screen.getByTestId("titleTest");
   expect(titleTest.tagName).toBe("P");
+});
+
+test("<Time/> Correct title content", () => {
+  render(<Time data={data} />);
+  const titleTest = screen.getByTestId("titleTest");
+  expect(titleTest.textContent).toBe("Tiempo en Montevideo");
+});
+
+test("<Time/> Actual time exists", () => {
+  render(<Time data={data} />);
+  const timeTest = screen.getByTestId("timeTest");
+  expect(timeTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct time tag", () => {
+  render(<Time data={data} />);
+  const timeTest = screen.getByTestId("timeTest");
+  expect(timeTest.tagName).toBe("P");
+});
+
+test("<Time/> Correct time content", () => {
+  render(<Time data={data} />);
+  const timeTest = screen.getByTestId("timeTest");
+  expect(timeTest.textContent).toBe("A partir de las 17:13");
 });
