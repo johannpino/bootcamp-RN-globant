@@ -8,7 +8,7 @@ const PokemonCardContainer = (props) => {
                         key={index}
                         id={pokemon.id}
                         name={pokemon.name}
-                        type={pokemon.type}
+                        type={pokemon.types.map((res,i) => (<span key={i}>{res.type.name} </span>))}
                         exp={pokemon.base_experience}
                         img={pokemon.img}
                         />
