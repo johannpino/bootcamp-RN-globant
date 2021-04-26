@@ -189,3 +189,15 @@ test("<Time/> Correct maxTemperature content", () => {
   const maxTempTest = screen.getByTestId("maxTempTest");
   expect(maxTempTest.textContent).toBe("max: 11°C");
 });
+
+test("<Time/> Actual probability rain exists", () => {
+  render(<Time data={data} />);
+  const rainTest = screen.getByTestId("rainTest");
+  expect(rainTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct probability rain tag", () => {
+  render(<Time data={data} />);
+  const rainTest = screen.getByTestId("rainTest");
+  expect(rainTest.tagName).toBe("P");
+});

@@ -73,6 +73,13 @@ const Time = ({ data }) => {
                       </div>
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col s12">
+                      <p data-testid="rainTest">
+                        {day.pop}% probabilidad de lluvia en el dia.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
