@@ -171,3 +171,21 @@ test("<Time/> Correct minTemperature content", () => {
   const minTempTest = screen.getByTestId("minTempTest");
   expect(minTempTest.textContent).toBe("min: 2°C");
 });
+
+test("<Time/> Actual maxTemperature exists", () => {
+  render(<Time data={data} />);
+  const maxTempTest = screen.getByTestId("maxTempTest");
+  expect(maxTempTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct maxTemperature tag", () => {
+  render(<Time data={data} />);
+  const maxTempTest = screen.getByTestId("maxTempTest");
+  expect(maxTempTest.tagName).toBe("P");
+});
+
+test("<Time/> Correct maxTemperature content", () => {
+  render(<Time data={data} />);
+  const maxTempTest = screen.getByTestId("maxTempTest");
+  expect(maxTempTest.textContent).toBe("max: 11°C");
+});

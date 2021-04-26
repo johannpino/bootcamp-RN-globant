@@ -65,6 +65,11 @@ const Time = ({ data }) => {
                             min: {KelvinToCelsius(day.temp.min)}°C
                           </p>
                         </div>
+                        <div className="col s3">
+                          <p data-testid="maxTempTest">
+                            max: {KelvinToCelsius(day.temp.max)}°C
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
