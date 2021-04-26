@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
+  padding: 20px 0 0 0 ;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -111,7 +111,7 @@
 }
 
 .logo {
-  height: 1em;
+  height: 1rem;
 }
 
 @media (max-width: 600px) {

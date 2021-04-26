@@ -3,6 +3,7 @@ import TiempoDetallado from "../components/TiempoDetallado";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
+import Header from "../components/Header";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -45,6 +46,7 @@ export default function Home() {
         ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
+      <Header data={data}></Header>
       <main className={styles.main}>
         {data ? null : <div className="loader">Loading...</div>}
         <TiempoDetallado data={data} />
