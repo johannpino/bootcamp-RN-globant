@@ -40,14 +40,14 @@ const TiempoDetallado = () => {
             </div>
             <div className="card-content">
               <div className="row">
-                <div className="col s4">
+                <div className="col s6">
                   <h2 data-testid="temperatura">
                     {KelvinToCelsius(current.temp)}º
                   </h2>
                 </div>
                 <div className="col s3">
                   <div className="row">
-                    <div className="col s1">
+                    <div className="col s2">
                       <p>
                         <i className="material-icons" data-testid="icon-up">
                           keyboard_arrow_up
@@ -98,7 +98,7 @@ const TiempoDetallado = () => {
                 <style jsx>{`
                   p {
                     margin-top: 1rem;
-                    padding-left: 1rem;
+                    padding-right: 2rem;
                   }
                   h2 {
                     margin-top: -1rem;
