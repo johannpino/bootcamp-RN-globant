@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Pokecard from "./Pokecard";
+import Pokecard from "../Pokecard/Pokecard";
 
 class Pokedex extends Component {
   static defaultProps = {
