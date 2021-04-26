@@ -6,10 +6,12 @@ const Index = () => {
     <div>
 
 <style jsx global>{`
+            @import url(//db.onlinewebfonts.com/c/6ab539c6fc2b21ff0b149b3d06d7f97c?family=Minecraft);
+
             .title {
                 font-size: 40px;
                 color: #ffffff;
-                padding: 100px 0 18px 0;
+                padding: 1rem 0 18px 0;
               }
               
               .paragraph {

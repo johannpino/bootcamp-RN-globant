@@ -107,7 +107,7 @@ const handleHamburger = () => {
               .sidebar-links {
                 display: none;
                 flex-direction: column;
-                padding: 280px 48px;
+                padding: 8rem 48px;
                 margin: auto;
                 text-align: center;
                 opacity: 0%:

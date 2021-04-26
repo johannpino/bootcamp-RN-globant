@@ -21,6 +21,8 @@ const explore = () => {
         <div>
             <style jsx global>{`
 
+            @import url(//db.onlinewebfonts.com/c/6ab539c6fc2b21ff0b149b3d06d7f97c?family=Minecraft);
+
             .pokemon-card-container {
                 display: flex;
                 flex-wrap: wrap;
