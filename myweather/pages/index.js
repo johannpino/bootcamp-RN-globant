@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TiempoDetallado from "../components/TiempoDetallado";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
@@ -6,7 +7,7 @@ import { Pronostico } from "../components/Pronostico";
 
 export default function Home() {
   const [data, setData] = useState(null);
-  const consultarAPI = async () => {
+  const consultarAPI = () => {
     const apiKey = "5c2928819e91e1b61db39f58e3ea69d8";
     let lat;
     let lon;
@@ -39,10 +40,16 @@ export default function Home() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         ></link>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
       <main className={styles.main}>
+        {data ? null : <div className="loader">Loading...</div>}
         <Pronostico data={data}></Pronostico>
+        <TiempoDetallado data={data} />
       </main>
     </div>
   );
