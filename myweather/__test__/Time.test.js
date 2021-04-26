@@ -76,3 +76,21 @@ test("<Time/> Correct time content", () => {
   const timeTest = screen.getByTestId("timeTest");
   expect(timeTest.textContent).toBe("A partir de las 17:13");
 });
+
+test("<Time/> Actual temperature exists", () => {
+  render(<Time data={data} />);
+  const temperatureTest = screen.getByTestId("temperatureTest");
+  expect(temperatureTest).toBeInTheDocument();
+});
+
+test("<Time/> Correct temperature tag", () => {
+  render(<Time data={data} />);
+  const temperatureTest = screen.getByTestId("temperatureTest");
+  expect(temperatureTest.tagName).toBe("H2");
+});
+
+test("<Time/> Correct temperature content", () => {
+  render(<Time data={data} />);
+  const temperatureTest = screen.getByTestId("temperatureTest");
+  expect(temperatureTest.textContent).toBe("18°C");
+});

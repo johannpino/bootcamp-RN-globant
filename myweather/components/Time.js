@@ -20,7 +20,9 @@ const Time = ({ data }) => {
     return time;
   };
 
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
   const { current } = data;
   return (
     <>
@@ -40,6 +42,13 @@ const Time = ({ data }) => {
                       <p data-testid="timeTest">
                         A partir de las {timeConverter(current.dt)}
                       </p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s10">
+                      <h2 data-testid="temperatureTest">
+                        {KelvinToCelsius(current.temp)}°C
+                      </h2>
                     </div>
                   </div>
                 </div>
