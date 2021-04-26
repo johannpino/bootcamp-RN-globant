@@ -4,6 +4,8 @@ import Spinner from "../components/Spinner";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Pronostico } from "../components/Pronostico";
+import Header from "../components/Header";
+import Time from "../components/Time";
 
 export default function Home() {
   return (
@@ -21,9 +23,11 @@ export default function Home() {
         ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
+      <Header></Header>
       <main className={styles.main}>
-        <Pronostico></Pronostico>
+        <Pronostico />
         <Spinner />
+        <Time />
         <TiempoDetallado />
       </main>
     </div>
