@@ -4,16 +4,21 @@ export const Pronostico = ({ data }) => {
   if (!data) {
     return null;
   }
-  const dayInfo = data.hourly;
+  const hourInfo = data.hourly;
 
   const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
   };
 
-  const splitWord = (word) => {
-    let out = word.split("/");
-    return out[1];
+  const timeConverter = (UNIX_timestamp) => {
+    let a = new Date(UNIX_timestamp * 1000);
+    let hour = a.getHours();
+    let min = a.getMinutes();
+    let time = hour + ":" + formatTime(min);
+    return time;
   };
+
+  const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
   return (
     <>
@@ -23,62 +28,65 @@ export const Pronostico = ({ data }) => {
             <div className="card-content">
               <div className="row">
                 <div className="col s12">
-                  <strong>
-                    Pronóstico de hoy para {splitWord(data.timezone)}
-                  </strong>
+                  <strong>Pronóstico por hora</strong>
                 </div>
-                <br />
-                <div className="col s3 center">
-                  <h4>Mañana</h4> {/*8am*/}
-                  <h4 data-testid="temperatura">
-                    {KelvinToCelsius(dayInfo[9].temp)}º
+              </div>
+              <div className="row">
+                <div className="col s3 time-of-day time-of-day-border">
+                  <h5 className="bold">Ahora</h5>
+                  <h4 className="bold" data-testid="temperatura">
+                    {KelvinToCelsius(hourInfo[0].temp)}º
                   </h4>
                   <img
-                    src={`http://openweathermap.org/img/wn/${dayInfo[9].weather[0].icon}@2x.png`}
+                    src={`http://openweathermap.org/img/wn/${hourInfo[0].weather[0].icon}@2x.png`}
                   ></img>
+                  <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
                     invert_colors
                   </i>
-                  <strong data-testid="prob-lluvia">{dayInfo[9].pop}%</strong>
+                  <strong data-testid="prob-lluvia">{hourInfo[0].pop}%</strong>
                 </div>
-                <div className="col s3 center">
-                  <h4>Tarde</h4> {/*5pm*/}
+                <div className="col s3 time-of-day time-of-day-border">
+                  <h5>{timeConverter(hourInfo[1].dt)}</h5>
                   <h4 data-testid="temperatura">
-                    {KelvinToCelsius(dayInfo[18].temp)}º
+                    {KelvinToCelsius(hourInfo[1].temp)}º
                   </h4>
                   <img
-                    src={`http://openweathermap.org/img/wn/${dayInfo[18].weather[0].icon}@2x.png`}
+                    src={`http://openweathermap.org/img/wn/${hourInfo[1].weather[0].icon}@2x.png`}
                   ></img>
+                  <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
                     invert_colors
                   </i>
-                  <strong data-testid="prob-lluvia">{dayInfo[18].pop}%</strong>
+                  <strong data-testid="prob-lluvia">{hourInfo[1].pop}%</strong>
                 </div>
-                <div className="col s3 center">
-                  <h4>Noche</h4> {/*10pm*/}
+                <div className="col s3 time-of-day time-of-day-border">
+                  <h5>{timeConverter(hourInfo[2].dt)}</h5>
                   <h4 data-testid="temperatura">
-                    {KelvinToCelsius(dayInfo[23].temp)}º
+                    {KelvinToCelsius(hourInfo[2].temp)}º
                   </h4>
                   <img
-                    src={`http://openweathermap.org/img/wn/${dayInfo[23].weather[0].icon}@2x.png`}
+                    src={`http://openweathermap.org/img/wn/${hourInfo[2].weather[0].icon}@2x.png`}
                   ></img>
+                  <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
                     invert_colors
                   </i>
-                  <strong data-testid="prob-lluvia">{dayInfo[23].pop}%</strong>
+                  <strong data-testid="prob-lluvia">{hourInfo[2].pop}%</strong>
                 </div>
-                <div className="col s3 center">
-                  <h4>Madrugada</h4> {/*3am*/}
+                <div className="col s3 time-of-day">
+                  <h5>{timeConverter(hourInfo[3].dt)}</h5>
                   <h4 data-testid="temperatura">
-                    {KelvinToCelsius(dayInfo[28].temp)}º
+                    {KelvinToCelsius(hourInfo[3].temp)}º
                   </h4>
                   <img
-                    src={`http://openweathermap.org/img/wn/${dayInfo[28].weather[0].icon}@2x.png`}
+                    src={`http://openweathermap.org/img/wn/${hourInfo[3].weather[0].icon}@2x.png`}
                   ></img>
+                  <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
                     invert_colors
                   </i>
-                  <strong data-testid="prob-lluvia">{dayInfo[28].pop}%</strong>
+                  <strong data-testid="prob-lluvia">{hourInfo[3].pop}%</strong>
                 </div>
               </div>
             </div>

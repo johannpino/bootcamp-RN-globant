@@ -1,0 +1,14 @@
+.time-of-day {
+  text-align: center;
+  padding-right: 10px;
+}
+
+.time-of-day-border {
+  border-right-width: 1px;
+  border-right-color: black;
+  border-right-style: solid;
+}
+
+.bold {
+  font-weight: bold;
+}
