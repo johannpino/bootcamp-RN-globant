@@ -3,6 +3,8 @@ import TiempoDetallado from "../components/TiempoDetallado";
 import Spinner from "../components/Spinner";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import fetch from "isomorphic-unfetch";
+import Time from "../components/Time";
 
 export default function Home() {
   return (
@@ -20,7 +22,8 @@ export default function Home() {
         ></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </Head>
-      <main className={styles.main}>
+      <main className={styles.main}
+        <Time />
         <Spinner />
         <TiempoDetallado />
       </main>
