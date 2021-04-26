@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { WeatherContext } from "../context/weatherContext";
 
-const TiempoDetallado = ({ data }) => {
+const TiempoDetallado = () => {
+  const { data } = useContext(WeatherContext);
   const KelvinToCelsius = (temp) => {
     return Math.floor(temp - 273);
   };
