@@ -201,3 +201,9 @@ test("<Time/> Correct probability rain tag", () => {
   const rainTest = screen.getByTestId("rainTest");
   expect(rainTest.tagName).toBe("P");
 });
+
+test("<Time/> Correct probability rain content", () => {
+  render(<Time data={data} />);
+  const rainTest = screen.getByTestId("rainTest");
+  expect(rainTest.textContent).toBe("0.2% probabilidad de lluvia en el dia.");
+});
