@@ -43,8 +43,8 @@ const Header = ({ data }) => {
     <>
       <nav>
         <div className="row nav-wrapper deep-purple lighten-1">
-          <div data-testid="weather" className="left col s6 hide-on-small-only">
-            <span className="text-nav-left">
+          <div className="left col s6 hide-on-small-only">
+            <span className="text-nav-left" data-testid="timezone">
               {splitTimeZone(data.timezone)}:{" "}
             </span>
             <strong className="text-nav-left" data-testid="temperature">
@@ -61,7 +61,10 @@ const Header = ({ data }) => {
                 alt="Logo"
                 layout="intrinsic"
               />{" "}
-              <span className="text-logo"> My Weather</span>
+              <span className="text-logo" data-testid="title">
+                {" "}
+                My Weather
+              </span>
             </div>
           </div>
           <div
@@ -69,6 +72,7 @@ const Header = ({ data }) => {
             className="right col s2 m1 l1 hide-on-small-only"
           >
             <span className="text-nav-right">{dateBuilder(new Date())}</span>
+            {/* this method is already tested in utils.test.js */}
           </div>
           <div className="right hide-on-small-only">
             <i data-testid="icon" className="material-icons">
