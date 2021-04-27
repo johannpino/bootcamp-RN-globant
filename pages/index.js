@@ -1,5 +1,5 @@
-import Container from '../components/Container/Container'
-import Home from '../components/Home/Home'
+import Container from "../components/Container/Container";
+import Home from "../components/Home/Home";
 
 const Index = () => {
   return (
