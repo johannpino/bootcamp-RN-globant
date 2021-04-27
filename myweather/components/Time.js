@@ -1,29 +1,12 @@
 import React from "react";
+import {
+  KelvinToCelsius,
+  splitTimeZone,
+  timeConverter,
+  capitalizeFirstLetter,
+} from "../utils/helper";
 
 const Time = ({ data }) => {
-  const KelvinToCelsius = (temp) => {
-    return Math.floor(temp - 273);
-  };
-
-  const splitTimeZone = (string) => {
-    let res = string.split("/");
-    return res[1];
-  };
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  const formatTime = (time) => (time < 10 ? `0${time}` : time);
-
-  const timeConverter = (UNIX_timestamp) => {
-    let a = new Date(UNIX_timestamp * 1000);
-    let hour = a.getHours();
-    let min = a.getMinutes();
-    let time = hour + ":" + formatTime(min);
-    return time;
-  };
-
   if (!data) {
     return null;
   }

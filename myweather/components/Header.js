@@ -1,16 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import { KelvinToCelsius, splitTimeZone } from "../utils/helper";
 
 const Header = ({ data }) => {
-  const KelvinToCelsius = (temp) => {
-    return Math.floor(temp - 273);
-  };
-
-  const splitTimeZone = (string) => {
-    let res = string.split("/");
-    return res[1];
-  };
-
   const dateBuilder = (d) => {
     let months = [
       "Enero",

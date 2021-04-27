@@ -3,6 +3,7 @@ import {
   splitTimeZone,
   formatTime,
   timeConverter,
+  capitalizeFirstLetter,
 } from "./helper";
 
 const expect = global.expect;
@@ -36,6 +37,12 @@ describe("helper", () => {
     const time = "1619381607";
     const actual = timeConverter(time);
     const expected = "17:13";
+    expect(actual).toEqual(expected);
+  });
+  test("Capitalize first letter", () => {
+    const word = "test";
+    const actual = capitalizeFirstLetter(word);
+    const expected = "Test";
     expect(actual).toEqual(expected);
   });
 });

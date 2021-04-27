@@ -13,6 +13,10 @@ export const timeConverter = (UNIX_timestamp) => {
   let a = new Date(UNIX_timestamp * 1000);
   let hour = a.getHours();
   let min = a.getMinutes();
-  let time = hour + ":" + formatTime(min);
+  let time = `${hour}:${formatTime(min)}`;
   return time;
+};
+
+export const capitalizeFirstLetter = (string) => {
+  return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 };
