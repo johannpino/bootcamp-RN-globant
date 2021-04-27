@@ -24,13 +24,7 @@ const Navbar = (props) => {
               </a>
             </li>
           </Link>
-          <Link href="/info">
-            <li>
-              <a href="" className={styles.navbarLink}>
-                Informacion
-              </a>
-            </li>
-          </Link>
+
           <Link href="/fight">
             <li>
               <a href="" className={styles.navbarLink}>

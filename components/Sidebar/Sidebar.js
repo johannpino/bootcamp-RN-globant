@@ -29,11 +29,6 @@ const Sidebar = (props) => {
           </a>
         </Link>
 
-        <Link href="/info">
-          <a href="" className={styles.sidebarLink}>
-            Informacion
-          </a>
-        </Link>
         <Link href="/fight">
           <a href="" className={styles.sidebarLink}>
             Fight!
