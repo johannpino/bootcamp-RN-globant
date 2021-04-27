@@ -43,7 +43,7 @@ const TiempoDetallado = ({ data }) => {
                     {KelvinToCelsius(current.temp)}º
                   </h2>
                 </div>
-                <div className="col s8 m3 l3">
+                <div className="col s6 m3 l3">
                   <div className="row">
                     <div className="col s2 m2 l2">
                       <p>
@@ -68,23 +68,23 @@ const TiempoDetallado = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <div className="col s4 m3 l3">
+                <div className="col s5 m3 l3">
                   <div className="row">
-                    <div className="col s1">
+                    <div className="col s2">
                       <p>
                         <i className="material-icons" data-testid="icon-down">
                           keyboard_arrow_down
                         </i>
                       </p>
                     </div>
-                    <div className="col s3 m3 l3">
+                    <div className="col s4 m3 l3">
                       <p>
                         <i className="material-icons" data-testid="icon-sun">
                           wb_sunny
                         </i>
                       </p>
                     </div>
-                    <div className="col s3 m3 l3">
+                    <div className="col s4 m3 l3">
                       <p>
                         <strong data-testid="sunset-time">
                           {timeConverter(current.sunset)}
@@ -106,8 +106,11 @@ const TiempoDetallado = ({ data }) => {
                       >
                         invert_colors
                       </i>{" "}
-                      Humedad:
-                      <strong data-testid="humidity">
+                      <span className="hide-on-small-only">Humedad:</span>
+                      <strong
+                        className="collection-number"
+                        data-testid="humidity"
+                      >
                         {" "}
                         {current.humidity}%
                       </strong>
@@ -119,8 +122,11 @@ const TiempoDetallado = ({ data }) => {
                       >
                         compare_arrows
                       </i>{" "}
-                      Presión:{" "}
-                      <strong data-testid="pressure">
+                      <span className="hide-on-small-only">Presión: </span>
+                      <strong
+                        className="collection-number"
+                        data-testid="pressure"
+                      >
                         {current.pressure}mb
                       </strong>
                     </li>
@@ -131,8 +137,11 @@ const TiempoDetallado = ({ data }) => {
                       >
                         remove_red_eye
                       </i>{" "}
-                      Visibilidad:{" "}
-                      <strong data-testid="visibility">
+                      <span className="hide-on-small-only">Visibilidad: </span>
+                      <strong
+                        className="collection-number"
+                        data-testid="visibility"
+                      >
                         {current.visibility / 1000}km
                       </strong>
                     </li>
@@ -147,8 +156,8 @@ const TiempoDetallado = ({ data }) => {
                       >
                         wrap_text
                       </i>{" "}
-                      Viento:{" "}
-                      <strong data-testid="wind">
+                      <span className="hide-on-small-only">Viento: </span>
+                      <strong className="collection-number" data-testid="wind">
                         {current.wind_speed}km/h
                       </strong>
                     </li>
@@ -156,8 +165,10 @@ const TiempoDetallado = ({ data }) => {
                       <i className="tiny material-icons" data-testid="uv-icon">
                         brightness_high
                       </i>{" "}
-                      Índice UV:{" "}
-                      <strong data-testid="uv">{current.uvi} de 10</strong>
+                      <span className="hide-on-small-only">Índice UV: </span>
+                      <strong className="collection-number" data-testid="uv">
+                        {current.uvi}
+                      </strong>
                     </li>
                     <li className="collection-item">
                       <i
@@ -166,8 +177,14 @@ const TiempoDetallado = ({ data }) => {
                       >
                         ac_unit
                       </i>{" "}
-                      Sensación térmica:{" "}
-                      <strong data-testid="feelslike">
+                      <span className="hide-on-small-only">
+                        Sensación térmica:
+                      </span>
+                      <strong
+                        data-testid="feelslike"
+                        className="collection-number"
+                      >
+                        {" "}
                         {KelvinToCelsius(current.feels_like)}º
                       </strong>
                     </li>
