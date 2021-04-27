@@ -23,13 +23,19 @@ const FightContainer = (props) => {
       })}
       <style jsx global>{`
         .Pokecard-winner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           color: green;
         }
         .Pokecard-loser {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           color: red;
         }
         .pokemon-card-container {
-          text-align: center;
+          text-align: ;
         }
       `}</style>
     </div>

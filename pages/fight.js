@@ -39,8 +39,8 @@ const Fight = (props) => {
         @import url(//db.onlinewebfonts.com/c/6ab539c6fc2b21ff0b149b3d06d7f97c?family=Minecraft);
 
         .pokemon-card-container {
-          display: flex;
-          flex-wrap: wrap;
+          display: inline-flex;
+          flex-wrap: inherit;
         }
 
         .pokecard-card {
@@ -65,6 +65,9 @@ const Fight = (props) => {
         }
         .title-fight {
           text-align: center;
+        }
+        .title-fight {
+          display: flex;
         }
       `}</style>
       <Container>
