@@ -3,18 +3,7 @@ import ReactDOM from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import Header from "../components/Header";
-
-const data = {
-  lat: -33.4362,
-  lon: -70.6574,
-  timezone: "America/Santiago",
-  timezone_offset: -14400,
-  current: {
-    dt: 1619458145,
-    temp: 291.96,
-    feels_like: 295.48,
-  },
-};
+import { data } from "./ExampleData";
 
 test("<Header/> renders without crashing", () => {
   const div = document.createElement("div");

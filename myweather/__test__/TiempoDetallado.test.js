@@ -3,35 +3,7 @@ import ReactDOM from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, cleanup } from "@testing-library/react";
 import TiempoDetallado from "../components/TiempoDetallado";
-const data = {
-  lat: -34.7634,
-  lon: -56.3936,
-  timezone: "America/Montevideo",
-  timezone_offset: -10800,
-  current: {
-    dt: 1619381607,
-    sunrise: 1619345816,
-    sunset: 1619384984,
-    temp: 291.96,
-    feels_like: 291.78,
-    pressure: 1017,
-    humidity: 72,
-    dew_point: 286.81,
-    uvi: 0.43,
-    clouds: 40,
-    visibility: 10000,
-    wind_speed: 6.17,
-    wind_deg: 180,
-    weather: [
-      {
-        id: 802,
-        main: "Clouds",
-        description: "nubes dispersas",
-        icon: "03d",
-      },
-    ],
-  },
-};
+import { data } from "./ExampleData";
 
 afterEach(cleanup);
 
@@ -53,7 +25,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const temp = screen.getByTestId("temperatura");
   expect(temp).toBeInTheDocument();
   expect(temp.tagName).toBe("H2");
-  expect(temp.textContent).toBe("18º");
+  expect(temp.textContent).toBe("21º");
 
   //icon up
   const iconUp = screen.getByTestId("icon-up");
@@ -83,13 +55,13 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const sunrise = screen.getByTestId("sunrise-time");
   expect(sunrise).toBeInTheDocument();
   expect(sunrise.tagName).toBe("STRONG");
-  expect(sunrise.textContent).toBe("7:16");
+  expect(sunrise.textContent).toBe("7:24");
 
   //sunset-time
   const sunset = screen.getByTestId("sunset-time");
   expect(sunset).toBeInTheDocument();
   expect(sunset.tagName).toBe("STRONG");
-  expect(sunset.textContent).toBe("18:09");
+  expect(sunset.textContent).toBe("18:17");
 
   //humidity-icon
   const humidityIcon = screen.getByTestId("humidity-icon");
@@ -101,7 +73,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const humidity = screen.getByTestId("humidity");
   expect(humidity).toBeInTheDocument();
   expect(humidity.tagName).toBe("STRONG");
-  expect(humidity.textContent).toBe(" 72%");
+  expect(humidity.textContent).toBe(" 49%");
 
   //pressure-icon
   const pressureIcon = screen.getByTestId("pressure-icon");
@@ -113,7 +85,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const pressure = screen.getByTestId("pressure");
   expect(pressure).toBeInTheDocument();
   expect(pressure.tagName).toBe("STRONG");
-  expect(pressure.textContent).toBe("1017mb");
+  expect(pressure.textContent).toBe("1019mb");
 
   //visibility-icon
   const visibilityIcon = screen.getByTestId("visibility-icon");
@@ -137,7 +109,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const wind = screen.getByTestId("wind");
   expect(wind).toBeInTheDocument();
   expect(wind.tagName).toBe("STRONG");
-  expect(wind.textContent).toBe("6.17km/h");
+  expect(wind.textContent).toBe("1.03km/h");
 
   //uv-icon
   const uvIcon = screen.getByTestId("uv-icon");
@@ -149,7 +121,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const uv = screen.getByTestId("uv");
   expect(uv).toBeInTheDocument();
   expect(uv.tagName).toBe("STRONG");
-  expect(uv.textContent).toBe("0.43");
+  expect(uv.textContent).toBe("0.99");
 
   //feelslike-icon
   const feelsLikeIcon = screen.getByTestId("feelslike-icon");
@@ -161,5 +133,5 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const feelslike = screen.getByTestId("feelslike");
   expect(feelslike).toBeInTheDocument();
   expect(feelslike.tagName).toBe("STRONG");
-  expect(feelslike.textContent).toBe(" 18º");
+  expect(feelslike.textContent).toBe(" 20º");
 });
