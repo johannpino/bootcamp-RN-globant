@@ -1,8 +1,9 @@
 import PokemonCard from '../PokemonCard/PokemonCard'
+import styles from '../../styles/explore.module.css'
 
 const PokemonCardContainer = (props) => {
     return (
-        <div className="pokemon-card-container">
+        <div className={styles.pokemonCardContainer}>
             {props.pokemons.map((pokemon, index) => {
                 return <PokemonCard
                         key={index}

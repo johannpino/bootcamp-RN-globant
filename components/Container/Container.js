@@ -24,12 +24,6 @@ const [navState, setNavState] = useState(false)
                 -o-background-size: cover;
                 background-size: cover;
               }
-                            
-              @media screen and (min-width: 1024px) {
-                .logo {
-                  left: 25%;
-                }
-              }
             `}
 
             </style>

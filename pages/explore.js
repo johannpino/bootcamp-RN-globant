@@ -43,37 +43,6 @@ const explore = () => {
 
     return (
         <div>
-            <style jsx global>{`
-
-            @import url(//db.onlinewebfonts.com/c/6ab539c6fc2b21ff0b149b3d06d7f97c?family=Minecraft);
-
-            .pokemon-card-container {
-                display: flex;
-                flex-wrap: wrap;
-            }
-
-            .pokecard-card {
-                width: 176px;
-                background-color: white;
-                padding: 15px;
-                text-align: center;
-                margin: 12px auto;
-                -webkit-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);
-                -moz-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);
-                box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.3);
-            }
-
-            .pokecard-img {
-                width: 144px;
-                padding: 0 auto;
-            }
-
-            .pokecard-title {
-                font-size: 24px
-            }
-            
-            `}</style>
-
             <Container>  
                 <PokemonCardContainer pokemons={pokeAll} />
             </Container>
