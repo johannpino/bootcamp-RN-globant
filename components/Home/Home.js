@@ -15,9 +15,9 @@ const Home = () => {
           </button>
         </Link>
 
-        <Link href="/info">
+        <Link href="/fight">
           <button className={`${styles.button} ${styles.button2}`}>
-            Saber mas
+            Fight!
           </button>
         </Link>
       </div>
