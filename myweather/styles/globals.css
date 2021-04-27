@@ -16,3 +16,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.flex {
+  display: flex;
+}
+
+.low-opacity {
+  opacity: 60%;
+}
+
+.card-content {
+  width: 80vw;
+}
