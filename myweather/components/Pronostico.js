@@ -1,24 +1,11 @@
 import React from "react";
+import { KelvinToCelsius, timeConverter } from "../utils/helper";
 
 export const Pronostico = ({ data }) => {
   if (!data) {
     return null;
   }
   const hourInfo = data.hourly;
-
-  const KelvinToCelsius = (temp) => {
-    return Math.floor(temp - 273);
-  };
-
-  const timeConverter = (UNIX_timestamp) => {
-    let a = new Date(UNIX_timestamp * 1000);
-    let hour = a.getHours();
-    let min = a.getMinutes();
-    let time = hour + ":" + formatTime(min);
-    return time;
-  };
-
-  const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
   return (
     <>
