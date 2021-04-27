@@ -1,7 +1,7 @@
 import React from "react";
 import { KelvinToCelsius, splitTimeZone, timeConverter } from "../utils/helper";
 const TiempoDetallado = ({ data }) => {
-  if (!data) return null;
+  if (!data) return null; //.
   const { current } = data;
   return (
     <>
