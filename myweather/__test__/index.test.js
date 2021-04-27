@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { cleanup } from "@testing-library/react";
-import WeatherProvider from "../context/weatherContext";
+import { render, cleanup } from "@testing-library/react";
+import WeatherProvider, { WeatherContext } from "../context/weatherContext";
 import Home from "../pages/index";
 
 afterEach(cleanup);
