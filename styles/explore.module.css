@@ -24,3 +24,39 @@
 .pokecardTitle {
   font-size: 24px;
 }
+
+.searchBarDiv {
+  width: 95%;
+  margin: 12px auto;
+  height: 54px;
+  display: flex;
+  background-color: white;
+  border: 3px solid #356abc;
+}
+
+.searchIcon {
+  height: 26px;
+  padding: 14px 34px;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  font-size: 22px;
+  font-family: "Minecraft";
+  padding-bottom: 2px;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 568px) {
+  .searchIcon {
+    padding: 14px 16px;
+  }
+
+  .searchInput {
+    font-size: 16px;
+  }
+}

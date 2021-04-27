@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Container from '../components/Container/Container'
 import PokemonCard from '../components/PokemonCard/PokemonCard'
 import PokemonCardContainer from '../components/PokemonCardContainer/PokemonCardContainer'
+import styles from '../styles/explore.module.css'
 
 const explore = () => {
 
@@ -44,6 +45,10 @@ const explore = () => {
     return (
         <div>
             <Container>  
+                <div className={styles.searchBarDiv}>
+                    <img src="search.svg" alt="search-icon" class={styles.searchIcon}/>
+                    <input type="text" class={styles.searchInput} placeholder="Busca un pokemon..."/>
+                </div>
                 <PokemonCardContainer pokemons={pokeAll} />
             </Container>
         </div>
