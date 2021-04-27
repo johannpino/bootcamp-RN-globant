@@ -8,26 +8,31 @@ import styles from "../../styles/explore.module.css";
 const PokemonCardContainer = () => {
   const { apiData } = useContext(ApiContext);
 
+  const [pokeArrayDefault, setPokeArrayDefault] = useState(apiData)
   const [pokeArray, setPokeArray] = useState(apiData)
-  const [search, setSearch] = useState("")
+  const [showFiltered, setShowFiltered] = useState(false)
 
   const updateArray = (e) => {
+
     const string = String(e.target.value)
-  
-    const filtered = pokeArray.filter(pokemon => {
+
+    if(string == ""){
+      setShowFiltered(false)
+    } else {      
+    const filtered = apiData.filter(pokemon => {
       return pokemon.name.includes(string.toLowerCase())
     })
-    console.log(filtered)
+    setShowFiltered(true)
     setPokeArray(filtered)
+    }
   }
 
   const type = (pokemon) =>
     pokemon.types.map((res, i) => <span key={i}>{res.type.name} </span>);
 
-  useEffect( async () => {
-    setPokeArray(apiData)
-    console.log(apiData)
-  }, undefined)
+  useEffect( () => {
+    setPokeArrayDefault(apiData)
+  })
 
   return (
     <div>
@@ -45,7 +50,8 @@ const PokemonCardContainer = () => {
             />
       </div>
       <div className={styles.pokemonCardContainer}>
-      {pokeArray ? pokeArray.map((pokemon, index) => {
+      {showFiltered 
+      ? pokeArray.map((pokemon, index) => {
         return (
           <PokemonCard
             key={index}
@@ -56,7 +62,20 @@ const PokemonCardContainer = () => {
             img={pokemon.img}
           />
         );
-      }) : null}
+      }) 
+      : pokeArrayDefault.map((pokemon, index) => {
+        return (
+          <PokemonCard
+            key={index}
+            id={pokemon.id}
+            name={pokemon.name}
+            type={type(pokemon)}
+            exp={pokemon.base_experience}
+            img={pokemon.img}
+          />
+        );
+      })
+      }
       </div>
     </div>
   );
