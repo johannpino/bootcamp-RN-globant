@@ -3,12 +3,14 @@ import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import { useState } from 'react'
 import styles from '../../styles/container.module.css'
+import ApiProvider from "../../context/ApiContext";
 
 const Container = (props) => {
 
 const [navState, setNavState] = useState(false)
 
     return (
+      <ApiProvider>
         <div>
             <style jsx global>{`
             * {
@@ -38,6 +40,7 @@ const [navState, setNavState] = useState(false)
               {props.children}
             </div>
         </div>
+        </ApiProvider>
     )
 }
 
