@@ -29,10 +29,15 @@ export default function Home() {
         </Head>
 
         <main className={styles.main}>
-          <Spinner data={data} />
-          <Time data={data} />
-          <TiempoDetallado data={data} />
-          <Pronostico data={data} />
+          {data ? (
+            <>
+              <Time data={data} />
+              <TiempoDetallado data={data} />
+              <Pronostico data={data} />
+            </>
+          ) : (
+            <Spinner />
+          )}
         </main>
       </div>
     </>
