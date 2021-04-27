@@ -127,13 +127,13 @@ test("<Time/> Actual temperature exists", () => {
 test("<Time/> Correct temperature tag", () => {
   render(<Time data={data} />);
   const temperatureTest = screen.getByTestId("temperatureTest");
-  expect(temperatureTest.tagName).toBe("H2");
+  expect(temperatureTest.tagName).toBe("STRONG");
 });
 
 test("<Time/> Correct temperature content", () => {
   render(<Time data={data} />);
   const temperatureTest = screen.getByTestId("temperatureTest");
-  expect(temperatureTest.textContent).toBe("18°C");
+  expect(temperatureTest.textContent).toBe("18°");
 });
 
 test("<Time/> Current description exists", () => {
@@ -151,7 +151,7 @@ test("<Time/> Correct description tag", () => {
 test("<Time/> Correct description content", () => {
   render(<Time data={data} />);
   const descriptionTest = screen.getByTestId("descriptionTest");
-  expect(descriptionTest.textContent).toBe("nubes dispersas");
+  expect(descriptionTest.textContent).toBe("Nubes dispersas");
 });
 
 test("<Time/> Actual minTemperature exists", () => {
@@ -169,7 +169,7 @@ test("<Time/> Correct minTemperature tag", () => {
 test("<Time/> Correct minTemperature content", () => {
   render(<Time data={data} />);
   const minTempTest = screen.getByTestId("minTempTest");
-  expect(minTempTest.textContent).toBe("min: 2°C");
+  expect(minTempTest.textContent).toBe("Min: 2°");
 });
 
 test("<Time/> Actual maxTemperature exists", () => {
@@ -187,7 +187,7 @@ test("<Time/> Correct maxTemperature tag", () => {
 test("<Time/> Correct maxTemperature content", () => {
   render(<Time data={data} />);
   const maxTempTest = screen.getByTestId("maxTempTest");
-  expect(maxTempTest.textContent).toBe("max: 11°C");
+  expect(maxTempTest.textContent).toBe("Max: 11°");
 });
 
 test("<Time/> Actual probability rain exists", () => {
@@ -205,7 +205,7 @@ test("<Time/> Correct probability rain tag", () => {
 test("<Time/> Correct probability rain content", () => {
   render(<Time data={data} />);
   const rainTest = screen.getByTestId("rainTest");
-  expect(rainTest.textContent).toBe("0.2% probabilidad de lluvia en el dia.");
+  expect(rainTest.textContent).toBe("0.2% probabilidad de lluvia en el día");
 });
 
 test("<Time/> Image exists", () => {
