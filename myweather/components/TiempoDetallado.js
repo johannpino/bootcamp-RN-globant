@@ -24,7 +24,7 @@ const TiempoDetallado = ({ data }) => {
   const { current } = data;
   return (
     <>
-      <div className="col s12">
+      <div>
         <div className="card horizontal">
           <div className="card-stacked">
             <div className="card-content">
@@ -38,28 +38,28 @@ const TiempoDetallado = ({ data }) => {
             </div>
             <div className="card-content">
               <div className="row">
-                <div className="col s6">
-                  <h2 data-testid="temperatura">
+                <div className="col s12 m6 l6">
+                  <h2 data-testid="temperatura" className="temp-detallado">
                     {KelvinToCelsius(current.temp)}º
                   </h2>
                 </div>
-                <div className="col s3">
+                <div className="col s8 m3 l3">
                   <div className="row">
-                    <div className="col s2">
+                    <div className="col s2 m2 l2">
                       <p>
                         <i className="material-icons" data-testid="icon-up">
                           keyboard_arrow_up
                         </i>
                       </p>
                     </div>
-                    <div className="col s3">
+                    <div className="col s3 m3 l3">
                       <p>
                         <i className="material-icons" data-testid="icon-sun-2">
                           wb_sunny
                         </i>
                       </p>
                     </div>
-                    <div className="col s3">
+                    <div className="col s3 m3 l3">
                       <p>
                         <strong data-testid="sunrise-time">
                           {timeConverter(current.sunrise)}
@@ -68,7 +68,7 @@ const TiempoDetallado = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <div className="col s3">
+                <div className="col s4 m3 l3">
                   <div className="row">
                     <div className="col s1">
                       <p>
@@ -77,14 +77,14 @@ const TiempoDetallado = ({ data }) => {
                         </i>
                       </p>
                     </div>
-                    <div className="col s3">
+                    <div className="col s3 m3 l3">
                       <p>
                         <i className="material-icons" data-testid="icon-sun">
                           wb_sunny
                         </i>
                       </p>
                     </div>
-                    <div className="col s3">
+                    <div className="col s3 m3 l3">
                       <p>
                         <strong data-testid="sunset-time">
                           {timeConverter(current.sunset)}
@@ -93,19 +93,10 @@ const TiempoDetallado = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <style jsx>{`
-                  p {
-                    margin-top: 1rem;
-                    padding-right: 2rem;
-                  }
-                  h2 {
-                    margin-top: -1rem;
-                  }
-                `}</style>
               </div>
             </div>
-            <div className="card-content">
-              <div className="row">
+            <div className="card-content ">
+              <div className="row no-margin">
                 <div className="col s6">
                   <ul className="collection">
                     <li className="collection-item">

@@ -33,12 +33,13 @@ export const Pronostico = ({ data }) => {
               </div>
               <div className="row">
                 <div className="col s3 time-of-day time-of-day-border">
-                  <h5 className="bold">Ahora</h5>
-                  <h4 className="bold" data-testid="temperatura">
+                  <h5 className="bold txt-pronostico">Ahora</h5>
+                  <h4 className="bold txt-pronostico" data-testid="temperatura">
                     {KelvinToCelsius(hourInfo[0].temp)}º
                   </h4>
                   <img
                     src={`http://openweathermap.org/img/wn/${hourInfo[0].weather[0].icon}@2x.png`}
+                    className="img-pronostico"
                   ></img>
                   <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
@@ -47,12 +48,15 @@ export const Pronostico = ({ data }) => {
                   <strong data-testid="prob-lluvia">{hourInfo[0].pop}%</strong>
                 </div>
                 <div className="col s3 time-of-day time-of-day-border">
-                  <h5>{timeConverter(hourInfo[1].dt)}</h5>
-                  <h4 data-testid="temperatura">
+                  <h5 className="txt-pronostico">
+                    {timeConverter(hourInfo[1].dt)}
+                  </h5>
+                  <h4 className="txt-pronostico" data-testid="temperatura">
                     {KelvinToCelsius(hourInfo[1].temp)}º
                   </h4>
                   <img
                     src={`http://openweathermap.org/img/wn/${hourInfo[1].weather[0].icon}@2x.png`}
+                    className="img-pronostico"
                   ></img>
                   <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
@@ -61,12 +65,15 @@ export const Pronostico = ({ data }) => {
                   <strong data-testid="prob-lluvia">{hourInfo[1].pop}%</strong>
                 </div>
                 <div className="col s3 time-of-day time-of-day-border">
-                  <h5>{timeConverter(hourInfo[2].dt)}</h5>
-                  <h4 data-testid="temperatura">
+                  <h5 className="txt-pronostico">
+                    {timeConverter(hourInfo[2].dt)}
+                  </h5>
+                  <h4 className="txt-pronostico" data-testid="temperatura">
                     {KelvinToCelsius(hourInfo[2].temp)}º
                   </h4>
                   <img
                     src={`http://openweathermap.org/img/wn/${hourInfo[2].weather[0].icon}@2x.png`}
+                    className="img-pronostico"
                   ></img>
                   <br />
                   <i className="tiny material-icons" data-testid="pop-icon">
@@ -75,12 +82,15 @@ export const Pronostico = ({ data }) => {
                   <strong data-testid="prob-lluvia">{hourInfo[2].pop}%</strong>
                 </div>
                 <div className="col s3 time-of-day">
-                  <h5>{timeConverter(hourInfo[3].dt)}</h5>
-                  <h4 data-testid="temperatura">
+                  <h5 className="txt-pronostico">
+                    {timeConverter(hourInfo[3].dt)}
+                  </h5>
+                  <h4 className="txt-pronostico" data-testid="temperatura">
                     {KelvinToCelsius(hourInfo[3].temp)}º
                   </h4>
                   <img
                     src={`http://openweathermap.org/img/wn/${hourInfo[3].weather[0].icon}@2x.png`}
+                    className="img-pronostico"
                   ></img>
                   <br />
                   <i className="tiny material-icons" data-testid="pop-icon">

@@ -1,0 +1,11 @@
+.img-weather-time {
+  padding-left: 12vw;
+}
+@media only screen and (max-width: 600px) {
+  .desc-txt {
+    font-size: 20px;
+  }
+  .rain-prob {
+    font-size: 8px;
+  }
+}

@@ -13,18 +13,18 @@ const Header = ({ data }) => {
 
   const dateBuilder = (d) => {
     let months = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
     ];
     let days = [
       "Domingo",
@@ -36,12 +36,11 @@ const Header = ({ data }) => {
       "Sábado",
     ];
 
-    let day = days[d.getDay()];
     let date = d.getDate();
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
-    return `${day} ${date} ${month} ${year}`;
+    return `${date}/${month}/${year}`;
   };
 
   if (!data) return null;
@@ -51,28 +50,35 @@ const Header = ({ data }) => {
   return (
     <>
       <nav>
-        <div className=" row nav-wrapper deep-purple lighten-1">
-          <div data-testid="weather" className="left col s4">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clima actual en &nbsp;
-            {splitTimeZone(data.timezone)}: &nbsp;
-            <strong data-testid="temperature">
-              {KelvinToCelsius(current.temp)}ºC
+        <div className="row nav-wrapper deep-purple lighten-1">
+          <div data-testid="weather" className="left col s6 hide-on-small-only">
+            <span className="text-nav-left">
+              {splitTimeZone(data.timezone)}:{" "}
+            </span>
+            <strong className="text-nav-left" data-testid="temperature">
+              {KelvinToCelsius(current.temp)}º
             </strong>
           </div>
           <div className="center brand-logo">
-            <Image
-              data-testid="img"
-              src="/../public/logoMyWeather.png"
-              width="35"
-              height="35"
-              alt="Logo"
-            />{" "}
-            &nbsp; My Weather
+            <div className="row">
+              <Image
+                data-testid="img"
+                src="https://i.ibb.co/hY2tvgy/logo-My-Weather.png"
+                width="25"
+                height="25"
+                alt="Logo"
+                layout="intrinsic"
+              />{" "}
+              <span className="text-logo"> My Weather</span>
+            </div>
           </div>
-          <div data-testid="date" className="right col s2">
-            {dateBuilder(new Date())}
+          <div
+            data-testid="date"
+            className="right col s2 m1 l1 hide-on-small-only"
+          >
+            <span className="text-nav-right">{dateBuilder(new Date())}</span>
           </div>
-          <div className="right">
+          <div className="right hide-on-small-only">
             <i data-testid="icon" className="material-icons">
               event
             </i>
