@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import TiempoDetallado from "../components/TiempoDetallado";
 const data = {
   lat: -34.7634,

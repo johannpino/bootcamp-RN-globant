@@ -15,7 +15,7 @@ export const Pronostico = ({ data }) => {
             <div className="card-content">
               <div className="row">
                 <div className="col s12">
-                  <strong data-testid="title">Pronóstico por hora</strong>
+                  <strong data-testid="title1">Pronóstico por hora</strong>
                 </div>
               </div>
               <div className="row">
