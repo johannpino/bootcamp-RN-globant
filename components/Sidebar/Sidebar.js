@@ -1,24 +1,24 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import styles from '../../styles/container.module.css';
 
 const Sidebar = (props) => {
     return (
-        <div className={props.isActive ? "sidebar-div sidebar-div-active" : "sidebar-div"}>
-        <div className={props.isActive ? "sidebar-links sidebar-links-active" : "sidebar-links"}>
+        <div className={props.isActive ? `${styles.sidebarDiv} ${styles.sidebarDivActive}` : `${styles.sidebarDiv}`}>
+        <div className={props.isActive ? `${styles.sidebarLinks} ${styles.sidebarLinksActive}` : `${styles.sidebarLinks}`}>
 
             <Link href="/">
-                <a href="" className="sidebar-link">Inicio</a>
+                <a href="" className={styles.sidebarLink}>Inicio</a>
             </Link>
 
             <Link href="/explore">
-                <a href="" className="sidebar-link">Explorar</a>
+                <a href="" className={styles.sidebarLink}>Explorar</a>
             </Link>
 
             <Link href="/info">
-            <a href="" className="sidebar-link">Informacion</a>
+            <a href="" className={styles.sidebarLink}>Informacion</a>
             </Link>
 
         </div>
-        <div className="close"></div>
       </div>
     )
 }

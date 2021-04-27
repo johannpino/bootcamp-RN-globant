@@ -1,22 +1,23 @@
 import React from 'react'
 import Link from 'next/link'
+import styles from '../../styles/container.module.css'
 
 const Navbar = (props) => {
     return (
         <div>
-            <nav className="navbar">
+            <nav className={styles.navbar}>
                 <Link href="/">
-                    <img src="logo.svg" alt="Globant Bootcamp" className="logo" />
+                    <img src="logo.svg" alt="Globant Bootcamp" className={styles.logo} />
                 </Link>
-                <ul className="navbar-links">
+                <ul className={styles.navbarLinks}>
                     <Link href="/">
-                        <li><a href="" className="navbar-link">Inicio</a></li>
+                        <li><a href="" className={styles.navbarLink} >Inicio</a></li>
                     </Link>
                     <Link href="/explore">
-                        <li><a href="" className="navbar-link">Explorar</a></li>
+                        <li><a href="" className={styles.navbarLink}>Explorar</a></li>
                     </Link>
                     <Link href="/info">
-                        <li><a href="" className="navbar-link">Informacion</a></li>
+                        <li><a href="" className={styles.navbarLink}>Informacion</a></li>
                     </Link>              
                 </ul>
             </nav>
