@@ -18,7 +18,7 @@ const Time = ({ data }) => {
       <div className="card horizontal deep-purple lighten-1">
         <div className="card-content white-text">
           <div className="row">
-            <div className="col s6">
+            <div className="col s5 m6 l6">
               <p className="flow-text" data-testid="titleTest">
                 Tiempo en {splitTimeZone(data.timezone)}
               </p>
@@ -26,8 +26,9 @@ const Time = ({ data }) => {
                 A partir de las {timeConverter(current.dt)}
               </p>
             </div>
-            <div className="col s6">
+            <div className="col s4 m6 l6">
               <img
+                className="img-weather-time"
                 src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
                 data-testid="imgTest"
               ></img>
@@ -46,10 +47,10 @@ const Time = ({ data }) => {
               </p>
             </div>
             <div className="col s4">
-              <h5 data-testid="descriptionTest">
+              <h5 data-testid="descriptionTest" className="desc-txt">
                 {capitalizeFirstLetter(current.weather[0].description)}
               </h5>
-              <p data-testid="rainTest">
+              <p data-testid="rainTest" className="rain-prob">
                 {day.pop}% probabilidad de lluvia en el día
               </p>
             </div>
@@ -57,9 +58,6 @@ const Time = ({ data }) => {
         </div>
       </div>
       <style jsx>{`
-        img {
-          margin-left: 10rem;
-        }
         strong {
           font-size: 3rem;
         }

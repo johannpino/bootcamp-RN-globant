@@ -24,3 +24,7 @@ a {
 .low-opacity {
   opacity: 60%;
 }
+
+.card-content {
+  width: 80vw;
+}
