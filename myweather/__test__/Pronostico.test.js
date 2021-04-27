@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
-import Pronostico from "../components/Pronostico";
+import { Pronostico } from "../components/Pronostico";
 import data from "./ExampleData";
 
 afterEach(cleanup);
