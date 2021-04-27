@@ -149,7 +149,7 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const uv = screen.getByTestId("uv");
   expect(uv).toBeInTheDocument();
   expect(uv.tagName).toBe("STRONG");
-  expect(uv.textContent).toBe("0.43 de 10");
+  expect(uv.textContent).toBe("0.43");
 
   //feelslike-icon
   const feelsLikeIcon = screen.getByTestId("feelslike-icon");
@@ -161,5 +161,5 @@ test("<TiempoDetallado/> renders input correctly", () => {
   const feelslike = screen.getByTestId("feelslike");
   expect(feelslike).toBeInTheDocument();
   expect(feelslike.tagName).toBe("STRONG");
-  expect(feelslike.textContent).toBe("18º");
+  expect(feelslike.textContent).toBe(" 18º");
 });
