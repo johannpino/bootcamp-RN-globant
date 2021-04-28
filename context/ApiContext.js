@@ -14,17 +14,13 @@ const ApiProvider = ({ children }) => {
   };
 
   const fetchData = async () => {
-    const data = await fetchApi();
-    let pokemons = [];
-    data.map(async (pokemon) => {
-      return await fetch(pokemon.url)
-        .then((response) => response.json())
-        .then((result) => {
-          pokemons.push(result);
-          setApiData([...pokemons]);
-        });
+    const dataApi = await fetchApi();
+    dataApi.map(async (pokemon) => {
+      const data = await fetch(pokemon.url);
+      const response = await data.json();
+      return setApiData(prevApiData => [...prevApiData,  response])
     });
-  };
+  }; 
 
   useEffect(() => {
     fetchData();

@@ -16,6 +16,7 @@ const FightContainer = (props) => {
             key={index}
             id={pokemon.id}
             name={pokemon.name}
+            type={pokemon.type}
             exp={pokemon.base_experience}
             img={pokemon.img}
           />
