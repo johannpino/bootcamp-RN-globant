@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205668776589",
+    "project_id": "athena-a6ad4",
+    "storage_bucket": "athena-a6ad4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205668776589:android:732232639df6562dbe40c4",
+        "android_client_info": {
+          "package_name": "com.athena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205668776589-e7qvadfdid85kc2fjboodfobmkhk8cmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcDxQzzxKOluyOqhMBzF1bo2YznzsCeIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205668776589-e7qvadfdid85kc2fjboodfobmkhk8cmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
