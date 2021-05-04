@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { GET_PROJECTS } from '../../types';
+import { GET_PROJECTS, GET_TASKS } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
 import firestore from '@react-native-firebase/firestore';
@@ -26,8 +26,22 @@ const FirebaseState = (props) => {
       });
   };
 
+  const getTasks = async () => {
+    const fetchedTasks = await firestore()
+      .collection('tasks')
+      .get()
+      .then((tasks) => {
+        dispatch({
+          type: GET_TASKS,
+          payload: tasks._docs,
+        });
+      });
+  };
+
   return (
-    <FireBaseContext.Provider value={{ projects: state.projects, getProjects }}>
+    <FireBaseContext.Provider
+      value={{ projects: state.projects, tasks: state.tasks, getProjects, getTasks }}
+    >
       {props.children}
     </FireBaseContext.Provider>
   );

@@ -7,33 +7,13 @@ import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, getProjects } = firebaseContext;
+  const { projects, getProjects, tasks, getTasks } = firebaseContext;
   console.log(projects);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      description: 'Connect to firebase database',
-      project: 'Manhattan project',
-      color: '#6A79FF',
-    },
-
-    {
-      id: 2,
-      description: 'Refactorize the whole project',
-      project: 'Weather App',
-      color: '#FF6AA5',
-    },
-
-    {
-      id: 3,
-      description: 'Refactorize the whole project',
-      project: 'Pokemon App',
-      color: '#EFFF6A',
-    },
-  ]);
+  console.log(tasks);
 
   useEffect(() => {
     getProjects();
+    getTasks();
   }, []);
 
   return (
