@@ -4,15 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 import MyTabs from './components/MyTabs';
 import FirebaseState from './context/firebase/firebaseState';
-import FireBaseContext from './context/firebase/firebaseContext';
+import ProjectState from './context/projects/projectState';
 
 const App = () => {
   return (
-    <FirebaseState>
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-    </FirebaseState>
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   );
 };
 
