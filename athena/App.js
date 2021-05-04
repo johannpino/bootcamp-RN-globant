@@ -8,9 +8,13 @@ import ProjectState from './context/projects/projectState';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    <FirebaseState>
+      <ProjectState>
+        <NavigationContainer>
+          <MyTabs />
+        </NavigationContainer>
+      </ProjectState>
+    </FirebaseState>
   );
 };
 
