@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableHighlight } from 'react-native';
 import Item from './Item';
-import DisplayItems from './DisplayItems';
+import DisplayProjects from './DisplayProjects'
+import DisplayTasks from './DisplayTasks'
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
@@ -18,9 +19,9 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Welcome,{'\n'}Person.</Text>
-      <DisplayItems title={'Recent tasks...'} isProject={false} items={tasks} />
-      <DisplayItems title={'Your projects'} isProject={true} items={projects} />
+      <Text style={styles.title}>Welcome,{'\n'}User.</Text>
+      <DisplayTasks title={'Recent tasks...'} items={tasks} />
+      <DisplayProjects title={'Your projects'} items={projects} />
     </ScrollView>
   );
 };
