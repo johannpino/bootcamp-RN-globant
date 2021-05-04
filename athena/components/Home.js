@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Welcome,{'\n'}Person.</Text>
-      {/* <DisplayItems title={'Recent tasks...'} isProject={false} items={tasks} /> */}
+      <DisplayItems title={'Recent tasks...'} isProject={false} items={tasks} />
       <DisplayItems title={'Your projects'} isProject={true} items={projects} />
     </ScrollView>
   );
