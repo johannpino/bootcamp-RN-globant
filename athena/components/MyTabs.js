@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Appearance } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
 import Projects from './Projects';
@@ -19,7 +19,10 @@ const MyTabs = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          color = 'white';
+          if (Appearance.getColorScheme() === 'dark') {
+            color = 'white'
+          }
+          color = 'black';
           size = 30;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
