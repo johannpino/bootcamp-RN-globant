@@ -3,6 +3,7 @@ import AuthContext from '../context/auth/authContext';
 import Register from '../components/Register'
 import Login from '../components/Login'
 import { createStackNavigator } from '@react-navigation/stack'
+import Text from 'react-native'
 
 import {
   SafeAreaView,
@@ -12,6 +13,8 @@ import {
   View,
 } from 'react-native';
 
+const Stack = createStackNavigator()
+
 const Auth = () => {
 
   const context = useContext(AuthContext);
@@ -20,15 +23,13 @@ const Auth = () => {
   if (initializing) return null;
 
     return (
-      <SafeAreaView>
-        <StatusBar />
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <View>
-            <Register/>
-            <Login />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        <Stack.Navigator 
+        headerMode={'none'}
+        tabBar
+        >
+              <Stack.Screen name="LoginScreen" component={Login} />
+              <Stack.Screen name="RegisterScreen" component={Register} />
+        </Stack.Navigator>
     );
 
 };
