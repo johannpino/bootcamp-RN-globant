@@ -1,32 +1,24 @@
-
-import React, { useState, useEffect, useContext } from 'react';
-import firestore from '@react-native-firebase/firestore';
+import React, { useContext } from 'react';
 import AuthContext from '../context/auth/authContext';
 import Register from '../components/Register'
 import Login from '../components/Login'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  TextInput,
-  Button,
-  useColorScheme,
   View,
 } from 'react-native';
 
 const Auth = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+
   const context = useContext(AuthContext);
-  const { user, initializing, login, logout, register } = context;
+  const { initializing} = context;
 
   if (initializing) return null;
 
-  if (!user) {
     return (
       <SafeAreaView>
         <StatusBar />
@@ -38,24 +30,7 @@ const Auth = () => {
         </ScrollView>
       </SafeAreaView>
     );
-  }
-  return (
-    <SafeAreaView>
-      <StatusBar />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Header />
-        <View>
-          <View>
-            <Text>Welcome {name}</Text>
-          </View>
-          <View>
-            <Text>Projects</Text>
-          </View>
-          <Button title="Sign out" onPress={() => logout()}></Button>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+
 };
 
 const styles = StyleSheet.create({});
