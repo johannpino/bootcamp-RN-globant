@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import { GET_PROJECTS, GET_TASKS, USER_SIGNIN, USER_SIGNOUT } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
