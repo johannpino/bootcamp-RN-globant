@@ -1,4 +1,4 @@
 import React from 'react';
-import Navigation from './config/Navigation';
+import Routes from './config/Routes';
 
-export default () => <Navigation />;
+export default () => <Routes />;
