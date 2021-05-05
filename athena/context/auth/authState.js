@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect, useReducer } from 'react';
 import auth from '@react-native-firebase/auth';
+import PropTypes from 'prop-types';
 import firestore from '@react-native-firebase/firestore';
 import { USER_SIGNIN, USER_SIGNOUT } from '../../types';
 import authReducer from './authReducer';
@@ -36,7 +38,7 @@ const AuthState = (props) => {
     setUserName(foundUser);
   };
 
-  // Handle user state changes
+  // eslint-disable-next-line no-shadow
   const onAuthStateChanged = (user) => {
     setUser(user);
     if (user) {
@@ -126,6 +128,10 @@ const AuthState = (props) => {
       {props.children}
     </AuthContext.Provider>
   );
+};
+
+AuthState.propTypes = {
+  children: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default AuthState;
