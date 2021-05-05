@@ -10,56 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import AuthContext from '../context/auth/authContext';
 
-const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-
-  const context = useContext(AuthContext);
-  const { login } = context;
-
-  return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Iniciar sesión</Text>
-      <View style={styles.inputView}>
-        <Icon name={'mail'} size={24} color={'white'} style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-          placeholder={'Ingresa tu correo electronico'}
-          placeholderTextColor={'#484848'}
-        ></TextInput>
-      </View>
-      <View style={styles.inputView}>
-        <Icon
-          name={'lock-closed'}
-          size={24}
-          color={'white'}
-          style={styles.icon}
-        />
-        <TextInput
-          onChangeText={(text) => setPass(text)}
-          style={styles.input}
-          placeholder={'Ingresa tu contraseña...'}
-          placeholderTextColor={'#484848'}
-        ></TextInput>
-      </View>
-      <View style={styles.buttonView}>
-        <Pressable
-          onPress={() => login(email, pass)}
-          style={styles.pressableButton}
-        >
-          <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
-        </Pressable>
-      </View>
-      <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
-        <Text style={styles.pressableText}>
-          ¿No tienes una cuenta?{'\n'}Registrate
-        </Text>
-      </Pressable>
-    </ScrollView>
-  );
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -117,5 +67,52 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+
+  const context = useContext(AuthContext);
+  const { login } = context;
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>Iniciar sesión</Text>
+      <View style={styles.inputView}>
+        <Icon name="mail" size={24} color="white" style={styles.icon} />
+        <TextInput
+          onChangeText={(text) => setEmail(text)}
+          style={styles.input}
+          placeholder="Ingresa tu correo electronico"
+          placeholderTextColor="#484848"
+        />
+      </View>
+      <View style={styles.inputView}>
+        <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+        <TextInput
+          onChangeText={(text) => setPass(text)}
+          style={styles.input}
+          placeholder="Ingresa tu contraseña..."
+          placeholderTextColor="#484848"
+        />
+      </View>
+      <View style={styles.buttonView}>
+        <Pressable
+          onPress={() => login(email, pass)}
+          style={styles.pressableButton}
+        >
+          <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
+        </Pressable>
+      </View>
+      <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
+        <Text style={styles.pressableText}>
+          ¿No tienes una cuenta?
+          {'\n'}
+          Registrate
+        </Text>
+      </Pressable>
+    </ScrollView>
+  );
+};
 
 export default Login;
