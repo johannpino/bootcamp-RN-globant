@@ -29,7 +29,7 @@ const Register = ({ navigation }) => {
         <TextInput 
         onChangeText={(text) => setEmail(text)} 
         style={styles.input}
-        placeholder={'Ingresa tu correo electronico'}
+        placeholder={'Ingresa tu correo electronico...'}
         placeholderTextColor={'#484848'}
         ></TextInput>
       </View>
@@ -44,7 +44,7 @@ const Register = ({ navigation }) => {
       </View>
       <View style={styles.buttonView}>
       <Button
-        title="Sign up"
+        title="registrarme"
         onPress={() => register(name, email.toLocaleLowerCase(), pass)} // IMPORTANTE EL TOLOWERCASE
         color={'#5014FC'}
      ></Button>

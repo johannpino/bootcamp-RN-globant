@@ -3,9 +3,6 @@ import AuthContext from '../context/auth/authContext';
 import Register from '../components/Register';
 import Login from '../components/Login';
 import { createStackNavigator } from '@react-navigation/stack';
-import Text from 'react-native';
-
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +19,5 @@ const Auth = () => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Auth;

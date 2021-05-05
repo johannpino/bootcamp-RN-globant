@@ -3,8 +3,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable} from 
 import AuthContext from '../context/auth/authContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -35,7 +33,7 @@ const Login = ({ navigation }) => {
       </View>
       <View style={styles.buttonView}>
       <Button 
-      title="Sign in" 
+      title="Iniciar sesion" 
       onPress={() => login(email, pass)}
         color={'#5014FC'}
       ></Button>    
