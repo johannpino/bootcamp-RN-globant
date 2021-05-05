@@ -43,11 +43,9 @@ const Register = ({ navigation }) => {
         ></TextInput>
       </View>
       <View style={styles.buttonView}>
-      <Button
-        title="registrarme"
-        onPress={() => register(name, email.toLocaleLowerCase(), pass)} // IMPORTANTE EL TOLOWERCASE
-        color={'#5014FC'}
-     ></Button>
+      <Pressable onPress={() => register(name, email.toLocaleLowerCase(), pass)} style={styles.pressableButton}>
+        <Text style={styles.pressableButtonText}>REGISTRARME</Text>
+      </Pressable>
       </View>
       <Pressable onPress={() => navigation.navigate('LoginScreen')}>
         <Text style={styles.pressableText}>¿Ya tienes una cuenta?{'\n'}Inicia sesión</Text>
@@ -100,7 +98,18 @@ const styles = StyleSheet.create({
     color: '#D4D4D4',
     fontSize: 18,
     textDecorationLine: 'underline'
-}
+  }, 
+  pressableButton: {
+    backgroundColor: '#5014FC',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5
+  },
+  pressableButtonText: {
+    color: 'white',
+    fontSize: 18,
+  }
 });
 
 export default Register;

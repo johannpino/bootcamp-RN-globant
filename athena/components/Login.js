@@ -32,11 +32,9 @@ const Login = ({ navigation }) => {
         ></TextInput>
       </View>
       <View style={styles.buttonView}>
-      <Button 
-      title="Iniciar sesion" 
-      onPress={() => login(email, pass)}
-        color={'#5014FC'}
-      ></Button>    
+      <Pressable onPress={() => login(email, pass)} style={styles.pressableButton}>
+        <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
+      </Pressable>    
       </View>
       <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
         <Text style={styles.pressableText}>¿No tienes una cuenta?{'\n'}Registrate</Text>
@@ -89,7 +87,18 @@ const styles = StyleSheet.create({
       color: '#D4D4D4',
       fontSize: 18,
       textDecorationLine: 'underline'
-  }
+    },
+    pressableButton: {
+        backgroundColor: '#5014FC',
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5
+    },
+    pressableButtonText: {
+        color: 'white',
+        fontSize: 18,
+    }
   });
 
 export default Login;
