@@ -1,28 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import Item from './Item';
-
-const DisplayTasks = ({ title, items }) => {
-  if (!items) return null;
-  return (
-    <View>
-      {title ? <Text style={styles.secondary}>{title}</Text> : null}
-      <View style={styles.displayItems}>
-        {items.map((item, index) => {
-          return (
-            <Item
-              isProject={false}
-              title={item._data.name}
-              secondary={item._data.project}
-              color={item._data.projectColor}
-              key={index}
-            />
-          );
-        })}
-      </View>
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   secondary: {
@@ -36,5 +16,34 @@ const styles = StyleSheet.create({
     backgroundColor: '#D4D4D4',
   },
 });
+
+const DisplayTasks = ({ title, items }) => {
+  if (!items) return null;
+  return (
+    <View>
+      {title ? <Text style={styles.secondary}>{title}</Text> : null}
+      <View style={styles.displayItems}>
+        {items.map((item) => {
+          const { name, project, projectColor } = item._data;
+          const id = item._ref._documentPath._parts[1];
+          return (
+            <Item
+              isProject={false}
+              title={name}
+              secondary={project}
+              color={projectColor}
+              key={id}
+            />
+          );
+        })}
+      </View>
+    </View>
+  );
+};
+
+DisplayTasks.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.instanceOf(Array).isRequired,
+};
 
 export default DisplayTasks;
