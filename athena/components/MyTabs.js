@@ -20,6 +20,10 @@ const MyTabs = () => {
       initialRouteName="Home"
       tabBarOptions={{
         showLabel: false,
+        style: {
+          backgroundColor: '#1B1B1B',
+          height: 64,
+        },
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -27,7 +31,7 @@ const MyTabs = () => {
           if (Appearance.getColorScheme() === 'dark') {
             color = 'white';
           }
-          color = 'black';
+          color = 'white';
           size = 30;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';

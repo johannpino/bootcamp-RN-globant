@@ -1,21 +1,15 @@
-import React from 'react'
-import { ScrollView, StyleSheet} from 'react-native'
+import React from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
 
 const Projects = () => {
-    return (
-        <ScrollView style={styles.container}>
-            
-        </ScrollView>
-    )
-}
+  return <ScrollView style={styles.container}></ScrollView>;
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#1B1B1B',
-        padding: '5%',
-    },
-})
+  container: {
+    flex: 1,
+    padding: '5%',
+  },
+});
 
-
-export default Projects
+export default Projects;

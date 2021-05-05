@@ -26,7 +26,7 @@ const DisplayTasks = ({ title, items }) => {
 
 const styles = StyleSheet.create({
   secondary: {
-    fontSize: 22,
+    fontSize: 24,
     color: 'white',
   },
   displayItems: {
