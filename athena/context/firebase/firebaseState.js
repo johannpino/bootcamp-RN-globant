@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { GET_PROJECTS, GET_TASKS } from '../../types';
+import { GET_PROJECTS, GET_TASKS, USER_SIGNIN, USER_SIGNOUT } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
 import firestore from '@react-native-firebase/firestore';
@@ -9,38 +9,60 @@ const FirebaseState = (props) => {
     projects: [],
     user: {},
     tasks: [],
+    loggedin: false,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
-  const [projects, setProjects] = useState([]);
+
+  const getCollection = async (name) => {
+    const fetchedCollection = await firestore()
+      .collection(name)
+      .get()
+      .then((collection) => {
+        return collection._docs;
+      });
+    return fetchedCollection;
+  };
 
   // CRUD
   const getProjects = async () => {
-    const fetchedProjects = await firestore()
-      .collection('projects')
-      .get()
-      .then((projects) => {
-        dispatch({
-          type: GET_PROJECTS,
-          payload: projects._docs,
-        });
-      });
+    const payload = await getCollection('projects');
+    dispatch({
+      payload,
+      type: GET_PROJECTS,
+    });
   };
 
   const getTasks = async () => {
-    const fetchedTasks = await firestore()
-      .collection('tasks')
-      .get()
-      .then((tasks) => {
-        dispatch({
-          type: GET_TASKS,
-          payload: tasks._docs,
-        });
-      });
+    const payload = await getCollection('tasks');
+    dispatch({
+      payload,
+      type: GET_TASKS,
+    });
+  };
+
+  const signIn = () => {
+    dispatch({
+      type: USER_SIGNIN,
+    });
+  };
+
+  const signOut = () => {
+    dispatch({
+      type: USER_SIGNOUT,
+    });
   };
 
   return (
     <FireBaseContext.Provider
-      value={{ projects: state.projects, tasks: state.tasks, getProjects, getTasks }}
+      value={{
+        projects: state.projects,
+        tasks: state.tasks,
+        loggedin: state.loggedin,
+        getProjects,
+        getTasks,
+        signIn,
+        signOut,
+      }}
     >
       {props.children}
     </FireBaseContext.Provider>

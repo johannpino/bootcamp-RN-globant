@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableHighlight, Button } from 'react-native';
 import Item from './Item';
-import DisplayProjects from './DisplayProjects'
-import DisplayTasks from './DisplayTasks'
+import DisplayProjects from './DisplayProjects';
+import DisplayTasks from './DisplayTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import AuthContext from '../context/auth/authContext';
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 const Home = () => {
+  const authContext = useContext(AuthContext);
+  const { logout, userName } = authContext;
   const firebaseContext = useContext(FireBaseContext);
   const { projects, getProjects, tasks, getTasks } = firebaseContext;
-  console.log(projects);
-  console.log(tasks);
 
   useEffect(() => {
     getProjects();
@@ -19,9 +20,10 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Welcome,{'\n'}User.</Text>
+      <Text style={styles.title}>{` Welcome,${'\n'} ${userName}`}</Text>
       <DisplayTasks title={'Recent tasks...'} items={tasks} />
       <DisplayProjects title={'Your projects'} items={projects} />
+      <Button title="logout" onPress={() => logout()}></Button>
     </ScrollView>
   );
 };

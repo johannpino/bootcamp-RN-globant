@@ -1,15 +1,15 @@
-import { GET_PROJECTS, GET_TASKS } from '../../types';
+import { USER_SIGNIN, USER_SIGNOUT } from '../../types';
 export default (state, action) => {
   switch (action.type) {
-    case GET_PROJECTS:
+    case USER_SIGNIN:
       return {
         ...state,
-        projects: action.payload,
+        loggedin: true,
       };
-    case GET_TASKS:
+    case USER_SIGNOUT:
       return {
         ...state,
-        tasks: action.payload,
+        loggedin: false,
       };
     default:
       return state;
