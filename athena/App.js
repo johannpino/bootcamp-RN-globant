@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { StyleSheet, View } from 'react-native';
 import MyTabs from './components/MyTabs';
 import FirebaseState from './context/firebase/firebaseState';
 import ProjectState from './context/projects/projectState';
@@ -15,18 +14,16 @@ const MyTheme = {
   },
 };
 
-const App = () => {
-  return (
-    <AuthState>
-      <FirebaseState>
-        <ProjectState>
-          <NavigationContainer theme={MyTheme}>
-            <MyTabs />
-          </NavigationContainer>
-        </ProjectState>
-      </FirebaseState>
-    </AuthState>
-  );
-};
+const App = () => (
+  <AuthState>
+    <FirebaseState>
+      <ProjectState>
+        <NavigationContainer theme={MyTheme}>
+          <MyTabs />
+        </NavigationContainer>
+      </ProjectState>
+    </FirebaseState>
+  </AuthState>
+);
 
 export default App;

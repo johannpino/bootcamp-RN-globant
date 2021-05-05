@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect, useReducer } from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -13,12 +15,33 @@ const AuthState = (props) => {
   const [userName, setUserName] = useState();
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  const signIn = () => {
+    dispatch({
+      type: USER_SIGNIN,
+    });
+  };
+
+  const signOut = () => {
+    dispatch({
+      type: USER_SIGNOUT,
+    });
+  };
+
+  const getUser = async (userEmail) => {
+    const foundUser = await firestore()
+      .collection('users')
+      .where('email', '==', userEmail)
+      .get()
+      .then((res) => res._docs[0]._data.name);
+    setUserName(foundUser);
+  };
+
   // Handle user state changes
   const onAuthStateChanged = (user) => {
     setUser(user);
     if (user) {
       getUser(user.email);
-      //getProjects(user.email);
+      // getProjects(user.email);
     }
     if (initializing) setInitializing(false);
   };
@@ -40,8 +63,8 @@ const AuthState = (props) => {
         firestore()
           .collection('users')
           .add({
-            name: name,
-            email: email,
+            name,
+            email,
           })
           .then(() => {
             console.log('User added!');
@@ -61,19 +84,9 @@ const AuthState = (props) => {
       });
   };
 
-  const getUser = async (userEmail) => {
-    const foundUser = await firestore()
-      .collection('users')
-      .where('email', '==', userEmail)
-      .get()
-      .then((user) => {
-        return user._docs[0]._data.name;
-      });
-    setUserName(foundUser);
-  };
-
   //   const getProjects = async (userEmail) => {
-  //     const projects = await firestore().collection('projects').where('owner', '==', userEmail).get();
+  //     const projects = await firestore().
+  //      collection('projects').where('owner', '==', userEmail).get();
   //     console.log(projects._docs);
   //   };
 
@@ -93,18 +106,6 @@ const AuthState = (props) => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
-
-  const signIn = () => {
-    dispatch({
-      type: USER_SIGNIN,
-    });
-  };
-
-  const signOut = () => {
-    dispatch({
-      type: USER_SIGNOUT,
-    });
-  };
 
   return (
     <AuthContext.Provider
