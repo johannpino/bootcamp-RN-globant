@@ -1,13 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+
 import React, { useState, useEffect, useContext } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import AuthContext from '../context/auth/authContext';
+import Register from '../components/Register'
+import Login from '../components/Login'
 
 import {
   SafeAreaView,
@@ -36,36 +32,8 @@ const Auth = () => {
         <StatusBar />
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View>
-            <Text>Sign up</Text>
-            <View>
-              <Text>Name:</Text>
-              <TextInput onChangeText={(text) => setName(text)}></TextInput>
-            </View>
-            <View>
-              <Text>Email:</Text>
-              <TextInput onChangeText={(text) => setEmail(text)}></TextInput>
-            </View>
-            <View>
-              <Text>Password:</Text>
-              <TextInput onChangeText={(text) => setPass(text)}></TextInput>
-            </View>
-            <Button
-              title="Sign up"
-              onPress={() => register(name, email.toLocaleLowerCase(), pass)} // IMPORTANTE EL TOLOWERCASE
-            ></Button>
-            <Text></Text>
-            <Text>Or</Text>
-            <Text></Text>
-            <Text>Sign in</Text>
-            <View>
-              <Text>Email:</Text>
-              <TextInput onChangeText={(text) => setEmail(text)}></TextInput>
-            </View>
-            <View>
-              <Text>Password:</Text>
-              <TextInput onChangeText={(text) => setPass(text)}></TextInput>
-            </View>
-            <Button title="Sign in" onPress={() => login(email, pass)}></Button>
+            <Register/>
+            <Login />
           </View>
         </ScrollView>
       </SafeAreaView>
