@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable } from 'react-native';
 import AuthContext from '../context/auth/authContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Register = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -8,23 +9,38 @@ const Register = ({ navigation }) => {
   const [pass, setPass] = useState('');
 
   const context = useContext(AuthContext);
-  const { user, initializing, login, logout, register } = context;
+  const { register } = context;
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+      <Text style={styles.title}>Registrate</Text>
 
-      <Text style={styles.label}>Name:</Text>
       <View style={styles.inputView}>
-        <TextInput onChangeText={(text) => setName(text)} style={styles.input}></TextInput>
+        <Icon name={'person'} size={24} color={'white'} style={styles.icon} />
+        <TextInput 
+        onChangeText={(text) => setName(text)} 
+        style={styles.input}
+        placeholder={'Ingresa tu nombre...'}
+        placeholderTextColor={'#484848'}
+        ></TextInput>
       </View>
-      <Text style={styles.label}>Email:</Text>
       <View style={styles.inputView}>
-        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input}></TextInput>
+        <Icon name={'mail'} size={24} color={'white'} style={styles.icon} />
+        <TextInput 
+        onChangeText={(text) => setEmail(text)} 
+        style={styles.input}
+        placeholder={'Ingresa tu correo electronico'}
+        placeholderTextColor={'#484848'}
+        ></TextInput>
       </View>
-      <Text style={styles.label}>Password:</Text>
       <View style={styles.inputView}>
-        <TextInput onChangeText={(text) => setPass(text)} style={styles.input}></TextInput>
+        <Icon name={'lock-closed'} size={24} color={'white'} style={styles.icon} />
+        <TextInput 
+        onChangeText={(text) => setPass(text)} 
+        style={styles.input}
+        placeholder={'Ingresa tu contraseña...'}
+        placeholderTextColor={'#484848'}
+        ></TextInput>
       </View>
       <View style={styles.buttonView}>
       <Button
@@ -34,7 +50,7 @@ const Register = ({ navigation }) => {
      ></Button>
       </View>
       <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-        <Text style={styles.pressableText}>Already have an account? Go to Login</Text>
+        <Text style={styles.pressableText}>¿Ya tienes una cuenta?{'\n'}Inicia sesión</Text>
       </Pressable>
     </ScrollView>
   );
@@ -59,10 +75,22 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   inputView: {
-    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  icon:{
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   input: {
     fontSize: 20,
+    width: '85%',
+    color: 'white',
   },
   buttonView: {
     marginTop: 24,

@@ -1,25 +1,37 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable} from 'react-native';
 import AuthContext from '../context/auth/authContext';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
   const context = useContext(AuthContext);
-  const { user, initializing, login, logout, register } = context;
+  const { login } = context;
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Log in</Text>
-
-      <Text style={styles.label}>Email:</Text>
+      <Text style={styles.title}>Iniciar sesión</Text>
       <View style={styles.inputView}>
-        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input}></TextInput>
+        <Icon name={'mail'} size={24} color={'white'} style={styles.icon} /> 
+        <TextInput 
+        onChangeText={(text) => setEmail(text)} 
+        style={styles.input}
+        placeholder={'Ingresa tu correo electronico'}
+        placeholderTextColor={'#484848'}
+        ></TextInput>
       </View>
-      <Text style={styles.label}>Password:</Text>
       <View style={styles.inputView}>
-        <TextInput onChangeText={(text) => setPass(text)} style={styles.input}></TextInput>
+        <Icon name={'lock-closed'} size={24} color={'white'} style={styles.icon} />
+        <TextInput 
+        onChangeText={(text) => setPass(text)} 
+        style={styles.input}
+        placeholder={'Ingresa tu contraseña...'}
+        placeholderTextColor={'#484848'}
+        ></TextInput>
       </View>
       <View style={styles.buttonView}>
       <Button 
@@ -29,43 +41,57 @@ const Login = ({ navigation }) => {
       ></Button>    
       </View>
       <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
-        <Text style={styles.pressableText}>Dont have an account? Go to Register</Text>
+        <Text style={styles.pressableText}>¿No tienes una cuenta?{'\n'}Registrate</Text>
       </Pressable>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: '5%',
-  },
-  title: {
-    marginTop: 24,
-    marginBottom: 24,
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  label: {
-    fontSize: 24,
-    color: 'white',
-  },
-  inputView: {
-    backgroundColor: 'white',
-  },
-  input: {
-    fontSize: 20,
-  },
-  buttonView: {
-    marginTop: 24,
-    marginBottom: 16
-  },
-  pressableText: {
+    container: {
+      flex: 1,
+      padding: '5%',
+    },
+    title: {
+      marginTop: 24,
+      marginBottom: 24,
+      fontSize: 48,
+      fontWeight: 'bold',
       color: 'white',
+    },
+    label: {
+      fontSize: 24,
+      color: 'white',
+      marginTop: 4,
+      marginBottom: 4,
+    },
+    inputView: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomColor: 'white',
+      borderBottomWidth: 2,
+      marginTop: 8,
+      marginBottom: 8,
+    },
+    icon:{
+      paddingLeft: 12,
+      paddingRight: 12,
+    },
+    input: {
+      fontSize: 20,
+      width: '85%',
+      color: 'white'
+    },
+    buttonView: {
+      marginTop: 24,
+      marginBottom: 16
+    },
+    pressableText: {
+      color: '#D4D4D4',
       fontSize: 18,
       textDecorationLine: 'underline'
   }
-});
+  });
 
 export default Login;
