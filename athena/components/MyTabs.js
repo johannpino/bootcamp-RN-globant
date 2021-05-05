@@ -30,16 +30,28 @@ const MyTabs = () => {
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ focused }) => {
           let iconName;
-          const color = 'white';
           const size = 30;
+          let color = '#494949';
           if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
+            iconName = 'home';
+            if (focused) {
+              color = '#FFFFFF';
+            }
           } else if (route.name === 'Projects') {
-            iconName = focused ? 'folder-open' : 'folder-open-outline';
+            iconName = 'folder-open';
+            if (focused) {
+              color = '#FFFFFF';
+            }
           } else if (route.name === 'Profile') {
-            iconName = focused ? 'person-circle' : 'person-circle-outline';
+            iconName = 'person-circle';
+            if (focused) {
+              color = '#FFFFFF';
+            }
           } else if (route.name === 'Settings') {
-            iconName = focused ? 'settings' : 'settings-outline';
+            iconName = 'settings';
+            if (focused) {
+              color = '#FFFFFF';
+            }
           }
 
           // You can return any component that you like here!
