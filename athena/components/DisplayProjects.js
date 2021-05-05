@@ -29,7 +29,7 @@ const DisplayProjects = ({ title, items }) => {
             <Item
               isProject={false}
               title={name}
-              secondary={`${tasksRemaining} ${
+              secondary={`${tasksRemaining > 100 ? '99+' : tasksRemaining} ${
                 tasksRemaining > 1 ? 'tasks' : 'task'
               } remaining`}
               color={color}
