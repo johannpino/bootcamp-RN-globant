@@ -27,10 +27,11 @@ const MyTabs = () => {
         },
       }}
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        // eslint-disable-next-line react/prop-types
+        tabBarIcon: ({ focused }) => {
           let iconName;
-          color = 'white';
-          size = 30;
+          const color = 'white';
+          const size = 30;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Projects') {

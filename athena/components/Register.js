@@ -8,6 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AuthContext from '../context/auth/authContext';
 
@@ -125,6 +126,10 @@ const Register = ({ navigation }) => {
       </Pressable>
     </ScrollView>
   );
+};
+
+Register.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Register;

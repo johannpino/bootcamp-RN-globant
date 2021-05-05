@@ -8,6 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 import AuthContext from '../context/auth/authContext';
 
 const styles = StyleSheet.create({
@@ -113,6 +114,10 @@ const Login = ({ navigation }) => {
       </Pressable>
     </ScrollView>
   );
+};
+
+Login.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Login;

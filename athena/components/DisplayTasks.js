@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import Item from './Item';
 
 const styles = StyleSheet.create({
@@ -38,6 +39,11 @@ const DisplayTasks = ({ title, items }) => {
       </View>
     </View>
   );
+};
+
+DisplayTasks.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default DisplayTasks;

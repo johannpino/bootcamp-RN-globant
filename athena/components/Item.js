@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 const getFirstLetter = (string) => string.charAt(0);
 
@@ -57,6 +58,13 @@ const Item = ({ isProject, title, secondary, color }) => {
       </View>
     </View>
   );
+};
+
+Item.propTypes = {
+  isProject: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  secondary: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default Item;

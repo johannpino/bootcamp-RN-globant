@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import Item from './Item';
 
 const styles = StyleSheet.create({
@@ -27,7 +28,7 @@ const DisplayProjects = ({ title, items }) => {
           const id = item._ref._documentPath._parts[1];
           return (
             <Item
-              isProject={false}
+              isProject
               title={name}
               secondary={`${tasksRemaining > 100 ? '99+' : tasksRemaining} ${
                 tasksRemaining > 1 ? 'tasks' : 'task'
@@ -40,6 +41,11 @@ const DisplayProjects = ({ title, items }) => {
       </View>
     </View>
   );
+};
+
+DisplayProjects.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default DisplayProjects;
