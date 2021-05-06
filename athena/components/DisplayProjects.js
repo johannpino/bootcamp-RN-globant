@@ -31,8 +31,8 @@ const DisplayProjects = ({ title, items }) => {
               isProject
               title={name}
               secondary={`${tasksRemaining > 100 ? '99+' : tasksRemaining} ${
-                tasksRemaining > 1 ? 'tasks' : 'task'
-              } remaining`}
+                tasksRemaining > 1 ? 'tareas pendientes' : 'tarea pendiente'
+              }`}
               color={color}
               key={id}
             />
