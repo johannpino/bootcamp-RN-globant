@@ -2,12 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import firestore from '@react-native-firebase/firestore';
+import getCollection from '../../utils/firebase';
 import {
   GET_PROJECTS,
   GET_TASKS,
-  USER_SIGNIN,
-  USER_SIGNOUT,
+  SET_INITIALIZING,
+  SET_USER,
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
@@ -17,21 +17,13 @@ const FirebaseState = (props) => {
     projects: [],
     user: {},
     tasks: [],
-    loggedin: false,
+    initializing: true,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
 
-  const getCollection = async (name) => {
-    const fetchedCollection = await firestore()
-      .collection(name)
-      .get()
-      .then((collection) => collection._docs);
-    return fetchedCollection;
-  };
-
   // CRUD
   const getProjects = async () => {
-    const payload = await getCollection('projects');
+    const payload = await getCollection('projects', state.user.email);
     dispatch({
       payload,
       type: GET_PROJECTS,
@@ -39,22 +31,24 @@ const FirebaseState = (props) => {
   };
 
   const getTasks = async () => {
-    const payload = await getCollection('tasks');
+    const payload = await getCollection('tasks', state.user.email);
     dispatch({
       payload,
       type: GET_TASKS,
     });
   };
 
-  const signIn = () => {
+  const setUser = (user) => {
     dispatch({
-      type: USER_SIGNIN,
+      payload: user,
+      type: SET_USER,
     });
   };
 
-  const signOut = () => {
+  const setInitializing = (bool) => {
     dispatch({
-      type: USER_SIGNOUT,
+      type: SET_INITIALIZING,
+      payload: bool,
     });
   };
 
@@ -63,11 +57,12 @@ const FirebaseState = (props) => {
       value={{
         projects: state.projects,
         tasks: state.tasks,
-        loggedin: state.loggedin,
+        initializing: state.initializing,
+        user: state.user,
         getProjects,
         getTasks,
-        signIn,
-        signOut,
+        setUser,
+        setInitializing,
       }}
     >
       {props.children}

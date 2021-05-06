@@ -6,14 +6,14 @@ import Home from './Home';
 import Projects from './Projects';
 import Profile from './Profile';
 import Settings from './Settings';
-import AuthContext from '../context/auth/authContext';
+import FireBaseContext from '../context/firebase/firebaseContext';
 import Auth from './Auth';
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  const firebaseContext = useContext(FireBaseContext);
+  const { user } = firebaseContext;
   if (!user) return <Auth />;
 
   return (

@@ -1,77 +1,46 @@
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useContext } from 'react';
 import auth from '@react-native-firebase/auth';
 import PropTypes from 'prop-types';
-import firestore from '@react-native-firebase/firestore';
-import { USER_SIGNIN, USER_SIGNOUT } from '../../types';
-import authReducer from './authReducer';
 import AuthContext from './authContext';
+import FireBaseContext from '../firebase/firebaseContext';
 
 const AuthState = (props) => {
-  const initialState = {};
   // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-  const [userName, setUserName] = useState();
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const firebaseContext = useContext(FireBaseContext);
+  const { setUser, setInitializing, initializing } = firebaseContext;
 
-  const signIn = () => {
-    dispatch({
-      type: USER_SIGNIN,
-    });
-  };
-
-  const signOut = () => {
-    dispatch({
-      type: USER_SIGNOUT,
-    });
-  };
-
-  const getUser = async (userEmail) => {
-    const foundUser = await firestore()
-      .collection('users')
-      .where('email', '==', userEmail)
-      .get()
-      .then((res) => res._docs[0]._data.name);
-    setUserName(foundUser);
-  };
-
-  // eslint-disable-next-line no-shadow
   const onAuthStateChanged = (user) => {
     setUser(user);
-    if (user) {
-      getUser(user.email);
-      // getProjects(user.email);
-    }
     if (initializing) setInitializing(false);
   };
 
+  const onUserChanged = (user) => {
+    setUser(user);
+  };
+
   const login = (email, pass) => {
-    auth().signInWithEmailAndPassword(email, pass);
-    signIn();
+    auth()
+      .signInWithEmailAndPassword(email, pass)
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const logout = () => {
-    console.log('loggin out');
     auth().signOut();
   };
 
   const register = (name, email, pass) => {
     auth()
       .createUserWithEmailAndPassword(email, pass)
-      .then(() => {
-        firestore()
-          .collection('users')
-          .add({
-            name,
-            email,
-          })
-          .then(() => {
-            console.log('User added!');
-          });
-        console.log('User account created & signed in!');
+      .then((userData) => {
+        userData.user.updateProfile({
+          displayName: name,
+          photoURL: '',
+        });
       })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
@@ -86,23 +55,10 @@ const AuthState = (props) => {
       });
   };
 
-  //   const getProjects = async (userEmail) => {
-  //     const projects = await firestore().
-  //      collection('projects').where('owner', '==', userEmail).get();
-  //     console.log(projects._docs);
-  //   };
-
-  //   const createProject = () => {
-  //     firestore()
-  //       .collection('projects')
-  //       .add({
-  //         name: project,
-  //         owner: user.email,
-  //       })
-  //       .then(() => {
-  //         console.log('project added!');
-  //       });
-  //   };
+  useEffect(() => {
+    const subscriber = auth().onUserChanged(onUserChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -112,17 +68,9 @@ const AuthState = (props) => {
   return (
     <AuthContext.Provider
       value={{
-        loggedin: state.loggedin,
-        user,
-        initializing,
-        userName,
-        signIn,
-        signOut,
-        onAuthStateChanged,
         login,
         logout,
         register,
-        getUser,
       }}
     >
       {props.children}
