@@ -28,9 +28,11 @@ const Home = () => {
   const { projects, getProjects, tasks, getTasks, user } = firebaseContext;
 
   useEffect(() => {
-    getProjects();
-    getTasks();
-  }, []);
+    if (Object.keys(user).length > 0) {
+      getProjects();
+      getTasks();
+    }
+  }, [user]);
 
   return (
     <>

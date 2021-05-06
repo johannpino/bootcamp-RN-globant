@@ -68,6 +68,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  error: {
+    color: '#FF0000',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
 const Register = ({ navigation }) => {
@@ -76,7 +81,16 @@ const Register = ({ navigation }) => {
   const [pass, setPass] = useState('');
 
   const context = useContext(AuthContext);
-  const { register } = context;
+  const { register, errorMessage, setErrorMessage } = context;
+
+  const handlePress = () => {
+    if (name.trim() === '' || email.trim() === '' || pass.trim() === '') {
+      setErrorMessage('Todos los campos son requeridos');
+      return;
+    }
+    register(name, email.toLocaleLowerCase(), pass);
+    setErrorMessage('');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -109,15 +123,18 @@ const Register = ({ navigation }) => {
           placeholderTextColor="#484848"
         />
       </View>
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
       <View style={styles.buttonView}>
-        <Pressable
-          onPress={() => register(name, email.toLocaleLowerCase(), pass)}
-          style={styles.pressableButton}
-        >
+        <Pressable onPress={() => handlePress()} style={styles.pressableButton}>
           <Text style={styles.pressableButtonText}>REGISTRARME</Text>
         </Pressable>
       </View>
-      <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('LoginScreen');
+          setErrorMessage('');
+        }}
+      >
         <Text style={styles.pressableText}>
           ¿Ya tienes una cuenta?
           {'\n'}
