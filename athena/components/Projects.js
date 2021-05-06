@@ -1,13 +1,114 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+/* eslint-disable implicit-arrow-linebreak */
+import React, { useEffect, useState, useContext } from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TextInput,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import FireBaseContext from '../context/firebase/firebaseContext';
+import DisplayProjects from './DisplayProjects';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: '5%',
   },
+  titleContainer: {
+    flexDirection: 'row',
+  },
+  title: {
+    marginTop: 24,
+    marginBottom: 24,
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  icon: {
+    marginTop: 30,
+    marginBottom: 24,
+    marginLeft: 90,
+  },
+  iconSearch: {
+    marginVertical: 8,
+    marginLeft: 14,
+    marginRight: 5,
+  },
+  search: {
+    flex: 1,
+    flexDirection: 'row',
+    borderRadius: 6,
+    marginTop: 8,
+    marginBottom: 16,
+    backgroundColor: '#FFFFFF',
+    width: '100%',
+  },
+  input: {
+    fontSize: 20,
+    width: '85%',
+    color: 'black',
+  },
 });
 
-const Projects = () => <ScrollView style={styles.container} />;
+const Projects = () => {
+  const firebaseContext = useContext(FireBaseContext);
+  const { projects, getProjects, user } = firebaseContext;
+  const [filteredProjects, setFilteredProjects] = useState(projects);
+
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      getProjects();
+    }
+  }, [user]);
+
+  const handleChange = (text) => {
+    const result = projects.filter((project) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const { name } = project._data;
+      return name.toLowerCase().includes(text.toLowerCase());
+    });
+    setFilteredProjects(result);
+  };
+
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Proyectos</Text>
+          <Pressable onPress={() => alert('add proyect')}>
+            <Icon
+              style={styles.icon}
+              name="add-circle-outline"
+              size={52}
+              color="#FFFFFF"
+            />
+          </Pressable>
+        </View>
+      </View>
+      <View style={styles.container}>
+        <View style={styles.search}>
+          <Icon
+            style={styles.iconSearch}
+            name="search-outline"
+            size={35}
+            color="#000000"
+          />
+          <TextInput
+            onChangeText={(text) => handleChange(text)}
+            style={styles.input}
+            placeholder="Busca un proyecto..."
+            placeholderTextColor="#484848"
+          />
+        </View>
+      </View>
+      <View style={styles.container}>
+        <DisplayProjects title="Tus proyectos" items={filteredProjects} />
+      </View>
+    </ScrollView>
+  );
+};
 
 export default Projects;
