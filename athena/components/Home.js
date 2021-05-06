@@ -33,12 +33,20 @@ const Home = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>{` Welcome,${'\n'} ${user.displayName}`}</Text>
-      <DisplayTasks title="Recent tasks..." items={tasks} />
-      <DisplayProjects title="Your projects" items={projects} />
-      <Button title="logout" onPress={() => logout()} />
-    </ScrollView>
+    <>
+      {user.displayName ? (
+        <ScrollView style={styles.container}>
+          <Text style={styles.title}>
+            {` Welcome,${'\n'} ${user.displayName}`}
+          </Text>
+          <DisplayTasks title="Recent tasks..." items={tasks} />
+          <DisplayProjects title="Your projects" items={projects} />
+          <Button title="logout" onPress={() => logout()} />
+        </ScrollView>
+      ) : (
+        <Text style={styles.title}>Loading...</Text> // spiner goes here
+      )}
+    </>
   );
 };
 
