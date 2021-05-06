@@ -56,6 +56,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textDecorationLine: 'underline',
   },
+  error: {
+    color: '#FF0000',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   pressableButton: {
     backgroundColor: '#5014FC',
     height: 40,
@@ -74,7 +79,16 @@ const Login = ({ navigation }) => {
   const [pass, setPass] = useState('');
 
   const context = useContext(AuthContext);
-  const { login } = context;
+  const { login, errorMessage, setErrorMessage } = context;
+
+  const handlePress = () => {
+    if (email.trim() === '' || pass.trim() === '') {
+      setErrorMessage('Todos los campos son obligatorios');
+      return;
+    }
+    login(email, pass);
+    setErrorMessage('');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -98,14 +112,17 @@ const Login = ({ navigation }) => {
         />
       </View>
       <View style={styles.buttonView}>
-        <Pressable
-          onPress={() => login(email, pass)}
-          style={styles.pressableButton}
-        >
+        <Pressable onPress={() => handlePress()} style={styles.pressableButton}>
           <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
         </Pressable>
       </View>
-      <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('RegisterScreen');
+          setErrorMessage('');
+        }}
+      >
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
         <Text style={styles.pressableText}>
           ¿No tienes una cuenta?
           {'\n'}
