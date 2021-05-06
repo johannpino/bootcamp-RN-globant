@@ -1,29 +1,25 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-underscore-dangle */
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import firestore from '@react-native-firebase/firestore';
 import {
   GET_PROJECTS,
   GET_TASKS,
-  USER_SIGNIN,
-  USER_SIGNOUT,
+  SET_INITIALIZING,
+  SET_USER,
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
-import AuthContext from '../auth/authContext';
 
 const FirebaseState = (props) => {
   const initialState = {
     projects: [],
     user: {},
     tasks: [],
-    loggedin: false,
+    initializing: true,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
-
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
 
   const getCollection = async (name, owner) => {
     const fetchedCollection = await firestore()
@@ -36,7 +32,7 @@ const FirebaseState = (props) => {
 
   // CRUD
   const getProjects = async () => {
-    const payload = await getCollection('projects', user.email);
+    const payload = await getCollection('projects', state.user.email);
     dispatch({
       payload,
       type: GET_PROJECTS,
@@ -44,22 +40,24 @@ const FirebaseState = (props) => {
   };
 
   const getTasks = async () => {
-    const payload = await getCollection('tasks', user.email);
+    const payload = await getCollection('tasks', state.user.email);
     dispatch({
       payload,
       type: GET_TASKS,
     });
   };
 
-  const signIn = () => {
+  const setUser = (user) => {
     dispatch({
-      type: USER_SIGNIN,
+      payload: user,
+      type: SET_USER,
     });
   };
 
-  const signOut = () => {
+  const setInitializing = (bool) => {
     dispatch({
-      type: USER_SIGNOUT,
+      type: SET_INITIALIZING,
+      payload: bool,
     });
   };
 
@@ -68,11 +66,12 @@ const FirebaseState = (props) => {
       value={{
         projects: state.projects,
         tasks: state.tasks,
-        loggedin: state.loggedin,
+        initializing: state.initializing,
+        user: state.user,
         getProjects,
         getTasks,
-        signIn,
-        signOut,
+        setUser,
+        setInitializing,
       }}
     >
       {props.children}

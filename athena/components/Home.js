@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { logout, userName } = authContext;
+  const { logout } = authContext;
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, getProjects, tasks, getTasks } = firebaseContext;
+  const { projects, getProjects, tasks, getTasks, user } = firebaseContext;
 
   useEffect(() => {
     getProjects();
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{` Welcome,${'\n'} ${userName}`}</Text>
+      <Text style={styles.title}>{` Welcome,${'\n'} ${user.displayName}`}</Text>
       <DisplayTasks title="Recent tasks..." items={tasks} />
       <DisplayProjects title="Your projects" items={projects} />
       <Button title="logout" onPress={() => logout()} />

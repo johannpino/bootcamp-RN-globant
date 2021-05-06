@@ -14,13 +14,13 @@ const MyTheme = {
 };
 
 const App = () => (
-  <AuthState>
-    <FirebaseState>
+  <FirebaseState>
+    <AuthState>
       <NavigationContainer theme={MyTheme}>
         <MyTabs />
       </NavigationContainer>
-    </FirebaseState>
-  </AuthState>
+    </AuthState>
+  </FirebaseState>
 );
 
 export default App;

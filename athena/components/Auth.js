@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import AuthContext from '../context/auth/authContext';
+import FireBaseContext from '../context/firebase/firebaseContext';
 import Register from './Register';
 import Login from './Login';
 
 const Stack = createStackNavigator();
 
 const Auth = () => {
-  const context = useContext(AuthContext);
+  const context = useContext(FireBaseContext);
   const { initializing } = context;
 
   if (initializing) return null;
