@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-underscore-dangle */
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
 import firestore from '@react-native-firebase/firestore';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
+import AuthContext from '../auth/authContext';
 
 const FirebaseState = (props) => {
   const initialState = {
@@ -21,9 +22,13 @@ const FirebaseState = (props) => {
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
 
-  const getCollection = async (name) => {
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+  const getCollection = async (name, owner) => {
     const fetchedCollection = await firestore()
       .collection(name)
+      .where('owner', '==', owner)
       .get()
       .then((collection) => collection._docs);
     return fetchedCollection;
@@ -31,7 +36,7 @@ const FirebaseState = (props) => {
 
   // CRUD
   const getProjects = async () => {
-    const payload = await getCollection('projects');
+    const payload = await getCollection('projects', user.email);
     dispatch({
       payload,
       type: GET_PROJECTS,
@@ -39,7 +44,7 @@ const FirebaseState = (props) => {
   };
 
   const getTasks = async () => {
-    const payload = await getCollection('tasks');
+    const payload = await getCollection('tasks', user.email);
     dispatch({
       payload,
       type: GET_TASKS,
