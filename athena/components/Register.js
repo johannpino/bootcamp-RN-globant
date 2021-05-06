@@ -82,7 +82,6 @@ const Register = ({ navigation }) => {
 
   const context = useContext(AuthContext);
   const { register, errorMessage, setErrorMessage } = context;
-
   const handlePress = () => {
     if (name.trim() === '' || email.trim() === '' || pass.trim() === '') {
       setErrorMessage('Todos los campos son requeridos');

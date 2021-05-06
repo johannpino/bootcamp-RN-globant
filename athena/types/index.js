@@ -2,3 +2,5 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 export const GET_TASKS = 'GET_TASKS';
 export const SET_USER = 'SET_USER';
 export const SET_INITIALIZING = 'SET_INITIALIZING';
+export const SET_FILTERED_PROJECTS = 'SET_FILTERED_PROJECTS';
+export const SET_NEW_PROJECT = 'SET_NEW_PROJECT';

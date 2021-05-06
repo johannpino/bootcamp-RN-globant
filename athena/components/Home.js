@@ -39,10 +39,10 @@ const Home = () => {
       {user.displayName ? (
         <ScrollView style={styles.container}>
           <Text style={styles.title}>
-            {` Welcome,${'\n'} ${user.displayName}`}
+            {` Bienvenido,${'\n'} ${user.displayName}`}
           </Text>
-          <DisplayTasks title="Recent tasks..." items={tasks} />
-          <DisplayProjects title="Your projects" items={projects} />
+          <DisplayTasks title="Tareas recientes..." items={tasks} />
+          <DisplayProjects title="Tus proyectos" items={projects} />
           <Button title="logout" onPress={() => logout()} />
         </ScrollView>
       ) : (
