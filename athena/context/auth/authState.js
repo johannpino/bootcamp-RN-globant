@@ -71,7 +71,6 @@ const AuthState = (props) => {
         login,
         logout,
         register,
-        onAuthStateChanged,
       }}
     >
       {props.children}

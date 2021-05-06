@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import firestore from '@react-native-firebase/firestore';
+import getCollection from '../../utils/firebase';
 import {
   GET_PROJECTS,
   GET_TASKS,
@@ -20,15 +20,6 @@ const FirebaseState = (props) => {
     initializing: true,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
-
-  const getCollection = async (name, owner) => {
-    const fetchedCollection = await firestore()
-      .collection(name)
-      .where('owner', '==', owner)
-      .get()
-      .then((collection) => collection._docs);
-    return fetchedCollection;
-  };
 
   // CRUD
   const getProjects = async () => {

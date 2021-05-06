@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import firestore from '@react-native-firebase/firestore';
 
 const getCollection = async (name, owner) => {
@@ -5,7 +6,6 @@ const getCollection = async (name, owner) => {
     .collection(name)
     .where('owner', '==', owner)
     .get()
-    // eslint-disable-next-line no-underscore-dangle
     .then((collection) => collection._docs);
   return fetchedCollection;
 };
