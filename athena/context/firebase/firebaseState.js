@@ -23,6 +23,7 @@ const FirebaseState = (props) => {
 
   // CRUD
   const getProjects = async () => {
+    console.log(state.user.email);
     const payload = await getCollection('projects', state.user.email);
     dispatch({
       payload,
@@ -31,6 +32,7 @@ const FirebaseState = (props) => {
   };
 
   const getTasks = async () => {
+    console.log(state.user.email);
     const payload = await getCollection('tasks', state.user.email);
     dispatch({
       payload,

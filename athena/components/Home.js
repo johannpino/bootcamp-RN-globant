@@ -32,7 +32,7 @@ const Home = () => {
       getProjects();
       getTasks();
     }
-  }, []);
+  }, [user]);
 
   return (
     <>
