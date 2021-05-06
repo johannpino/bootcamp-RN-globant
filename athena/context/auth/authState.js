@@ -12,10 +12,13 @@ const AuthState = (props) => {
   const firebaseContext = useContext(FireBaseContext);
   const { setUser, setInitializing, initializing } = firebaseContext;
 
-  // eslint-disable-next-line no-shadow
   const onAuthStateChanged = (user) => {
     setUser(user);
     if (initializing) setInitializing(false);
+  };
+
+  const onUserChanged = (user) => {
+    setUser(user);
   };
 
   const login = (email, pass) => {
@@ -51,6 +54,11 @@ const AuthState = (props) => {
         console.error(error);
       });
   };
+
+  useEffect(() => {
+    const subscriber = auth().onUserChanged(onUserChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
