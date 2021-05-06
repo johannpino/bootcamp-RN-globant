@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import ProjectsContext from '../context/projects/projectsContext';
 import DisplayProjects from './DisplayProjects';
+import NewProject from './NewProject';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,13 +58,25 @@ const styles = StyleSheet.create({
 const Projects = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, getProjects, user } = firebaseContext;
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+
+  const projectsContext = useContext(ProjectsContext);
+  const {
+    filteredProjects,
+    newProject,
+    setNewProject,
+    setFilteredProjects,
+  } = projectsContext;
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       getProjects();
+      setFilteredProjects(projects);
     }
   }, [user]);
+
+  const handlePress = () => {
+    setNewProject(true);
+  };
 
   const handleChange = (text) => {
     const result = projects.filter((project) => {
@@ -73,12 +87,14 @@ const Projects = () => {
     setFilteredProjects(result);
   };
 
+  if (newProject) return <NewProject />;
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Proyectos</Text>
-          <Pressable onPress={() => alert('add proyect')}>
+          <Pressable onPress={() => handlePress()}>
             <Icon
               style={styles.icon}
               name="add-circle-outline"

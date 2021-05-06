@@ -4,6 +4,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import MyTabs from './components/MyTabs';
 import FirebaseState from './context/firebase/firebaseState';
 import AuthState from './context/auth/authState';
+import ProjectsState from './context/projects/projectsState';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -16,9 +17,11 @@ const MyTheme = {
 const App = () => (
   <FirebaseState>
     <AuthState>
-      <NavigationContainer theme={MyTheme}>
-        <MyTabs />
-      </NavigationContainer>
+      <ProjectsState>
+        <NavigationContainer theme={MyTheme}>
+          <MyTabs />
+        </NavigationContainer>
+      </ProjectsState>
     </AuthState>
   </FirebaseState>
 );

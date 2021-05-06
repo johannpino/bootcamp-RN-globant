@@ -39,7 +39,7 @@ const Home = () => {
       {user.displayName ? (
         <ScrollView style={styles.container}>
           <Text style={styles.title}>
-            {` Welcome,${'\n'} ${user.displayName}`}
+            {` Bienvenido,${'\n'} ${user.displayName}`}
           </Text>
           <DisplayTasks title="Tareas recientes..." items={tasks} />
           <DisplayProjects title="Tus proyectos" items={projects} />
