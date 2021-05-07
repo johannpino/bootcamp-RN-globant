@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 const DisplayProjects = ({ title, items }) => {
-  if (!items) return null;
+  if (!items || items === '') return null;
   return (
     <View style={styles.itemContainer}>
       {title ? <Text style={styles.secondary}>{title}</Text> : null}

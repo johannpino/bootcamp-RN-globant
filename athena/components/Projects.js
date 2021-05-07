@@ -116,7 +116,7 @@ const Projects = () => {
         />
       </View>
 
-      <DisplayProjects items={filteredProjects} />
+      <DisplayProjects title="" items={filteredProjects} />
 
     </ScrollView>
   );
