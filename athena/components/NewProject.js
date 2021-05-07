@@ -51,19 +51,41 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  error: {
+    color: '#FF0000',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
 });
 
 const NewProject = () => {
   const projectsContext = useContext(ProjectsContext);
   const firebaseContext = useContext(FireBaseContext);
-  const [selectedColor, setSelectedcolor] = useState(1);
+  const [selectedColor, setSelectedcolor] = useState('');
 
   const { addProject, user } = firebaseContext;
   const { setNewProject } = projectsContext;
+  const [error, setError] = useState(false);
   const [name, setName] = useState('');
 
   const selectedHandler = (color) => {
     setSelectedcolor(color);
+  };
+
+  const handlePress = () => {
+    if (name.trim() === '' || selectedColor === '') {
+      setError(true);
+      return;
+    }
+    addProject({
+      color: selectedColor,
+      name: capitalizeFirstLetter(name),
+      owner: user.email,
+      tasksRemaining: 0,
+    });
+    setNewProject(false);
+    setError(false);
   };
 
   useEffect(() => {}, [selectedColor]);
@@ -93,18 +115,10 @@ const NewProject = () => {
           selectedHandler={selectedHandler}
           selectedColor={selectedColor}
         />
-        <Pressable
-          style={styles.projectBtn}
-          onPress={() => {
-            addProject({
-              color: selectedColor,
-              name: capitalizeFirstLetter(name),
-              owner: user.email,
-              tasksRemaining: 0,
-            });
-            setNewProject(false);
-          }}
-        >
+        {error ? (
+          <Text style={styles.error}>Selecciona nombre y color</Text>
+        ) : null}
+        <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
           <Text style={styles.projectBtnText}>CREAR PROYECTO</Text>
         </Pressable>
       </View>

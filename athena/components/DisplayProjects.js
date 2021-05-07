@@ -20,6 +20,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const formatDescription = (tasksRemaining) => {
+  if (tasksRemaining === 0) {
+    return 'No hay tareas';
+  }
+  if (tasksRemaining === 1) {
+    return `${tasksRemaining} tarea pendientes`;
+  }
+  if (tasksRemaining > 99) {
+    return '+99 tarea pendientes';
+  }
+  return `${tasksRemaining} tareas pendientes`;
+};
+
 const DisplayProjects = ({ title, items }) => {
   if (!items || items === '') return null;
   return (
@@ -33,9 +46,7 @@ const DisplayProjects = ({ title, items }) => {
             <Item
               isProject
               title={name}
-              secondary={`${tasksRemaining > 100 ? '99+' : tasksRemaining} ${
-                tasksRemaining > 1 ? 'tareas pendientes' : 'tarea pendiente'
-              }`}
+              secondary={formatDescription(tasksRemaining)}
               color={String(color)}
               key={id}
             />
