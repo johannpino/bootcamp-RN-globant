@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 
 const styles = StyleSheet.create({
+  itemContainer: {
+    marginBottom: 30,
+  },
   secondary: {
     fontSize: 22,
     color: 'white',
@@ -17,10 +20,23 @@ const styles = StyleSheet.create({
   },
 });
 
+const formatDescription = (tasksRemaining) => {
+  if (tasksRemaining === 0) {
+    return 'No hay tareas';
+  }
+  if (tasksRemaining === 1) {
+    return `${tasksRemaining} tarea pendientes`;
+  }
+  if (tasksRemaining > 99) {
+    return '+99 tarea pendientes';
+  }
+  return `${tasksRemaining} tareas pendientes`;
+};
+
 const DisplayProjects = ({ title, items }) => {
-  if (!items) return null;
+  if (!items || items === '') return null;
   return (
-    <View>
+    <View style={styles.itemContainer}>
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
         {items.map((item) => {
@@ -30,10 +46,8 @@ const DisplayProjects = ({ title, items }) => {
             <Item
               isProject
               title={name}
-              secondary={`${tasksRemaining > 100 ? '99+' : tasksRemaining} ${
-                tasksRemaining > 1 ? 'tareas pendientes' : 'tarea pendiente'
-              }`}
-              color={color}
+              secondary={formatDescription(tasksRemaining)}
+              color={String(color)}
               key={id}
             />
           );

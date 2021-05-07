@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,13 +10,17 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProjectsContext from '../context/projects/projectsContext';
+import FireBaseContext from '../context/firebase/firebaseContext';
 import ColorContainer from './ColorContainer';
 import colors from '../utils/colors';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 1,
     padding: '5%',
+  },
+  modalContainer: {
     alignItems: 'center',
   },
   title: {
@@ -36,16 +40,58 @@ const styles = StyleSheet.create({
     marginHorizontal: 48,
     borderBottomColor: 'white',
     borderBottomWidth: 2,
+    width: '80%',
+  },
+  projectBtn: {
+    backgroundColor: '#5014FC',
+    borderRadius: 6,
+    padding: 12,
+  },
+  projectBtnText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  error: {
+    color: '#FF0000',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 });
 
 const NewProject = () => {
   const projectsContext = useContext(ProjectsContext);
+  const firebaseContext = useContext(FireBaseContext);
+  const [selectedColor, setSelectedcolor] = useState('');
+
+  const { addProject, user } = firebaseContext;
   const { setNewProject } = projectsContext;
+  const [error, setError] = useState(false);
   const [name, setName] = useState('');
 
+  const selectedHandler = (color) => {
+    setSelectedcolor(color);
+  };
+
+  const handlePress = () => {
+    if (name.trim() === '' || selectedColor === '') {
+      setError(true);
+      return;
+    }
+    addProject({
+      color: selectedColor,
+      name: capitalizeFirstLetter(name),
+      owner: user.email,
+      tasksRemaining: 0,
+    });
+    setNewProject(false);
+    setError(false);
+  };
+
+  useEffect(() => {}, [selectedColor]);
+
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Pressable onPress={() => setNewProject(false)}>
         <Icon
           style={styles.icon}
@@ -54,10 +100,8 @@ const NewProject = () => {
           color="#FFFFFF"
         />
       </Pressable>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>{`Nuevo${'\n'}proyecto`}</Text>
-        </View>
+      <View style={styles.modalContainer}>
+        <Text style={styles.title}>{`Nuevo${'\n'}proyecto`}</Text>
         <View style={styles.inputView}>
           <TextInput
             onChangeText={(text) => setName(text)}
@@ -66,9 +110,17 @@ const NewProject = () => {
             placeholderTextColor="#484848"
           />
         </View>
-        <View>
-          <ColorContainer colors={colors} />
-        </View>
+        <ColorContainer
+          colors={colors}
+          selectedHandler={selectedHandler}
+          selectedColor={selectedColor}
+        />
+        {error ? (
+          <Text style={styles.error}>Selecciona nombre y color</Text>
+        ) : null}
+        <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
+          <Text style={styles.projectBtnText}>CREAR PROYECTO</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );

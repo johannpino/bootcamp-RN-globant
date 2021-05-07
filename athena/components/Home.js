@@ -1,11 +1,10 @@
 /* eslint-disable object-curly-newline */
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Text, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 
 import DisplayProjects from './DisplayProjects';
 import DisplayTasks from './DisplayTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import AuthContext from '../context/auth/authContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,8 +21,6 @@ const styles = StyleSheet.create({
 });
 
 const Home = () => {
-  const authContext = useContext(AuthContext);
-  const { logout } = authContext;
   const firebaseContext = useContext(FireBaseContext);
   const { projects, getProjects, tasks, getTasks, user } = firebaseContext;
 
@@ -32,7 +29,7 @@ const Home = () => {
       getProjects();
       getTasks();
     }
-  }, [user]);
+  }, [user, projects]);
 
   return (
     <>
@@ -43,7 +40,6 @@ const Home = () => {
           </Text>
           <DisplayTasks title="Tareas recientes..." items={tasks} />
           <DisplayProjects title="Tus proyectos" items={projects} />
-          <Button title="logout" onPress={() => logout()} />
         </ScrollView>
       ) : (
         <Text style={styles.title}>Loading...</Text> // spiner goes here

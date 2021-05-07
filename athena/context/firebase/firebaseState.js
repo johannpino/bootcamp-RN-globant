@@ -2,12 +2,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import getCollection from '../../utils/firebase';
+import { getCollection, addDocument } from '../../utils/firebase';
 import {
   GET_PROJECTS,
   GET_TASKS,
   SET_INITIALIZING,
   SET_USER,
+  ADD_PROJECT,
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
@@ -28,6 +29,15 @@ const FirebaseState = (props) => {
       payload,
       type: GET_PROJECTS,
     });
+  };
+
+  const addProject = (project) => {
+    addDocument('projects', project);
+    getProjects();
+  };
+
+  const addTask = (task) => {
+    addDocument('tasks', task);
   };
 
   const getTasks = async () => {
@@ -63,6 +73,7 @@ const FirebaseState = (props) => {
         getTasks,
         setUser,
         setInitializing,
+        addProject,
       }}
     >
       {props.children}

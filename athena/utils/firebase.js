@@ -10,4 +10,13 @@ const getCollection = async (name, owner) => {
   return fetchedCollection;
 };
 
-export default getCollection;
+const addDocument = async (name, obj) => {
+  firestore()
+    .collection(name)
+    .add(obj)
+    .then(() => {
+      console.log('Document created!');
+    });
+};
+
+export { getCollection, addDocument };
