@@ -69,7 +69,6 @@ const Projects = () => {
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       getProjects();
-      setFilteredProjects(projects);
     }
   }, [user, projects]);
 
@@ -83,7 +82,11 @@ const Projects = () => {
       const { name } = project._data;
       return name.toLowerCase().includes(text.toLowerCase());
     });
-    setFilteredProjects(result);
+    if (text.trim() === '') {
+      setFilteredProjects([]);
+    } else {
+      setFilteredProjects(result);
+    }
   };
 
   if (newProject) return <NewProject />;
@@ -116,8 +119,11 @@ const Projects = () => {
         />
       </View>
 
-      <DisplayProjects title="" items={filteredProjects} />
-
+      {filteredProjects.length > 0 ? (
+        <DisplayProjects title="" items={filteredProjects} />
+      ) : (
+        <DisplayProjects title="" items={projects} />
+      )}
     </ScrollView>
   );
 };
