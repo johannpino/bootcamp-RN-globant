@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProjectsContext from '../context/projects/projectsContext';
+import FireBaseContext from '../context/firebase/firebaseContext';
+import AuthContext from '../context/auth/authContext';
 import ColorContainer from './ColorContainer';
 import colors from '../utils/colors';
 
@@ -41,6 +43,8 @@ const styles = StyleSheet.create({
 
 const NewProject = () => {
   const projectsContext = useContext(ProjectsContext);
+  const firebaseContext = useContext(FireBaseContext);
+  const { addProject, user } = firebaseContext;
   const { setNewProject } = projectsContext;
   const [name, setName] = useState('');
 
@@ -70,6 +74,18 @@ const NewProject = () => {
           <ColorContainer colors={colors} />
         </View>
       </View>
+      <Pressable onPress={() => {
+        addProject({
+          color: '#6BFCC5',
+          name,
+          owner: user.email,
+          tasksRemaining: '49',
+        });
+        setNewProject(false);
+      }}
+      >
+        <Text>NEW PROJECT</Text>
+      </Pressable>
     </ScrollView>
   );
 };

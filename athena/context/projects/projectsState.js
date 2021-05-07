@@ -1,8 +1,12 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-underscore-dangle */
 import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
-import { SET_FILTERED_PROJECTS, SET_NEW_PROJECT } from '../../types';
+import PropTypes, { bool } from 'prop-types';
+import {
+  SET_FILTERED_PROJECTS,
+  SET_NEW_PROJECT,
+  ADD_PROJECT,
+} from '../../types';
 import ProjectsContext from './projectsContext';
 import ProjectsReducer from './projectsReducer';
 

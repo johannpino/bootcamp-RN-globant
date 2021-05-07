@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -72,7 +72,7 @@ const Projects = () => {
       getProjects();
       setFilteredProjects(projects);
     }
-  }, [user]);
+  }, [user, projects]);
 
   const handlePress = () => {
     setNewProject(true);
