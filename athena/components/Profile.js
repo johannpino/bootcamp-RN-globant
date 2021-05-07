@@ -48,14 +48,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { user, projects, tasks } = firebaseContext;
   return (
     <View style={styles.container}>
       <ProfilePicture user={user} />
       <Text style={styles.name}>{user.displayName}</Text>
-      <Pressable style={styles.editBtn}>
+      <Pressable
+        style={styles.editBtn}
+        onPress={() => navigation.navigate('EditProfile')}
+      >
         <Text style={styles.editText}>EDITAR PERFIL</Text>
       </Pressable>
       <View style={styles.row}>
