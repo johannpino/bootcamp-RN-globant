@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,6 +8,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const Profile = () => <ScrollView style={styles.container} />;
+const Profile = () => <ScrollView style={styles.container}></ScrollView>;
 
 export default Profile;

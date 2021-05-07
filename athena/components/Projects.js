@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 24,
-    marginBottom: 24,
     fontSize: 48,
     fontWeight: 'bold',
     color: 'white',
@@ -90,39 +89,33 @@ const Projects = () => {
   if (newProject) return <NewProject />;
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Proyectos</Text>
-          <Pressable onPress={() => handlePress()}>
-            <Icon
-              style={styles.icon}
-              name="add-circle-outline"
-              size={52}
-              color="#FFFFFF"
-            />
-          </Pressable>
-        </View>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.search}>
+    <ScrollView style={styles.container}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Proyectos</Text>
+        <Pressable onPress={() => handlePress()}>
           <Icon
-            style={styles.iconSearch}
-            name="search-outline"
-            size={35}
-            color="#000000"
+            style={styles.icon}
+            name="add-circle-outline"
+            size={52}
+            color="#FFFFFF"
           />
-          <TextInput
-            onChangeText={(text) => handleChange(text)}
-            style={styles.input}
-            placeholder="Busca un proyecto..."
-            placeholderTextColor="#484848"
-          />
-        </View>
+        </Pressable>
       </View>
-      <View style={styles.container}>
-        <DisplayProjects title="Tus proyectos" items={filteredProjects} />
+      <View style={styles.search}>
+        <Icon
+          style={styles.iconSearch}
+          name="search-outline"
+          size={35}
+          color="#000000"
+        />
+        <TextInput
+          onChangeText={(text) => handleChange(text)}
+          style={styles.input}
+          placeholder="Busca un proyecto..."
+          placeholderTextColor="#484848"
+        />
       </View>
+      <DisplayProjects title="Tus proyectos" items={filteredProjects} />
     </ScrollView>
   );
 };
