@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398360687605",
+    "project_id": "ireadapp-7d5d4",
+    "storage_bucket": "ireadapp-7d5d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398360687605:android:185bc660689d323b0e26bc",
+        "android_client_info": {
+          "package_name": "com.ireadapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398360687605-p5v5ecdv8fqlabl1mhs6q21uet28kld0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuDG_Nmi3iHe-cDQGjdr_TFQfRxdutM-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398360687605-p5v5ecdv8fqlabl1mhs6q21uet28kld0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
