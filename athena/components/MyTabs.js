@@ -35,25 +35,25 @@ const MyTabs = () => {
           if (route.name === 'Home') {
             iconName = 'home-outline';
             if (focused) {
-              color = '#6933FF';
+              color = '#FFFFFF';
               iconName = 'home';
             }
           } else if (route.name === 'Projects') {
             iconName = 'folder-open-outline';
             if (focused) {
-              color = '#6933FF';
+              color = '#FFFFFF';
               iconName = 'folder-open';
             }
           } else if (route.name === 'Profile') {
             iconName = 'person-outline';
             if (focused) {
-              color = '#6933FF';
+              color = '#FFFFFF';
               iconName = 'person';
             }
           } else if (route.name === 'Settings') {
             iconName = 'settings-outline';
             if (focused) {
-              color = '#6933FF';
+              color = '#FFFFFF';
               iconName = 'settings';
             }
           }
