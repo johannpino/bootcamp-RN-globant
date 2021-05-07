@@ -2,8 +2,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-
-const getFirstLetter = (string) => string.charAt(0);
+import { getFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   item: {

@@ -13,29 +13,17 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
   },
 });
-const ColorContainer = ({ colors }) => {
-  const [stateColors, setStateColors] = useState(colors);
-  const [selectedColor, setSelectedcolor] = useState(1);
-
-  const selectedHandler = (id) => {
-    setSelectedcolor(id);
-  };
-
-  useEffect(() => {}, [selectedColor]);
-
-  return (
-    <View style={styles.colorContainer}>
-      {stateColors.map((color) => (
-        <ColorSquare
-          key={color.color}
-          color={color.color}
-          id={color.id}
-          isSelected={color.id === selectedColor}
-          selectedHandler={selectedHandler}
-        />
-      ))}
-    </View>
-  );
-};
+const ColorContainer = ({ colors, selectedHandler, selectedColor }) => (
+  <View style={styles.colorContainer}>
+    {colors.map((color) => (
+      <ColorSquare
+        key={color.color}
+        color={color.color}
+        isSelected={color.color === selectedColor}
+        selectedHandler={selectedHandler}
+      />
+    ))}
+  </View>
+);
 
 export default ColorContainer;

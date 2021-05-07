@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -13,6 +13,7 @@ import ProjectsContext from '../context/projects/projectsContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import ColorContainer from './ColorContainer';
 import colors from '../utils/colors';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,9 +56,17 @@ const styles = StyleSheet.create({
 const NewProject = () => {
   const projectsContext = useContext(ProjectsContext);
   const firebaseContext = useContext(FireBaseContext);
+  const [selectedColor, setSelectedcolor] = useState(1);
+
   const { addProject, user } = firebaseContext;
   const { setNewProject } = projectsContext;
   const [name, setName] = useState('');
+
+  const selectedHandler = (color) => {
+    setSelectedcolor(color);
+  };
+
+  useEffect(() => {}, [selectedColor]);
 
   return (
     <ScrollView style={styles.container}>
@@ -79,15 +88,19 @@ const NewProject = () => {
             placeholderTextColor="#484848"
           />
         </View>
-        <ColorContainer colors={colors} />
+        <ColorContainer
+          colors={colors}
+          selectedHandler={selectedHandler}
+          selectedColor={selectedColor}
+        />
         <Pressable
           style={styles.projectBtn}
           onPress={() => {
             addProject({
-              color: '#6BFCC5',
-              name,
+              color: selectedColor,
+              name: capitalizeFirstLetter(name),
               owner: user.email,
-              tasksRemaining: '49',
+              tasksRemaining: 0,
             });
             setNewProject(false);
           }}

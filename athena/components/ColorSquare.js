@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Pressable } from 'react-native';
 
-const ColorSquare = ({ color, id, isSelected, selectedHandler }) => {
+const ColorSquare = ({ color, isSelected, selectedHandler }) => {
   const styles = StyleSheet.create({
     square: {
       height: 56,
@@ -19,7 +19,7 @@ const ColorSquare = ({ color, id, isSelected, selectedHandler }) => {
   });
   return (
     <Pressable
-      onPress={() => selectedHandler(id)}
+      onPress={() => selectedHandler(color)}
       style={isSelected ? [styles.square, styles.selected] : styles.square}
     />
   );
