@@ -15,7 +15,7 @@ const ProfilePicture = ({ user }) => {
       height: 150,
       width: 150,
       borderRadius: 100,
-      backgroundColor: '#6AFFE4',
+      backgroundColor: '#E022FF',
       justifyContent: 'center',
       margin: 12,
       alignItems: 'center',

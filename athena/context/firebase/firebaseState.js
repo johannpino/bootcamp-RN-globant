@@ -8,7 +8,6 @@ import {
   GET_TASKS,
   SET_INITIALIZING,
   SET_USER,
-  ADD_PROJECT,
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
