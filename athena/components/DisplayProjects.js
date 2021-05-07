@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 
 const styles = StyleSheet.create({
+  itemContainer: {
+    marginBottom: 30,
+  },
   secondary: {
     fontSize: 22,
     color: 'white',
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
 const DisplayProjects = ({ title, items }) => {
   if (!items) return null;
   return (
-    <View>
+    <View style={styles.itemContainer}>
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
         {items.map((item) => {

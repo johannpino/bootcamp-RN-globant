@@ -115,7 +115,9 @@ const Projects = () => {
           placeholderTextColor="#484848"
         />
       </View>
-      <DisplayProjects title="Tus proyectos" items={filteredProjects} />
+
+      <DisplayProjects items={filteredProjects} />
+
     </ScrollView>
   );
 };
