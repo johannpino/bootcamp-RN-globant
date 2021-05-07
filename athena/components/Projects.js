@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 24,
     fontSize: 48,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  notFound: {
+    marginTop: 24,
+    fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -66,17 +72,27 @@ const Projects = () => {
     setFilteredProjects,
   } = projectsContext;
 
+  const [search, setSearch] = useState('');
+
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       getProjects();
     }
   }, [user, projects]);
 
+  const showProyectsNoFilter = () => {
+    if (search.trim() === '') {
+      return <DisplayProjects title="" items={projects} />;
+    }
+    return <Text style={styles.notFound}>No se encontraron resultados</Text>;
+  };
+
   const handlePress = () => {
     setNewProject(true);
   };
 
   const handleChange = (text) => {
+    setSearch(text);
     const result = projects.filter((project) => {
       // eslint-disable-next-line no-underscore-dangle
       const { name } = project._data;
@@ -118,11 +134,10 @@ const Projects = () => {
           placeholderTextColor="#484848"
         />
       </View>
-
       {filteredProjects.length > 0 ? (
         <DisplayProjects title="" items={filteredProjects} />
       ) : (
-        <DisplayProjects title="" items={projects} />
+        showProyectsNoFilter()
       )}
     </ScrollView>
   );
