@@ -13,7 +13,7 @@ const ColorSquare = ({ color, id, isSelected, selectedHandler }) => {
       alignItems: 'center',
     },
     selected: {
-      borderWidth: 2,
+      borderWidth: 6,
       borderColor: '#FFFFFF',
     },
   });

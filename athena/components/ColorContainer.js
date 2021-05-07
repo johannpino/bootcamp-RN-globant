@@ -1,40 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ColorSquare from './ColorSquare';
 
 const styles = StyleSheet.create({
   colorContainer: {
-    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
-    marginVertical: 36,
+    marginVertical: 18,
     height: 180,
     maxWidth: '100%',
-    width: '80%',
-  },
-  colorRow: {
-    flexDirection: 'row',
   },
 });
 const ColorContainer = ({ colors }) => {
   const [stateColors, setStateColors] = useState(colors);
+  const [selectedColor, setSelectedcolor] = useState(1);
 
   const selectedHandler = (id) => {
-    alert(id);
+    setSelectedcolor(id);
   };
+
+  useEffect(() => {}, [selectedColor]);
 
   return (
     <View style={styles.colorContainer}>
-      <View style={styles.colorRow}>
-        {stateColors.map((color) => (
-          <ColorSquare
-            key={color.color}
-            color={color.color}
-            id={color.id}
-            isSelected={color.isSelected}
-            selectedHandler={selectedHandler}
-          />
-        ))}
-      </View>
+      {stateColors.map((color) => (
+        <ColorSquare
+          key={color.color}
+          color={color.color}
+          id={color.id}
+          isSelected={color.id === selectedColor}
+          selectedHandler={selectedHandler}
+        />
+      ))}
     </View>
   );
 };

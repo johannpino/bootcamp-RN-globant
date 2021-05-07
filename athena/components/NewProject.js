@@ -11,14 +11,15 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProjectsContext from '../context/projects/projectsContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import AuthContext from '../context/auth/authContext';
 import ColorContainer from './ColorContainer';
 import colors from '../utils/colors';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 1,
     padding: '5%',
+  },
+  modalContainer: {
     alignItems: 'center',
   },
   title: {
@@ -38,6 +39,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 48,
     borderBottomColor: 'white',
     borderBottomWidth: 2,
+    width: '80%',
+  },
+  projectBtn: {
+    backgroundColor: '#5014FC',
+    borderRadius: 6,
+    padding: 12,
+  },
+  projectBtnText: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 
@@ -49,7 +60,7 @@ const NewProject = () => {
   const [name, setName] = useState('');
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Pressable onPress={() => setNewProject(false)}>
         <Icon
           style={styles.icon}
@@ -58,10 +69,8 @@ const NewProject = () => {
           color="#FFFFFF"
         />
       </Pressable>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>{`Nuevo${'\n'}proyecto`}</Text>
-        </View>
+      <View style={styles.modalContainer}>
+        <Text style={styles.title}>{`Nuevo${'\n'}proyecto`}</Text>
         <View style={styles.inputView}>
           <TextInput
             onChangeText={(text) => setName(text)}
@@ -70,22 +79,22 @@ const NewProject = () => {
             placeholderTextColor="#484848"
           />
         </View>
-        <View>
-          <ColorContainer colors={colors} />
-        </View>
+        <ColorContainer colors={colors} />
+        <Pressable
+          style={styles.projectBtn}
+          onPress={() => {
+            addProject({
+              color: '#6BFCC5',
+              name,
+              owner: user.email,
+              tasksRemaining: '49',
+            });
+            setNewProject(false);
+          }}
+        >
+          <Text style={styles.projectBtnText}>CREAR PROYECTO</Text>
+        </Pressable>
       </View>
-      <Pressable onPress={() => {
-        addProject({
-          color: '#6BFCC5',
-          name,
-          owner: user.email,
-          tasksRemaining: '49',
-        });
-        setNewProject(false);
-      }}
-      >
-        <Text>NEW PROJECT</Text>
-      </Pressable>
     </ScrollView>
   );
 };
