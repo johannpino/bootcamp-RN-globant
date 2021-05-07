@@ -33,24 +33,28 @@ const MyTabs = () => {
           const size = 30;
           let color = '#494949';
           if (route.name === 'Home') {
-            iconName = 'home';
+            iconName = 'home-outline';
             if (focused) {
-              color = '#FFFFFF';
+              color = '#6933FF';
+              iconName = 'home';
             }
           } else if (route.name === 'Projects') {
-            iconName = 'folder-open';
+            iconName = 'folder-open-outline';
             if (focused) {
-              color = '#FFFFFF';
+              color = '#6933FF';
+              iconName = 'folder-open';
             }
           } else if (route.name === 'Profile') {
-            iconName = 'person-circle';
+            iconName = 'person-outline';
             if (focused) {
-              color = '#FFFFFF';
+              color = '#6933FF';
+              iconName = 'person';
             }
           } else if (route.name === 'Settings') {
-            iconName = 'settings';
+            iconName = 'settings-outline';
             if (focused) {
-              color = '#FFFFFF';
+              color = '#6933FF';
+              iconName = 'settings';
             }
           }
 
