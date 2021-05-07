@@ -68,7 +68,7 @@ const Profile = ({ navigation }) => {
         </View>
         <View style={styles.statistics}>
           <Text style={styles.number}>{tasks.length}</Text>
-          <Text style={styles.text}>{` TAREAS${'\n'}PENDIENTES`}</Text>
+          <Text style={styles.text}>{` TAREAS${'\n'}TOTALES`}</Text>
         </View>
         <View style={styles.statistics}>
           <Text style={styles.number}>{getCompletedTasks(tasks).length}</Text>
