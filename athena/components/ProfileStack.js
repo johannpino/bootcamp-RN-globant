@@ -8,8 +8,25 @@ const Stack = createStackNavigator();
 
 const ProfileStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Profile" component={Profile} />
-    <Stack.Screen name="EditProfile" component={EditProfile} />
+    <Stack.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        headerStyle: {
+          backgroundColor: '#1B1B1B',
+        },
+      }}
+    />
+    <Stack.Screen
+      name="EditProfile"
+      component={EditProfile}
+      options={{
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#1B1B1B',
+        },
+      }}
+    />
   </Stack.Navigator>
 );
 
