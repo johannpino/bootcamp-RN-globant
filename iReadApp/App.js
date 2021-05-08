@@ -1,13 +1,12 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
+import Auth, {FirebaseProvider} from './src/context/FirebaseContext';
+import AuthPage from './src/pages/AuthPage';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Text>Hello word</Text>
-      </ScrollView>
-    </SafeAreaView>
+    <FirebaseProvider value={Auth}>
+      <AuthPage />
+    </FirebaseProvider>
   );
 };
 
