@@ -7,7 +7,7 @@ import Comunas from '../screens/Comunas';
 import OnboardingScreen from '../screens/OnBoardingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import LoginScreen from '../screens/LoginScreen';
-
+import SignupScreen from '../screens/SignupScreen';
 
 const MainStack = createStackNavigator();
 
@@ -44,6 +44,7 @@ const MainStackScreen = () => {
     <MainStack.Navigator initialRouteName={routerPath()}>
       <MainStack.Screen name="Onboarding" component={OnboardingScreen} options={{ header: () => null }} />
       <MainStack.Screen name="Login" component={LoginScreen} options={{ header: () => null }} />
+      <MainStack.Screen name="Signup" component={SignupScreen} options={{ header: () => null }} />
       <MainStack.Screen name="MyAppInfo" component={Home} />
       <MainStack.Screen name="Comunas" component={Comunas} />
     </MainStack.Navigator>

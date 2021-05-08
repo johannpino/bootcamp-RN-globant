@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
                 },
                 logout: async () => {
                     try {
-                        await auth.singOut();
+                        await auth().signOut();
                     } catch (e) {
                         console.log(e);
                     }

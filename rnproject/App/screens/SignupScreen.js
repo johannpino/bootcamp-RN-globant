@@ -1,27 +1,20 @@
 import React, { useContext, useState } from 'react';
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    Image,
-    Platform,
-    StyleSheet,
-    ScrollView
-} from 'react-native';
+import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../config/AuthProvider';
 
-const LoginScreen = ({ navigation }) => {
+const SignupScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
 
-    const { login, googleLogin, fbLogin } = useContext(AuthContext);
+    const { register } = useContext(AuthContext);
+
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            {/*IMAGEN LOGO*/}
-            <Text style={styles.text}>MyInfoApp</Text>
+        <View style={styles.container}>
+            <Text style={styles.text}>Crea una cuenta</Text>
 
             <FormInput
                 labelValue={email}
@@ -41,14 +34,33 @@ const LoginScreen = ({ navigation }) => {
                 secureTextEntry={true}
             />
 
-            <FormButton
-                buttonTitle="Sign In"
-                onPress={() => login(email, password)}
+            <FormInput
+                labelValue={confirmPassword}
+                onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+                placeholderText="Confirm Password"
+                iconType="lock"
+                secureTextEntry={true}
             />
 
-            <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>
-                <Text style={styles.navButtonText}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
+            <FormButton
+                buttonTitle="Sign Up"
+                onPress={() => register(email, password)}
+            />
+
+            <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>
+                    By registering, you confirm that you accept our{' '}
+                </Text>
+                <TouchableOpacity onPress={() => alert('Terms Clicked!')}>
+                    <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
+                        Terms of service
+          </Text>
+                </TouchableOpacity>
+                <Text style={styles.color_textPrivate}> and </Text>
+                <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
+                    Privacy Policy
+        </Text>
+            </View>
 
             {Platform.OS === 'android' ? (
                 <View>
@@ -57,7 +69,7 @@ const LoginScreen = ({ navigation }) => {
                         btnType="facebook"
                         color="#4867aa"
                         backgroundColor="#e6eaf4"
-                        onPress={() => fbLogin()}
+                        onPress={() => { }}
                     />
 
                     <SocialButton
@@ -65,35 +77,29 @@ const LoginScreen = ({ navigation }) => {
                         btnType="google"
                         color="#de4d41"
                         backgroundColor="#f5e7ea"
-                        onPress={() => googleLogin()}
+                        onPress={() => { }}
                     />
                 </View>
             ) : null}
 
             <TouchableOpacity
-                style={styles.forgotButton}
-                onPress={() => navigation.navigate('Signup')}>
-                <Text style={styles.navButtonText}>
-                    Aún no tienes cuenta? Crea una aqui
-        </Text>
+                style={styles.navButton}
+                onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.navButtonText}>Ya tienes una cuenta? Inicia sesión aquí.</Text>
             </TouchableOpacity>
-        </ScrollView>
+        </View>
     );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#f9fafd',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        paddingTop: 50
-    },
-    logo: {
-        height: 150,
-        width: 150,
-        resizeMode: 'cover',
     },
     text: {
         fontFamily: 'Kufam-SemiBoldItalic',
@@ -104,13 +110,22 @@ const styles = StyleSheet.create({
     navButton: {
         marginTop: 15,
     },
-    forgotButton: {
-        marginVertical: 35,
-    },
     navButtonText: {
         fontSize: 18,
         fontWeight: '500',
         color: '#2e64e5',
         fontFamily: 'Lato-Regular',
+    },
+    textPrivate: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginVertical: 35,
+        justifyContent: 'center',
+    },
+    color_textPrivate: {
+        fontSize: 13,
+        fontWeight: '400',
+        fontFamily: 'Lato-Regular',
+        color: 'grey',
     },
 });

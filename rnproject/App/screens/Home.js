@@ -1,8 +1,10 @@
-import React from 'react';
-import {SafeAreaView, Linking, Alert, ImageBackground} from 'react-native';
+import React, { useContext } from 'react';
+import { SafeAreaView, Linking, Alert, ImageBackground, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from '../constants/colors';
-import {RowItem, RowSeparator} from '../components/RowItem';
+import { RowItem, RowSeparator } from '../components/RowItem';
+import { AuthContext } from '../config/AuthProvider';
+import FormButton from '../components/FormButton';
 
 const openURL = url => {
   return Linking.openURL(url).catch(() => {
@@ -11,12 +13,13 @@ const openURL = url => {
 };
 
 export default () => {
+  const { user, logout } = useContext(AuthContext);
   return (
     <SafeAreaView>
       <ImageBackground
         source={require('../assets/images/background.png')}
-        style={{width: '100%', height: '100%'}}
-        imageStyle={{opacity: 0.3}}>
+        style={{ width: '100%', height: '100%' }}
+        imageStyle={{ opacity: 0.3 }}>
         <RowItem
           text="HOME SCREEN"
           onPress={() => alert('TEST ON PRESS!')}
@@ -86,6 +89,12 @@ export default () => {
           onPress={() => openURL('https://www.gob.cl/pasoapaso#preguntas/')}
           rightIcon={<Icon name="question" size={20} />}
         />
+        <View>
+          <Text>
+            BIENVENIDO {user.uid}
+          </Text>
+          <FormButton buttonTitle='Logout' onPress={() => logout()} />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );

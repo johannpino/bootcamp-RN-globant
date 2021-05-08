@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, StatusBar} from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import colors from '../constants/colors';
-import {UserInput} from '../components/UserInput';
+import { UserInput } from '../components/UserInput';
 
 const styles = StyleSheet.create({
   container: {
