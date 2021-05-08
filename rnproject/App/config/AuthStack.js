@@ -13,36 +13,32 @@ import SignupScreen from '../screens/SignupScreen';
 const MainStack = createStackNavigator();
 
 const MainStackScreen = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   let routeName;
-  let [variable, setVariable] = useState(false);
-  const routerPath = () => {
-    if (variable) {
-      console.log("LOGIN");
-      return "Login"
-    } else {
-      console.log("OnBoarding");
-      return "OnBoarding"
-    }
-  }
 
   useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then(value => {
-      console.log(value);
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
       if (value == null) {
-        setVariable(false);
-        routeName = "OnBoarding";
-        console.log("IF", value)
-        AsyncStorage.setItem('alreadyLaunched', "true");
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
       } else {
-        routeName = "Login";
-        console.log("ELSE", value);
-        setVariable(true);
+        setIsFirstLaunch(false);
       }
-    }).catch(error => console.log("ERROR", error));
+    });
+
+
   }, []);
 
+  if (isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch == true) {
+    routeName = 'Onboarding';
+  } else {
+    routeName = 'Login';
+  }
+
   return (
-    <MainStack.Navigator initialRouteName={routerPath()}>
+    <MainStack.Navigator initialRouteName={routeName}>
       <MainStack.Screen name="Onboarding" component={OnboardingScreen} options={{ header: () => null }} />
       <MainStack.Screen name="Login" component={LoginScreen} options={{ header: () => null }} />
       <MainStack.Screen name="Signup" component={SignupScreen} options={{ header: () => null }} />
