@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
 
             <FormButton
                 buttonTitle="Sign In"
-                onPress={() => login(email, password)}
+                onPress={() => login(email, password)} //cambiar por metodo login despues
             />
 
             <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>

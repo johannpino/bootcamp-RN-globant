@@ -15,7 +15,6 @@ const SignupScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Crea una cuenta</Text>
-
             <FormInput
                 labelValue={email}
                 onChangeText={(userEmail) => setEmail(userEmail)}
