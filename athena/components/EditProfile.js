@@ -9,7 +9,6 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ProjectsContext from '../context/projects/projectsContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { capitalizeFirstLetter } from '../utils/helpers';
 
@@ -75,7 +74,7 @@ const EditProfile = ({ navigation }) => {
       return;
     }
     user.updateProfile({
-      displayName: name,
+      displayName: capitalizeFirstLetter(name),
     });
     navigation.navigate('Profile');
   };
