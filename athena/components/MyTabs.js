@@ -3,9 +3,8 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
-import Projects from './Projects';
 import ProfileStack from './ProfileStack';
-import Profile from './Profile';
+import ProjectsStack from './ProjectsStack';
 import Settings from './Settings';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import Auth from './Auth';
@@ -65,7 +64,7 @@ const MyTabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Projects" component={Projects} />
+      <Tab.Screen name="Projects" component={ProjectsStack} />
       <Tab.Screen name="Profile" component={ProfileStack} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>

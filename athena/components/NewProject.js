@@ -9,7 +9,6 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ProjectsContext from '../context/projects/projectsContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import ColorContainer from './ColorContainer';
 import colors from '../utils/colors';
@@ -59,13 +58,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewProject = () => {
-  const projectsContext = useContext(ProjectsContext);
+const NewProject = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const [selectedColor, setSelectedcolor] = useState('');
 
   const { addProject, user } = firebaseContext;
-  const { setNewProject } = projectsContext;
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
 
@@ -84,15 +81,15 @@ const NewProject = () => {
       owner: user.email,
       tasksRemaining: 0,
     });
-    setNewProject(false);
     setError(false);
+    navigation.navigate('Projects');
   };
 
   useEffect(() => {}, [selectedColor]);
 
   return (
     <ScrollView style={styles.container}>
-      <Pressable onPress={() => setNewProject(false)}>
+      <Pressable onPress={() => navigation.navigate('Projects')}>
         <Icon
           style={styles.icon}
           name="close-outline"

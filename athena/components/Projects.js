@@ -11,9 +11,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import ProjectsContext from '../context/projects/projectsContext';
 import DisplayProjects from './DisplayProjects';
-import NewProject from './NewProject';
 import { filterProjects } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -62,18 +60,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Projects = () => {
+const Projects = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, getProjects, user } = firebaseContext;
 
-  const projectsContext = useContext(ProjectsContext);
-  const {
-    filteredProjects,
-    newProject,
-    setNewProject,
-    setFilteredProjects,
-  } = projectsContext;
-
+  const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -89,22 +80,16 @@ const Projects = () => {
     return <Text style={styles.notFound}>No se encontraron resultados</Text>;
   };
 
-  const handlePress = () => {
-    setNewProject(true);
-  };
-
   const handleChange = (text) => {
     setSearch(text);
     setFilteredProjects(filterProjects(projects, text));
   };
 
-  if (newProject) return <NewProject />;
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Proyectos</Text>
-        <Pressable onPress={() => handlePress()}>
+        <Pressable onPress={() => navigation.navigate('NewProject')}>
           <Icon
             style={styles.icon}
             name="add-circle-outline"
