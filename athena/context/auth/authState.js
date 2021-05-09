@@ -18,6 +18,7 @@ const AuthState = (props) => {
     if (initializing) setInitializing(false);
   };
 
+  // updates user after signup
   const onUserChanged = (user) => {
     setUser(user);
   };

@@ -11,12 +11,7 @@ const getCollection = async (name, owner) => {
 };
 
 const addDocument = async (name, obj) => {
-  firestore()
-    .collection(name)
-    .add(obj)
-    .then(() => {
-      console.log('Document created!');
-    });
+  firestore().collection(name).add(obj);
 };
 
 export { getCollection, addDocument };

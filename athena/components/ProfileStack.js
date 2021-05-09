@@ -12,19 +12,14 @@ const ProfileStack = () => (
       name="Profile"
       component={Profile}
       options={{
-        headerStyle: {
-          backgroundColor: '#1B1B1B',
-        },
+        headerShown: false,
       }}
     />
     <Stack.Screen
       name="EditProfile"
       component={EditProfile}
       options={{
-        headerTintColor: 'white',
-        headerStyle: {
-          backgroundColor: '#1B1B1B',
-        },
+        headerShown: false,
       }}
     />
   </Stack.Navigator>

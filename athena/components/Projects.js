@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect, useContext, useState } from 'react';
 import {
@@ -13,6 +14,7 @@ import FireBaseContext from '../context/firebase/firebaseContext';
 import ProjectsContext from '../context/projects/projectsContext';
 import DisplayProjects from './DisplayProjects';
 import NewProject from './NewProject';
+import { filterProjects } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -93,16 +95,7 @@ const Projects = () => {
 
   const handleChange = (text) => {
     setSearch(text);
-    const result = projects.filter((project) => {
-      // eslint-disable-next-line no-underscore-dangle
-      const { name } = project._data;
-      return name.toLowerCase().includes(text.toLowerCase());
-    });
-    if (text.trim() === '') {
-      setFilteredProjects([]);
-    } else {
-      setFilteredProjects(result);
-    }
+    setFilteredProjects(filterProjects(projects, text));
   };
 
   if (newProject) return <NewProject />;
