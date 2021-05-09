@@ -10,8 +10,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import ColorContainer from './ColorContainer';
-import colors from '../utils/colors';
 import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -35,13 +33,19 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   inputView: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginHorizontal: 48,
     borderBottomColor: 'white',
     borderBottomWidth: 2,
     width: '80%',
   },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: 'white',
+  },
   projectBtn: {
+    marginVertical: 20,
     backgroundColor: '#5014FC',
     borderRadius: 6,
     padding: 12,
@@ -58,38 +62,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewProject = ({ navigation }) => {
+const EditProfile = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
-  const [selectedColor, setSelectedcolor] = useState('');
+  const { user } = firebaseContext;
 
-  const { addProject, user } = firebaseContext;
-  const [error, setError] = useState(false);
   const [name, setName] = useState('');
 
-  const selectedHandler = (color) => {
-    setSelectedcolor(color);
-  };
-
   const handlePress = () => {
-    if (name.trim() === '' || selectedColor === '') {
-      setError(true);
+    if (name.trim() === '') {
+      navigation.navigate('Profile');
       return;
     }
-    addProject({
-      color: selectedColor,
-      name: capitalizeFirstLetter(name),
-      owner: user.email,
-      tasksRemaining: 0,
+    user.updateProfile({
+      displayName: capitalizeFirstLetter(name),
     });
-    setError(false);
-    navigation.navigate('Projects');
+    navigation.navigate('Profile');
   };
-
-  useEffect(() => {}, [selectedColor]);
 
   return (
     <ScrollView style={styles.container}>
-      <Pressable onPress={() => navigation.navigate('Projects')}>
+      <Pressable onPress={() => navigation.navigate('Profile')}>
         <Icon
           style={styles.icon}
           name="close-outline"
@@ -98,29 +90,22 @@ const NewProject = ({ navigation }) => {
         />
       </Pressable>
       <View style={styles.modalContainer}>
-        <Text style={styles.title}>{`Nuevo${'\n'}proyecto`}</Text>
+        <Text style={styles.title}>Editar perfil</Text>
         <View style={styles.inputView}>
+          <Text style={styles.label}>Nombre</Text>
           <TextInput
             onChangeText={(text) => setName(text)}
             style={styles.input}
-            placeholder="Nombre del proyecto"
+            placeholder={user.displayName}
             placeholderTextColor="#484848"
           />
         </View>
-        <ColorContainer
-          colors={colors}
-          selectedHandler={selectedHandler}
-          selectedColor={selectedColor}
-        />
-        {error ? (
-          <Text style={styles.error}>Selecciona nombre y color</Text>
-        ) : null}
         <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
-          <Text style={styles.projectBtnText}>CREAR PROYECTO</Text>
+          <Text style={styles.projectBtnText}>ACEPTAR</Text>
         </Pressable>
       </View>
     </ScrollView>
   );
 };
 
-export default NewProject;
+export default EditProfile;

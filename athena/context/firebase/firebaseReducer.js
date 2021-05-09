@@ -27,11 +27,6 @@ export default (state, action) => {
         ...state,
         initializing: action.payload,
       };
-    case ADD_PROJECT:
-      return {
-        ...state,
-        projects: action.payload,
-      };
     default:
       return state;
   }

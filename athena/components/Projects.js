@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,9 +11,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import ProjectsContext from '../context/projects/projectsContext';
 import DisplayProjects from './DisplayProjects';
-import NewProject from './NewProject';
+import { filterProjects } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 24,
     fontSize: 48,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  notFound: {
+    marginTop: 24,
+    fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -54,45 +60,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const Projects = () => {
+const Projects = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, getProjects, user } = firebaseContext;
 
-  const projectsContext = useContext(ProjectsContext);
-  const {
-    filteredProjects,
-    newProject,
-    setNewProject,
-    setFilteredProjects,
-  } = projectsContext;
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       getProjects();
-      setFilteredProjects(projects);
     }
   }, [user, projects]);
 
-  const handlePress = () => {
-    setNewProject(true);
+  const showProyectsNoFilter = () => {
+    if (search.trim() === '') {
+      return <DisplayProjects title="" items={projects} />;
+    }
+    return <Text style={styles.notFound}>No se encontraron resultados</Text>;
   };
 
   const handleChange = (text) => {
-    const result = projects.filter((project) => {
-      // eslint-disable-next-line no-underscore-dangle
-      const { name } = project._data;
-      return name.toLowerCase().includes(text.toLowerCase());
-    });
-    setFilteredProjects(result);
+    setSearch(text);
+    setFilteredProjects(filterProjects(projects, text));
   };
-
-  if (newProject) return <NewProject />;
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Proyectos</Text>
-        <Pressable onPress={() => handlePress()}>
+        <Pressable onPress={() => navigation.navigate('NewProject')}>
           <Icon
             style={styles.icon}
             name="add-circle-outline"
@@ -115,9 +112,11 @@ const Projects = () => {
           placeholderTextColor="#484848"
         />
       </View>
-
-      <DisplayProjects title="" items={filteredProjects} />
-
+      {filteredProjects.length > 0 ? (
+        <DisplayProjects title="" items={filteredProjects} />
+      ) : (
+        showProyectsNoFilter()
+      )}
     </ScrollView>
   );
 };

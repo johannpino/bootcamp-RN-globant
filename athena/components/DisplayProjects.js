@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Item from './Item';
+import { formatDescription } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -19,19 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D4D4D4',
   },
 });
-
-const formatDescription = (tasksRemaining) => {
-  if (tasksRemaining === 0) {
-    return 'No hay tareas';
-  }
-  if (tasksRemaining === 1) {
-    return `${tasksRemaining} tarea pendientes`;
-  }
-  if (tasksRemaining > 99) {
-    return '+99 tarea pendientes';
-  }
-  return `${tasksRemaining} tareas pendientes`;
-};
 
 const DisplayProjects = ({ title, items }) => {
   if (!items || items === '') return null;
