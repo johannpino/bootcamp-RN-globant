@@ -71,7 +71,7 @@ const Projects = ({ navigation }) => {
     if (Object.keys(user).length > 0) {
       getProjects();
     }
-  }, [user, projects]);
+  }, [filteredProjects]);
 
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {
