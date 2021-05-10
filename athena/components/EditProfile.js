@@ -1,6 +1,9 @@
+/* eslint-disable prefer-const */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
+
 import {
   ScrollView,
   StyleSheet,
@@ -84,11 +87,32 @@ const EditProfile = ({ navigation }) => {
   const { user } = firebaseContext;
 
   const [name, setName] = useState('');
-  const [callback, setCallback] = useState();
 
-  useEffect(() => {
-    console.log(callback);
-  }, [callback]);
+  const setImage = async (image) => {
+    const path = `${user.email}/profile.jpg`;
+    let storageRef = storage().ref(path);
+    await storageRef.putFile(image.path);
+    const url = await storage().ref(path).getDownloadURL();
+    user.updateProfile({
+      photoURL: url,
+    });
+  };
+
+  const handleProfile = async () => {
+    await ImagePicker.openPicker({
+      width: 200,
+      heigth: 200,
+      cropping: true,
+    })
+      .then((image) => {
+        setImage(image);
+      })
+      .catch((err) => {
+        if (err.code !== 'E_PICKER_CANCELLED') {
+          alert('Error subiendo tu imagen... Inténtalo de nuevo');
+        }
+      });
+  };
 
   const handlePress = () => {
     if (name.trim() === '') {
@@ -123,15 +147,7 @@ const EditProfile = ({ navigation }) => {
           />
         </View>
         <View>
-          <Pressable
-            onPress={async () => {
-              await ImagePicker.openPicker({
-                cropping: true,
-              }).then((image) => {
-                console.log(image);
-              });
-            }}
-          >
+          <Pressable onPress={() => handleProfile()}>
             <ProfilePicture user={user} />
           </Pressable>
         </View>
