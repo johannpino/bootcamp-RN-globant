@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   titleComunas: {
     color: colors.white,
     fontSize: 18,
-
     textAlign: 'center',
   },
 });
