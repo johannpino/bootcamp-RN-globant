@@ -17,13 +17,13 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    const { login, googleLogin, fbLogin } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     return (
         <ScrollView contentContainerStyle={styles.container}>
 
             <Text style={styles.text}>MyInfoApp</Text>
             <Image
-                source={require('../assets/images/background.png')}
+                source={require('../assets/images/logoApp.png')}
                 style={styles.logo}
             />
             <FormInput
@@ -46,13 +46,8 @@ const LoginScreen = ({ navigation }) => {
 
             <FormButton
                 buttonTitle="Sign In"
-                onPress={() => login(email, password)} //cambiar por metodo login despues
+                onPress={() => login(email, password)}
             />
-
-            <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>
-                <Text style={styles.navButtonText}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
-
 
             <TouchableOpacity
                 style={styles.forgotButton}
@@ -75,11 +70,11 @@ const styles = StyleSheet.create({
         paddingTop: 50
     },
     logo: {
-        height: 150,
-        width: 150,
+        height: 200,
+        width: 200,
         resizeMode: 'cover',
-        marginBottom: 25,
-        marginTop: 25
+        marginBottom: 10,
+        marginTop: 10
     },
     text: {
         fontFamily: 'Kufam-SemiBoldItalic',
