@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
 } from 'react-native';
+import { Formik } from 'formik';
 
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -69,65 +70,103 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   error: {
-    color: '#FF0000',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#FF2626',
+    fontSize: 22,
   },
 });
 
 const Register = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-
   const context = useContext(AuthContext);
   const { register, errorMessage, setErrorMessage } = context;
-  const handlePress = () => {
-    if (name.trim() === '' || email.trim() === '' || pass.trim() === '') {
+
+  const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handlePress = (registerObj) => {
+    const name = registerObj.name.trim();
+    const email = registerObj.email.trim();
+    const pass = registerObj.pass.trim();
+    const repeatPass = registerObj.repeatPass.trim();
+
+    if (name === '' || email === '' || pass === '' || repeatPass === '') {
       setErrorMessage('Todos los campos son requeridos');
       return;
+    } if (!emailIsValid(email)) {
+      setErrorMessage('Correo electronico invalido');
     }
-    register(name, email.toLocaleLowerCase(), pass);
+
+    register(name, email, pass, repeatPass);
     setErrorMessage('');
   };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Registrate</Text>
-
-      <View style={styles.inputView}>
-        <Icon name="person" size={24} color="white" style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setName(text)}
-          style={styles.input}
-          placeholder="Ingresa tu nombre..."
-          placeholderTextColor="#484848"
-        />
-      </View>
-      <View style={styles.inputView}>
-        <Icon name="mail" size={24} color="white" style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-          placeholder="Ingresa tu correo electronico..."
-          placeholderTextColor="#484848"
-        />
-      </View>
-      <View style={styles.inputView}>
-        <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setPass(text)}
-          style={styles.input}
-          placeholder="Ingresa tu contraseña..."
-          placeholderTextColor="#484848"
-        />
-      </View>
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-      <View style={styles.buttonView}>
-        <Pressable onPress={() => handlePress()} style={styles.pressableButton}>
-          <Text style={styles.pressableButtonText}>REGISTRARME</Text>
-        </Pressable>
-      </View>
+
+      <Formik
+        initialValues={{
+          name: '', email: '', pass: '', repeatPass: '',
+        }}
+        onSubmit={(values) => handlePress(values)}
+      >
+        {({
+          handleChange, handleBlur, handleSubmit, values,
+        }) => (
+          <View>
+            <View style={styles.inputView}>
+              <Icon name="person" size={24} color="white" style={styles.icon} />
+              <TextInput
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+                style={styles.input}
+                placeholder="Ingresa tu nombre..."
+                placeholderTextColor="#484848"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <Icon name="mail" size={24} color="white" style={styles.icon} />
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                style={styles.input}
+                placeholder="Ingresa tu correo electronico..."
+                placeholderTextColor="#484848"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                onChangeText={handleChange('pass')}
+                onBlur={handleBlur('pass')}
+                value={values.pass}
+                placeholder="Ingresa tu contraseña..."
+                placeholderTextColor="#484848"
+                secureTextEntry
+              />
+            </View>
+            <View style={styles.inputView}>
+              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <TextInput
+                onChangeText={handleChange('repeatPass')}
+                onBlur={handleBlur('repeatPass')}
+                value={values.repeatPass}
+                style={styles.input}
+                placeholder="Repite tu contraseña..."
+                placeholderTextColor="#484848"
+                secureTextEntry
+              />
+            </View>
+            <View style={styles.buttonView}>
+              <Pressable onPress={handleSubmit} style={styles.pressableButton}>
+                <Text style={styles.pressableButtonText}>REGISTRARME</Text>
+              </Pressable>
+            </View>
+          </View>
+        )}
+      </Formik>
       <Pressable
         onPress={() => {
           navigation.navigate('LoginScreen');

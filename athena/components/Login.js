@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
 } from 'react-native';
+import { Formik } from 'formik';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import AuthContext from '../context/auth/authContext';
@@ -57,9 +58,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   error: {
-    color: '#FF0000',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#FF2626',
+    fontSize: 22,
   },
   pressableButton: {
     backgroundColor: '#5014FC',
@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
 });
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-
   const context = useContext(AuthContext);
   const { login, errorMessage, setErrorMessage } = context;
 
-  const handlePress = () => {
+  const handlePress = (loginObj) => {
+    const email = loginObj.email.trim();
+    const pass = loginObj.pass.trim();
+
     if (email.trim() === '' || pass.trim() === '') {
       setErrorMessage('Todos los campos son obligatorios');
       return;
@@ -93,36 +93,59 @@ const Login = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Iniciar sesión</Text>
-      <View style={styles.inputView}>
-        <Icon name="mail" size={24} color="white" style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-          placeholder="Ingresa tu correo electronico"
-          placeholderTextColor="#484848"
-        />
-      </View>
-      <View style={styles.inputView}>
-        <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
-        <TextInput
-          onChangeText={(text) => setPass(text)}
-          style={styles.input}
-          placeholder="Ingresa tu contraseña..."
-          placeholderTextColor="#484848"
-        />
-      </View>
-      <View style={styles.buttonView}>
-        <Pressable onPress={() => handlePress()} style={styles.pressableButton}>
-          <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
-        </Pressable>
-      </View>
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+      <Formik
+        initialValues={{
+          email: '', pass: '',
+        }}
+        onSubmit={(values) => handlePress(values)}
+      >
+
+        {({
+          handleChange, handleBlur, handleSubmit, values,
+        }) => (
+          <View>
+            <View style={styles.inputView}>
+              <Icon name="mail" size={24} color="white" style={styles.icon} />
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                style={styles.input}
+                placeholder="Ingresa tu correo electronico..."
+                placeholderTextColor="#484848"
+              />
+            </View>
+
+            <View style={styles.inputView}>
+              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                onChangeText={handleChange('pass')}
+                onBlur={handleBlur('pass')}
+                value={values.pass}
+                placeholder="Ingresa tu contraseña..."
+                placeholderTextColor="#484848"
+                secureTextEntry
+              />
+            </View>
+            <View style={styles.buttonView}>
+              <Pressable onPress={handleSubmit} style={styles.pressableButton}>
+                <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
+              </Pressable>
+            </View>
+          </View>
+
+        )}
+
+      </Formik>
+
       <Pressable
         onPress={() => {
           navigation.navigate('RegisterScreen');
           setErrorMessage('');
         }}
       >
-        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
         <Text style={styles.pressableText}>
           ¿No tienes una cuenta?
           {'\n'}
