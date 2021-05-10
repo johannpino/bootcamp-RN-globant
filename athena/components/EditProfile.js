@@ -1,5 +1,9 @@
+/* eslint-disable prefer-const */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import ImagePicker from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
+
 import {
   ScrollView,
   StyleSheet,
@@ -10,11 +14,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import ProfilePicture from './ProfilePicture';
 import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
-    height: 1,
+    flex: 1,
     padding: '5%',
   },
   modalContainer: {
@@ -60,6 +65,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  editBtn: {
+    borderWidth: 2,
+    borderColor: '#FFF',
+    marginVertical: 20,
+    backgroundColor: '#010101',
+    borderRadius: 6,
+    padding: 12,
+  },
+  editText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  row: {
+    flexDirection: 'row',
+  },
 });
 
 const EditProfile = ({ navigation }) => {
@@ -67,6 +87,32 @@ const EditProfile = ({ navigation }) => {
   const { user } = firebaseContext;
 
   const [name, setName] = useState('');
+
+  const setImage = async (image) => {
+    const path = `${user.email}/profile.jpg`;
+    let storageRef = storage().ref(path);
+    await storageRef.putFile(image.path);
+    const url = await storage().ref(path).getDownloadURL();
+    user.updateProfile({
+      photoURL: url,
+    });
+  };
+
+  const handleProfile = async () => {
+    await ImagePicker.openPicker({
+      width: 200,
+      heigth: 200,
+      cropping: true,
+    })
+      .then((image) => {
+        setImage(image);
+      })
+      .catch((err) => {
+        if (err.code !== 'E_PICKER_CANCELLED') {
+          alert('Error subiendo tu imagen... Inténtalo de nuevo');
+        }
+      });
+  };
 
   const handlePress = () => {
     if (name.trim() === '') {
@@ -99,6 +145,11 @@ const EditProfile = ({ navigation }) => {
             placeholder={user.displayName}
             placeholderTextColor="#484848"
           />
+        </View>
+        <View>
+          <Pressable onPress={() => handleProfile()}>
+            <ProfilePicture user={user} />
+          </Pressable>
         </View>
         <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
           <Text style={styles.projectBtnText}>ACEPTAR</Text>
