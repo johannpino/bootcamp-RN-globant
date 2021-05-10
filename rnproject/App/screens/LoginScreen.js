@@ -20,9 +20,12 @@ const LoginScreen = ({ navigation }) => {
     const { login, googleLogin, fbLogin } = useContext(AuthContext);
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {/*IMAGEN LOGO*/}
-            <Text style={styles.text}>MyInfoApp</Text>
 
+            <Text style={styles.text}>MyInfoApp</Text>
+            <Image
+                source={require('../assets/images/background.png')}
+                style={styles.logo}
+            />
             <FormInput
                 labelValue={email}
                 onChangeText={(userEmail) => setEmail(userEmail)}
@@ -50,25 +53,6 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={styles.navButtonText}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
 
-            {Platform.OS === 'android' ? (
-                <View>
-                    <SocialButton
-                        buttonTitle="Inicia sesion con Facebook"
-                        btnType="facebook"
-                        color="#4867aa"
-                        backgroundColor="#e6eaf4"
-                        onPress={() => fbLogin()}
-                    />
-
-                    <SocialButton
-                        buttonTitle="Inicia sesion con Google"
-                        btnType="google"
-                        color="#de4d41"
-                        backgroundColor="#f5e7ea"
-                        onPress={() => googleLogin()}
-                    />
-                </View>
-            ) : null}
 
             <TouchableOpacity
                 style={styles.forgotButton}
@@ -94,6 +78,8 @@ const styles = StyleSheet.create({
         height: 150,
         width: 150,
         resizeMode: 'cover',
+        marginBottom: 25,
+        marginTop: 25
     },
     text: {
         fontFamily: 'Kufam-SemiBoldItalic',
@@ -105,7 +91,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     forgotButton: {
-        marginVertical: 35,
+        marginVertical: 20,
     },
     navButtonText: {
         fontSize: 18,

@@ -61,26 +61,6 @@ const SignupScreen = ({ navigation }) => {
         </Text>
             </View>
 
-            {Platform.OS === 'android' ? (
-                <View>
-                    <SocialButton
-                        buttonTitle="Inicia sesion con Facebook"
-                        btnType="facebook"
-                        color="#4867aa"
-                        backgroundColor="#e6eaf4"
-                        onPress={() => { }}
-                    />
-
-                    <SocialButton
-                        buttonTitle="Inicia sesion con Google"
-                        btnType="google"
-                        color="#de4d41"
-                        backgroundColor="#f5e7ea"
-                        onPress={() => { }}
-                    />
-                </View>
-            ) : null}
-
             <TouchableOpacity
                 style={styles.navButton}
                 onPress={() => navigation.navigate('Login')}>

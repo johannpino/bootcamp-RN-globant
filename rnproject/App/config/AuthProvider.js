@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
                         await auth().signInWithEmailAndPassword(email, password);
                     } catch (e) {
                         console.log(e);
+                        alert('Usuario o contraseña invalidos');
                     }
                 },
                 register: async (email, password) => {
