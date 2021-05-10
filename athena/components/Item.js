@@ -1,7 +1,13 @@
 /* eslint-disable object-curly-newline */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  Easing,
+} from 'react-native-reanimated';
 import { getFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -43,9 +49,21 @@ const Item = ({ isProject, title, secondary, color }) => {
     justifyContent: 'center',
     alignItems: 'center',
   };
+  const offset = useSharedValue(1);
+
+  useEffect(() => {
+    offset.value = 0;
+    return () => {
+      offset.value = 10;
+    };
+  }, []);
+
+  const defaultSpringStyles = useAnimatedStyle(() => ({
+    transform: [{ translateX: withSpring(offset.value * 255) }],
+  }));
 
   return (
-    <View style={styles.item}>
+    <Animated.View style={[styles.item, defaultSpringStyles]}>
       <View style={isProject ? notCircle : circle}>
         <Text style={styles.initial}>
           {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}
@@ -55,7 +73,7 @@ const Item = ({ isProject, title, secondary, color }) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.secondary}>{secondary}</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
