@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
 import Animated, {
   useSharedValue,
@@ -63,16 +63,21 @@ const Item = ({ isProject, title, secondary, color }) => {
   }));
 
   return (
-    <Animated.View style={[styles.item, defaultSpringStyles]}>
-      <View style={isProject ? notCircle : circle}>
-        <Text style={styles.initial}>
-          {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}
-        </Text>
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.secondary}>{secondary}</Text>
-      </View>
+    <Animated.View style={defaultSpringStyles}>
+      <Pressable
+        onPress={() => console.log(title)}
+        style={styles.item}
+      >
+        <View style={isProject ? notCircle : circle}>
+          <Text style={styles.initial}>
+            {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}
+          </Text>
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.secondary}>{secondary}</Text>
+        </View>
+      </Pressable>
     </Animated.View>
   );
 };

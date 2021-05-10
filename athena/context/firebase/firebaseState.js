@@ -23,6 +23,7 @@ const FirebaseState = (props) => {
 
   // CRUD
   const getProjects = async () => {
+    console.log('getprojects');
     const payload = await getCollection('projects', state.user.email);
     dispatch({
       payload,
