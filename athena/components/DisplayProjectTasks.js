@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import { getProjectTasks } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   taskSelectorView: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   taskSelectorPressable: {
     flex: 1,
   },
-  showTasksView: {
+  DisplayProjectTasksView: {
     backgroundColor: '#D4D4D4',
     borderRadius: 8,
     marginTop: 8,
@@ -50,11 +51,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ShowTasks = ({ color }) => {
+const DisplayProjectTasks = ({ color, projectId }) => {
   const [incomplete, setInclomplete] = useState(true);
 
   const firebaseContext = useContext(FireBaseContext);
-  const { tasks } = firebaseContext;
+  const { user, tasks } = firebaseContext;
 
   return (
     <View>
@@ -89,12 +90,12 @@ const ShowTasks = ({ color }) => {
           </Text>
         </Pressable>
       </View>
-      <View style={styles.showTasksView}>
-        {tasks.map((task) => {
-          const { name, index } = task;
+      <View style={styles.DisplayProjectTasksView}>
+        {getProjectTasks(tasks, projectId).map((task) => {
+          const { name, key } = task;
           return (
-            <View style={styles.task} key={task.key}>
-              <Text style={styles.taskText}>{task.name}</Text>
+            <View style={styles.task} key={key}>
+              <Text style={styles.taskText}>{name}</Text>
               <Icon name="ellipse-outline" size={24} color={color} />
             </View>
           );
@@ -104,4 +105,4 @@ const ShowTasks = ({ color }) => {
   );
 };
 
-export default ShowTasks;
+export default DisplayProjectTasks;

@@ -63,6 +63,7 @@ const FirebaseState = (props) => {
   useEffect(() => {
     const subscriber = firestore()
       .collection('projects')
+      .orderBy('date', 'desc')
       .onSnapshot((querySnapshot) => {
         const projects = [];
 
@@ -83,6 +84,7 @@ const FirebaseState = (props) => {
   useEffect(() => {
     const subscriber = firestore()
       .collection('tasks')
+      .orderBy('date', 'desc')
       .onSnapshot((querySnapshot) => {
         const tasks = [];
 

@@ -10,9 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import ColorContainer from './ColorContainer';
-import colors from '../utils/colors';
-import { capitalizeFirstLetter } from '../utils/helpers';
+import { updateDocument } from '../utils/firebase';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,23 +56,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewProject = ({ navigation, route }) => {
+const NewTask = ({ navigation, route }) => {
   const firebaseContext = useContext(FireBaseContext);
-
-  const { addTask } = firebaseContext;
+  const { key, tasksRemaining, color, name } = route.params.item;
+  const { addTask, user } = firebaseContext;
   const [error, setError] = useState(false);
-  const [name, setName] = useState('');
+  const [taskName, setTaskName] = useState('');
 
   const handlePress = () => {
-    if (name.trim() === '') {
+    if (taskName.trim() === '') {
       setError(true);
       return;
     }
     addTask({
       completed: false,
-      name,
-      projectId: route.params.id,
+      name: taskName,
+      projectId: key,
+      projectName: name,
+      owner: user.email,
+      color,
       date: Date.now(),
+    });
+    updateDocument('projects', key, {
+      tasksRemaining: tasksRemaining + 1,
     });
     setError(false);
     navigation.navigate('Projects');
@@ -94,15 +98,13 @@ const NewProject = ({ navigation, route }) => {
         <Text style={styles.title}>{`Nueva${'\n'}tarea`}</Text>
         <View style={styles.inputView}>
           <TextInput
-            onChangeText={(text) => setName(text)}
+            onChangeText={(text) => setTaskName(text)}
             style={styles.input}
             placeholder="Nombre de la tarea"
             placeholderTextColor="#484848"
           />
         </View>
-        {error ? (
-          <Text style={styles.error}>Selecciona nombre</Text>
-        ) : null}
+        {error ? <Text style={styles.error}>Selecciona nombre</Text> : null}
         <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
           <Text style={styles.projectBtnText}>CREAR TAREA</Text>
         </Pressable>
@@ -111,4 +113,4 @@ const NewProject = ({ navigation, route }) => {
   );
 };
 
-export default NewProject;
+export default NewTask;

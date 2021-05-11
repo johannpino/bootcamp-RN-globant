@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView } from 'react-native';
 import { getUserProyects, getUserTasks } from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
-import DisplayTasks from './DisplayTasks';
+import DisplayRecentTasks from './DisplayRecentTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
 
 const styles = StyleSheet.create({
@@ -31,7 +31,7 @@ const Home = () => {
           <Text style={styles.title}>
             {` Bienvenido,${'\n'} ${user.displayName}`}
           </Text>
-          <DisplayTasks
+          <DisplayRecentTasks
             title="Tareas recientes..."
             items={getUserTasks(tasks, user.email)}
           />

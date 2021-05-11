@@ -8,11 +8,14 @@ export const getFirstLetter = (string) => string.charAt(0);
 export const getUserProyects = (proyects, owner) =>
   proyects.filter((proyect) => proyect.owners.includes(owner));
 
+export const getCurrentProject = (projects, id) =>
+  projects.filter((project) => project.key === id);
+
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);
 
-export const getCurrentProject = (projects, id) =>
-  projects.filter((project) => project.key === id);
+export const getProjectTasks = (tasks, projectId) =>
+  tasks.filter((task) => task.projectId === projectId);
 
 export const getCompletedTasks = (tasks) =>
   tasks.filter((task) => task.completed);

@@ -1,14 +1,12 @@
 /* eslint-disable max-len */
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  View, Text, Pressable, ScrollView, StyleSheet,
-} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { rgba } from 'polished';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getCurrentProject } from '../utils/helpers';
-import ShowTasks from './ShowTasks';
+import DisplayProjectTasks from './DisplayProjectTasks';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
   taskSelectorPressable: {
     flex: 1,
   },
-  showTasksView: {
+  DisplayProjectTasksView: {
     backgroundColor: '#D4D4D4',
     borderRadius: 8,
     marginTop: 8,
@@ -76,30 +74,27 @@ const styles = StyleSheet.create({
 const ProjectScreen = ({ route, navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects } = firebaseContext;
-  const {
-    name, key, color, owner, tasksRemaining,
-  } = getCurrentProject(
-    projects,
-    route.params.id,
-  )[0];
 
+  const { key } = route.params.item;
+  const { name, color } = getCurrentProject(projects, key)[0];
 
   return (
     <ScrollView>
-      <LinearGradient
-        style={styles.container}
-        colors={[color, rgba(color, 0)]}
-      >
+      <LinearGradient style={styles.container} colors={[color, rgba(color, 0)]}>
         <View style={styles.navigationView}>
           <Pressable onPress={() => navigation.navigate('Projects')}>
             <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate('NewTask', {id: route.params.id})}>
+          <Pressable
+            onPress={() =>
+              navigation.navigate('NewTask', { item: route.params.item })
+            }
+          >
             <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
           </Pressable>
         </View>
         <Text style={styles.title}>{name}</Text>
-        <ShowTasks color={color}/>
+        <DisplayProjectTasks color={color} projectId={key} />
       </LinearGradient>
     </ScrollView>
   );

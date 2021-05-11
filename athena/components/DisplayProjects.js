@@ -26,19 +26,9 @@ const DisplayProjects = ({ title, items }) => {
     <View style={styles.itemContainer}>
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
-        {items.map((item) => {
-          const { name, tasksRemaining, color, key } = item;
-          return (
-            <Item
-              isProject
-              title={name}
-              secondary={formatDescription(tasksRemaining)}
-              color={String(color)}
-              key={key}
-              id={key}
-            />
-          );
-        })}
+        {items.map((item) => (
+          <Item isProject key={item.key} item={item} />
+        ))}
       </View>
     </View>
   );

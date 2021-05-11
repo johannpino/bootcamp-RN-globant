@@ -10,7 +10,11 @@ const getCollection = async (name, owner) => {
 };
 
 const addDocument = async (name, obj) => {
-  firestore().collection(name).add(obj);
+  await firestore().collection(name).add(obj);
 };
 
-export { getCollection, addDocument };
+const updateDocument = async (collection, key, obj) => {
+  await firestore().collection(collection).doc(key).update(obj);
+};
+
+export { getCollection, addDocument, updateDocument };

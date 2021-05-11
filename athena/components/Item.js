@@ -7,7 +7,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { getFirstLetter } from '../utils/helpers';
+import { formatDescription, getFirstLetter } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 
 const styles = StyleSheet.create({
@@ -32,7 +32,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ isProject, title, secondary, color, id }) => {
+const Item = ({ isProject, item }) => {
+  const { name, tasksRemaining, color } = item;
+  let secondary;
+  if (isProject) {
+    secondary = formatDescription(tasksRemaining);
+  } else {
+    secondary = item.projectName;
+  }
   const circle = {
     height: 44,
     width: 44,
@@ -65,16 +72,16 @@ const Item = ({ isProject, title, secondary, color, id }) => {
   return (
     <Animated.View style={defaultSpringStyles}>
       <Pressable
-        onPress={() => RootNavigation.navigate('ProjectScreen', { id })}
+        onPress={() => RootNavigation.navigate('ProjectScreen', { item })}
         style={styles.item}
       >
         <View style={isProject ? notCircle : circle}>
           <Text style={styles.initial}>
-            {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}
+            {isProject ? getFirstLetter(name) : getFirstLetter(secondary)}
           </Text>
         </View>
         <View style={styles.info}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>{secondary}</Text>
         </View>
       </Pressable>
@@ -84,8 +91,7 @@ const Item = ({ isProject, title, secondary, color, id }) => {
 
 Item.propTypes = {
   isProject: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  secondary: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
 };
 

@@ -16,32 +16,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const DisplayTasks = ({ title, items }) => {
+const DisplayRecentTasks = ({ title, items }) => {
   if (!items) return null;
   return (
     <View>
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
-        {items.map((item) => {
-          const { name, project, projectColor, key } = item;
-          return (
-            <Item
-              isProject={false}
-              title={name}
-              secondary={project}
-              color={projectColor}
-              key={key}
-            />
-          );
-        })}
+        {items.slice(0, 3).map((item) => (
+          <Item isProject={false} key={item.key} item={item} />
+        ))}
       </View>
     </View>
   );
 };
 
-DisplayTasks.propTypes = {
+DisplayRecentTasks.propTypes = {
   title: PropTypes.string.isRequired,
   items: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default DisplayTasks;
+export default DisplayRecentTasks;
