@@ -1,10 +1,12 @@
 /* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import { getUserProyects, getUserTasks } from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
 import DisplayRecentTasks from './DisplayRecentTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import { config } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,26 +22,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, tasks, user } = firebaseContext;
 
   return (
     <>
       {user ? (
-        <ScrollView style={styles.container}>
-          <Text style={styles.title}>
-            {` Bienvenido,${'\n'} ${user.displayName}`}
-          </Text>
-          <DisplayRecentTasks
-            title="Tareas recientes..."
-            items={getUserTasks(tasks, user.email)}
-          />
-          <DisplayProjects
-            title="Tus proyectos"
-            items={getUserProyects(projects, user.email)}
-          />
-        </ScrollView>
+        <GestureRecognizer
+          onSwipeLeft={() => navigation.navigate('Projects')}
+          config={config}
+          style={{
+            flex: 1,
+          }}
+        >
+          <ScrollView style={styles.container}>
+            <Text style={styles.title}>
+              {` Bienvenido,${'\n'} ${user.displayName}`}
+            </Text>
+            <DisplayTasks
+              title="Tareas recientes..."
+              items={getUserTasks(tasks, user.email)}
+            />
+            <DisplayProjects
+              title="Tus proyectos"
+              items={getUserProyects(projects, user.email)}
+            />
+          </ScrollView>
+        </GestureRecognizer>
       ) : (
         <Text style={styles.title}>Loading...</Text> // spiner goes here
       )}

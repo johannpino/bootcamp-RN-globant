@@ -96,7 +96,7 @@ const Item = ({ isProject, item }) => {
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>{secondary}</Text>
         </View>
-      </Pressable>
+      </View>
     </Animated.View>
   );
 };

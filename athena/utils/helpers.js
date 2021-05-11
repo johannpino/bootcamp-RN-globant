@@ -43,3 +43,8 @@ export const filterProjects = (projects, query) => {
   });
   return result;
 };
+
+export const config = {
+  velocityThreshold: 0.3,
+  directionalOffsetThreshold: 80,
+};

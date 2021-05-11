@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import ProfilePicture from './ProfilePicture';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import {
   getCompletedTasks,
   getUserProyects,
   getUserTasks,
+  config,
 } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -13,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: '5%',
     alignItems: 'center',
+    backgroundColor: '#1B1B1B',
   },
   name: {
     fontSize: 36,
@@ -59,36 +62,45 @@ const Profile = ({ navigation }) => {
   if (!user) return null;
 
   return (
-    <View style={styles.container}>
-      <ProfilePicture />
-      <Text style={styles.name}>{user.displayName}</Text>
-      <Pressable
-        style={styles.editBtn}
-        onPress={() => navigation.navigate('EditProfile')}
-      >
-        <Text style={styles.editText}>EDITAR PERFIL</Text>
-      </Pressable>
-      <View style={styles.row}>
-        <View style={styles.statistics}>
-          <Text style={styles.number}>
-            {getUserProyects(projects, user.email).length}
-          </Text>
-          <Text style={styles.text}>{` PROYECTOS${'\n'}ACTIVOS`}</Text>
-        </View>
-        <View style={styles.statistics}>
-          <Text style={styles.number}>
-            {getUserTasks(tasks, user.email).length}
-          </Text>
-          <Text style={styles.text}>{` TAREAS${'\n'}TOTALES`}</Text>
-        </View>
-        <View style={styles.statistics}>
-          <Text style={styles.number}>
-            {getCompletedTasks(getUserTasks(tasks, user.email)).length}
-          </Text>
-          <Text style={styles.text}>{` TAREAS${'\n'}COMPLETADAS`}</Text>
+    <GestureRecognizer
+      onSwipeLeft={() => navigation.navigate('Settings')}
+      onSwipeRight={() => navigation.navigate('Projects')}
+      config={config}
+      style={{
+        flex: 1,
+      }}
+    >
+      <View style={styles.container}>
+        <ProfilePicture user={user} />
+        <Text style={styles.name}>{user.displayName}</Text>
+        <Pressable
+          style={styles.editBtn}
+          onPress={() => navigation.navigate('EditProfile')}
+        >
+          <Text style={styles.editText}>EDITAR PERFIL</Text>
+        </Pressable>
+        <View style={styles.row}>
+          <View style={styles.statistics}>
+            <Text style={styles.number}>
+              {getUserProyects(projects, user.email).length}
+            </Text>
+            <Text style={styles.text}>{` PROYECTOS${'\n'}ACTIVOS`}</Text>
+          </View>
+          <View style={styles.statistics}>
+            <Text style={styles.number}>
+              {getUserTasks(tasks, user.email).length}
+            </Text>
+            <Text style={styles.text}>{` TAREAS${'\n'}TOTALES`}</Text>
+          </View>
+          <View style={styles.statistics}>
+            <Text style={styles.number}>
+              {getCompletedTasks(getUserTasks(tasks, user.email)).length}
+            </Text>
+            <Text style={styles.text}>{` TAREAS${'\n'}COMPLETADAS`}</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </GestureRecognizer>
   );
 };
 

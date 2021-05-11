@@ -8,11 +8,14 @@ import {
   View,
   Pressable,
   TextInput,
+  Touchable,
 } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
-import { filterProjects, getUserProyects } from '../utils/helpers';
+import { filterProjects, getUserProyects, config } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -96,22 +99,25 @@ const Projects = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.navigationView}>
+    <GestureRecognizer
+      onSwipeLeft={() => navigation.navigate('Profile')}
+      onSwipeRight={() => navigation.navigate('Home')}
+      config={config}
+      style={{
+        flex: 1,
+      }}
+    >
+      <ScrollView style={styles.container}>
+      <View style={styles.titleContainer}>
         <Text style={styles.title}>Proyectos</Text>
         <Pressable onPress={() => navigation.navigate('NewProject')}>
-          <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
-        </Pressable>
-      </View>
-      <View style={styles.titleContainer}>
-        {/* <Pressable onPress={() => navigation.navigate('NewProject')}>
           <Icon
             style={styles.icon}
             name="add-circle-outline"
             size={52}
             color="#FFFFFF"
           />
-        </Pressable> */}
+        </Pressable>
       </View>
       <View style={styles.search}>
         <Icon
@@ -133,6 +139,7 @@ const Projects = ({ navigation }) => {
         showProyectsNoFilter()
       )}
     </ScrollView>
+    </GestureRecognizer>
   );
 };
 
