@@ -6,7 +6,7 @@ export const capitalizeFirstLetter = (string) =>
 export const getFirstLetter = (string) => string.charAt(0);
 
 export const getUserProyects = (proyects, owner) =>
-  proyects.filter((proyect) => proyect.owner === owner);
+  proyects.filter((proyect) => proyect.owners.includes(owner));
 
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);

@@ -91,9 +91,9 @@ const ShowTasks = ({ color }) => {
       </View>
       <View style={styles.showTasksView}>
         {tasks.map((task) => {
-          const { name } = task;
+          const { name, index } = task;
           return (
-            <View style={styles.task}>
+            <View style={styles.task} key={task.key}>
               <Text style={styles.taskText}>{task.name}</Text>
               <Icon name="ellipse-outline" size={24} color={color} />
             </View>

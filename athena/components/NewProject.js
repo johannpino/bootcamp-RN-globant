@@ -78,7 +78,7 @@ const NewProject = ({ navigation }) => {
     addProject({
       color: selectedColor,
       name: capitalizeFirstLetter(name),
-      owner: user.email,
+      owners: [user.email],
       tasksRemaining: 0,
       date: Date.now(),
     });
