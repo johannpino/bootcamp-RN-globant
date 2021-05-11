@@ -14,8 +14,10 @@ export const getCurrentProject = (projects, id) =>
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);
 
-export const getProjectTasks = (tasks, projectId) =>
-  tasks.filter((task) => task.projectId === projectId);
+export const getProjectTasks = (tasks, projectId, completed) =>
+  tasks.filter(
+    (task) => task.projectId === projectId && task.completed === completed
+  );
 
 export const getCompletedTasks = (tasks) =>
   tasks.filter((task) => task.completed);

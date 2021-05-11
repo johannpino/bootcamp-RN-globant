@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { updateDocument } from '../utils/firebase';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +71,7 @@ const NewTask = ({ navigation, route }) => {
     }
     addTask({
       completed: false,
-      name: taskName,
+      name: capitalizeFirstLetter(taskName),
       projectId: key,
       projectName: name,
       owner: user.email,

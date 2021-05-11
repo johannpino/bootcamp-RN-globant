@@ -91,7 +91,7 @@ const DisplayProjectTasks = ({ color, projectId }) => {
         </Pressable>
       </View>
       <View style={styles.DisplayProjectTasksView}>
-        {getProjectTasks(tasks, projectId).map((task) => {
+        {getProjectTasks(tasks, projectId, !incomplete).map((task) => {
           const { name, key } = task;
           return (
             <View style={styles.task} key={key}>
