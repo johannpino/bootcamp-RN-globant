@@ -1,8 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import {
+  View, Pressable, Text, StyleSheet,
+} from 'react-native';
+
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from 'react-native-reanimated';
+
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getProjectTasks } from '../utils/helpers';
+import { updateDocument } from '../utils/firebase';
 
 const styles = StyleSheet.create({
   taskSelectorView: {
@@ -52,6 +62,26 @@ const styles = StyleSheet.create({
 });
 
 const DisplayProjectTasks = ({ color, projectId }) => {
+  const offset = useSharedValue(1);
+
+  useEffect(() => {
+    offset.value = 0;
+    return () => {
+      offset.value = 10;
+    };
+  }, []);
+
+  const customSpringStyles = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: withSpring(offset.value * 255, {
+          damping: 20,
+          stiffness: 90,
+        }),
+      },
+    ],
+  }));
+
   const [incomplete, setInclomplete] = useState(true);
 
   const firebaseContext = useContext(FireBaseContext);
@@ -90,17 +120,26 @@ const DisplayProjectTasks = ({ color, projectId }) => {
           </Text>
         </Pressable>
       </View>
-      <View style={styles.DisplayProjectTasksView}>
-        {getProjectTasks(tasks, projectId, !incomplete).map((task) => {
-          const { name, key } = task;
-          return (
-            <View style={styles.task} key={key}>
-              <Text style={styles.taskText}>{name}</Text>
-              <Icon name="ellipse-outline" size={24} color={color} />
-            </View>
-          );
-        })}
-      </View>
+      <Animated.View style={customSpringStyles}>
+        <View style={styles.DisplayProjectTasksView}>
+          {getProjectTasks(tasks, projectId, !incomplete).map((task) => {
+            const { name, key, completed } = task;
+            return (
+              <Pressable
+                style={styles.task}
+                onPress={() => updateDocument('tasks', key, { completed: !completed })}
+              >
+                <Text style={styles.taskText}>{name}</Text>
+                <Icon
+                  name={completed ? 'ellipse' : 'ellipse-outline'}
+                  size={24}
+                  color={color}
+                />
+              </Pressable>
+            );
+          })}
+        </View>
+      </Animated.View>
     </View>
   );
 };

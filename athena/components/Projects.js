@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    marginTop: 24,
+    marginBottom: 8,
     fontSize: 48,
     fontWeight: 'bold',
     color: 'white',
@@ -58,6 +58,12 @@ const styles = StyleSheet.create({
     width: '85%',
     color: 'black',
   },
+  navigationView: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });
 
 const Projects = ({ navigation }) => {
@@ -91,16 +97,21 @@ const Projects = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.titleContainer}>
+      <View style={styles.navigationView}>
         <Text style={styles.title}>Proyectos</Text>
         <Pressable onPress={() => navigation.navigate('NewProject')}>
+          <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
+        </Pressable>
+      </View>
+      <View style={styles.titleContainer}>
+        {/* <Pressable onPress={() => navigation.navigate('NewProject')}>
           <Icon
             style={styles.icon}
             name="add-circle-outline"
             size={52}
             color="#FFFFFF"
           />
-        </Pressable>
+        </Pressable> */}
       </View>
       <View style={styles.search}>
         <Icon

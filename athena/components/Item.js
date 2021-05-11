@@ -65,12 +65,19 @@ const Item = ({ isProject, item }) => {
     };
   }, []);
 
-  const defaultSpringStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: withSpring(offset.value * 255) }],
+  const customSpringStyles = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: withSpring(offset.value * 255, {
+          damping: 20,
+          stiffness: 90,
+        }),
+      },
+    ],
   }));
 
   return (
-    <Animated.View style={defaultSpringStyles}>
+    <Animated.View style={customSpringStyles}>
       <Pressable
         onPress={() => {
           RootNavigation.navigate('ProjectScreen', {
@@ -96,7 +103,7 @@ const Item = ({ isProject, item }) => {
 
 Item.propTypes = {
   isProject: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   color: PropTypes.string.isRequired,
 };
 
