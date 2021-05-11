@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {
-  View, Pressable, Text, StyleSheet,
-} from 'react-native';
+import { View, Pressable, Text, StyleSheet } from 'react-native';
 
 import Animated, {
   useSharedValue,
@@ -126,8 +124,11 @@ const DisplayProjectTasks = ({ color, projectId }) => {
             const { name, key, completed } = task;
             return (
               <Pressable
+                key={key}
                 style={styles.task}
-                onPress={() => updateDocument('tasks', key, { completed: !completed })}
+                onPress={() =>
+                  updateDocument('tasks', key, { completed: !completed })
+                }
               >
                 <Text style={styles.taskText}>{name}</Text>
                 <Icon

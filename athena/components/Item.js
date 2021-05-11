@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-newline */
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
 import Animated, {
@@ -7,8 +7,13 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { formatDescription, getFirstLetter } from '../utils/helpers';
+import {
+  formatDescription,
+  getFirstLetter,
+  getProjectTasks,
+} from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
+import FireBaseContext from '../context/firebase/firebaseContext';
 
 const styles = StyleSheet.create({
   item: {
@@ -33,10 +38,13 @@ const styles = StyleSheet.create({
 });
 
 const Item = ({ isProject, item }) => {
-  const { name, tasksRemaining, color } = item;
+  const { user, projects, tasks } = useContext(FireBaseContext);
+  const { name, color } = item;
   let secondary;
   if (isProject) {
-    secondary = formatDescription(tasksRemaining);
+    secondary = formatDescription(
+      getProjectTasks(tasks, item.key, false).length
+    );
   } else {
     secondary = item.projectName;
   }
@@ -103,8 +111,7 @@ const Item = ({ isProject, item }) => {
 
 Item.propTypes = {
   isProject: PropTypes.bool.isRequired,
-  name: PropTypes.string,
-  color: PropTypes.string.isRequired,
+  item: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Item;
