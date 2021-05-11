@@ -1,12 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  Button,
-  Pressable,
-}
-  from 'react-native';
+import { ScrollView, StyleSheet, Text, Button, Pressable } from 'react-native';
 import AuthContext from '../context/auth/authContext';
 
 const styles = StyleSheet.create({
@@ -43,7 +36,7 @@ const styles = StyleSheet.create({
 const Settings = () => {
   const authContext = useContext(AuthContext);
   const { logout } = authContext;
-  return(
+  return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Configuración</Text>
       <Pressable style={styles.logoutBtn} onPress={() => logout()}>

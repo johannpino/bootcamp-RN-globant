@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import firestore from '@react-native-firebase/firestore';
 
 const getCollection = async (name, owner) => {

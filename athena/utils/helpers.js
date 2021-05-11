@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable implicit-arrow-linebreak */
 export const capitalizeFirstLetter = (string) =>
   `${string.charAt(0).toUpperCase()}${string.slice(1)}`;

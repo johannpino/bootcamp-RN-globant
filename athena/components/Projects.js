@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -62,16 +61,10 @@ const styles = StyleSheet.create({
 
 const Projects = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, setProjects, user } = firebaseContext;
+  const { projects, user } = firebaseContext;
 
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    if (Object.keys(user).length > 0) {
-      // setProjects();
-    }
-  }, [filteredProjects]);
 
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {
