@@ -86,10 +86,22 @@ const Travel = () => {
     return data.data[data.data.length - 2][index];
   };
 
-  const handlePress = item => {
+  const canTravelMessage = () => {
     Alert.alert(
       '¡Hola! Te informamos que',
-      `La comuna se encuentra en: ${faseActual(item)}`,
+      `Puedes viajar a tu destino`,
+      [
+        {
+          text: 'Aceptar',
+          style: 'ok',
+        },
+      ],
+    );
+  };
+  const canNotTravelMessage = () => {
+    Alert.alert(
+      '¡Hola! Te informamos que',
+      `No puedes viajar a esta comuna`,
       [
         {
           text: 'Aceptar',
@@ -109,8 +121,11 @@ const Travel = () => {
     console.log("Hasta: " + toPhase);
     if (toPhase <= fromPhase) {
       console.log("Se puede")
+      canTravelMessage();
     } else {
       console.log("No se puede")
+      canNotTravelMessage();
+
     }
   };
 
