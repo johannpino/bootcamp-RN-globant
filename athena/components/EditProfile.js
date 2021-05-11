@@ -128,12 +128,7 @@ const EditProfile = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <Pressable onPress={() => navigation.navigate('Profile')}>
-        <Icon
-          style={styles.icon}
-          name="close-outline"
-          size={52}
-          color="#FFFFFF"
-        />
+        <Icon name="close-outline" size={52} color="#FFFFFF" />
       </Pressable>
       <View style={styles.modalContainer}>
         <Text style={styles.title}>Editar perfil</Text>

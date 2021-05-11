@@ -8,6 +8,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { getFirstLetter } from '../utils/helpers';
+import * as RootNavigation from '../utils/RootNavigation';
 
 const styles = StyleSheet.create({
   item: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ isProject, title, secondary, color }) => {
+const Item = ({ isProject, title, secondary, color, id }) => {
   const circle = {
     height: 44,
     width: 44,
@@ -63,7 +64,10 @@ const Item = ({ isProject, title, secondary, color }) => {
 
   return (
     <Animated.View style={defaultSpringStyles}>
-      <Pressable onPress={() => console.log(title)} style={styles.item}>
+      <Pressable
+        onPress={() => RootNavigation.navigate('ProjectScreen', { id })}
+        style={styles.item}
+      >
         <View style={isProject ? notCircle : circle}>
           <Text style={styles.initial}>
             {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}

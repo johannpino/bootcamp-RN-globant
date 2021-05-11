@@ -35,6 +35,7 @@ const DisplayProjects = ({ title, items }) => {
               secondary={formatDescription(tasksRemaining)}
               color={String(color)}
               key={key}
+              id={key}
             />
           );
         })}

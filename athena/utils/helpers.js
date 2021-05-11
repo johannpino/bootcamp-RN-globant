@@ -1,4 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
+
 export const capitalizeFirstLetter = (string) =>
   `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
@@ -9,6 +10,9 @@ export const getUserProyects = (proyects, owner) =>
 
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);
+
+export const getCurrentProject = (projects, id) =>
+  projects.filter((project) => project.key === id);
 
 export const getCompletedTasks = (tasks) =>
   tasks.filter((task) => task.completed);
