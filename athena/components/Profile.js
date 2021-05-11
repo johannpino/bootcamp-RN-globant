@@ -79,7 +79,9 @@ const Profile = ({ navigation }) => {
           <Text style={styles.text}>{` TAREAS${'\n'}TOTALES`}</Text>
         </View>
         <View style={styles.statistics}>
-          <Text style={styles.number}>{getCompletedTasks(tasks).length}</Text>
+          <Text style={styles.number}>
+            {getCompletedTasks(getUserTasks(tasks, user.email)).length}
+          </Text>
           <Text style={styles.text}>{` TAREAS${'\n'}COMPLETADAS`}</Text>
         </View>
       </View>

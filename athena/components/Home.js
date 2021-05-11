@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, tasks, setTasks, user } = firebaseContext;
+  const { projects, tasks, user } = firebaseContext;
 
   return (
     <>

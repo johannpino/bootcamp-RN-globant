@@ -6,7 +6,6 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
-  Easing,
 } from 'react-native-reanimated';
 import { getFirstLetter } from '../utils/helpers';
 
@@ -64,10 +63,7 @@ const Item = ({ isProject, title, secondary, color }) => {
 
   return (
     <Animated.View style={defaultSpringStyles}>
-      <Pressable
-        onPress={() => console.log(title)}
-        style={styles.item}
-      >
+      <Pressable onPress={() => console.log(title)} style={styles.item}>
         <View style={isProject ? notCircle : circle}>
           <Text style={styles.initial}>
             {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}

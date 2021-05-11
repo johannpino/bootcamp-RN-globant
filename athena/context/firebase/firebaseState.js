@@ -1,10 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, useReducer } from 'react';
-import { ActivityIndicator } from 'react-native';
+
+import React, { useEffect, useReducer } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import PropTypes from 'prop-types';
-import { getCollection, addDocument } from '../../utils/firebase';
+import { addDocument } from '../../utils/firebase';
 import {
   SET_PROJECTS,
   SET_TASKS,
@@ -25,8 +24,6 @@ const FirebaseState = (props) => {
 
   // CRUD
   const setProjects = async (payload) => {
-    // console.log('setProjects');
-    // const payload = await getCollection('projects', state.user.email);
     dispatch({
       payload,
       type: SET_PROJECTS,
@@ -35,7 +32,6 @@ const FirebaseState = (props) => {
 
   const addProject = (project) => {
     addDocument('projects', project);
-    // setProjects();
   };
 
   const addTask = (task) => {
@@ -80,7 +76,7 @@ const FirebaseState = (props) => {
         setProjects(projects);
       });
 
-    // Unsubscribe from events when no longer in use
+    // Unsubscribe
     return () => subscriber();
   }, []);
 
@@ -100,7 +96,7 @@ const FirebaseState = (props) => {
         setTasks(tasks);
       });
 
-    // Unsubscribe from events when no longer in use
+    // Unsubscribe
     return () => subscriber();
   }, []);
 

@@ -27,7 +27,6 @@ const MyTabs = () => {
         },
       }}
       screenOptions={({ route }) => ({
-        // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ focused }) => {
           let iconName;
           const size = 30;
@@ -58,7 +57,6 @@ const MyTabs = () => {
             }
           }
 
-          // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}

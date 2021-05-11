@@ -2,13 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { getFirstLetter } from '../utils/helpers';
 
-const userHasProfile = (user) => {
-  if (user.photoURL) {
-    return true;
-  }
-  return false;
-};
-
 const ProfilePicture = ({ user }) => {
   const styles = StyleSheet.create({
     circle: {
