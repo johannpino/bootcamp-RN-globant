@@ -92,7 +92,7 @@ const ProjectScreen = ({ route, navigation }) => {
           </Pressable>
           <Pressable
             onPress={() =>
-              navigation.navigate('NewTask', { item: route.params.item })
+              navigation.navigate('NewTask', { item: route.params })
             }
           >
             <Icon name="add-circle-outline" size={44} color="#FFFFFF" />

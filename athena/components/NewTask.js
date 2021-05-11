@@ -81,12 +81,12 @@ const NewTask = ({ navigation, route }) => {
       tasksRemaining: tasksRemaining + 1,
     });
     setError(false);
-    navigation.navigate('Projects');
+    navigation.navigate('ProjectScreen');
   };
 
   return (
     <ScrollView style={styles.container}>
-      <Pressable onPress={() => navigation.navigate('Projects')}>
+      <Pressable onPress={() => navigation.navigate('ProjectScreen')}>
         <Icon
           style={styles.icon}
           name="close-outline"

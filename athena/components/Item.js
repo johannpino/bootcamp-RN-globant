@@ -73,14 +73,10 @@ const Item = ({ isProject, item }) => {
     <Animated.View style={defaultSpringStyles}>
       <Pressable
         onPress={() => {
-          try {
-            RootNavigation.navigate('ProjectScreen', {
-              ...item,
-              isProject: isProject,
-            });
-          } catch (err) {
-            RootNavigation.navigate('Projects');
-          }
+          RootNavigation.navigate('ProjectScreen', {
+            ...item,
+            isProject,
+          });
         }}
         style={styles.item}
       >
