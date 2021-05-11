@@ -45,6 +45,12 @@ const Travel = () => {
   const [data, setData] = useState('');
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState([]);
+
+  const [dataDOS, setDataDOS] = useState('');
+  const [queryDOS, setQueryDOS] = useState('');
+  const [filterDOS, setFilterDOS] = useState([]);
+
+
   let fromPhase;
   let toPhase;
   const removeAccents = str => {
@@ -53,6 +59,9 @@ const Travel = () => {
 
   const handleChange = e => {
     setQuery(e);
+  };
+  const handleChangeDOS = e => {
+    setQueryDOS(e);
   };
 
   useEffect(() => {
@@ -63,6 +72,7 @@ const Travel = () => {
         complete: results => {
           console.log(results);
           setData(results);
+          setDataDOS(results);
         },
       },
     );
@@ -80,6 +90,19 @@ const Travel = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
+
+  useEffect(() => {
+    if (dataDOS) {
+      const allComunas = dataDOS.data[3];
+      const result = allComunas.filter(comuna => {
+        const lower = removeAccents(comuna.toLowerCase());
+        return lower.includes(queryDOS.toLowerCase());
+      });
+
+      setFilterDOS(result);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryDOS]);
 
   const faseActual = item => {
     const index = parseInt(data.data[3].indexOf(item), 10);
@@ -140,9 +163,9 @@ const Travel = () => {
           </Pressable>
         ))}
       </ScrollView>
-      <TextInput onChangeText={handleChange} style={styles.input} />
+      <TextInput onChangeText={handleChangeDOS} style={styles.input} />
       <ScrollView style={styles.list}>
-        {filter.map((item, idx) => (
+        {filterDOS.map((item, idx) => (
           <Pressable onPress={() => updateToPhase(item)} key={idx}>
             <Text style={styles.text}>{item}</Text>
           </Pressable>
