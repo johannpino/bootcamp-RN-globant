@@ -18,7 +18,7 @@ const MyTabs = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Projects"
       tabBarOptions={{
         showLabel: false,
         style: {

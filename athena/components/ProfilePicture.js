@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { getFirstLetter } from '../utils/helpers';
+import FireBaseContext from '../context/firebase/firebaseContext';
 
-const ProfilePicture = ({ user }) => {
+const ProfilePicture = () => {
+  const { user } = useContext(FireBaseContext);
   const styles = StyleSheet.create({
     circle: {
       height: 150,

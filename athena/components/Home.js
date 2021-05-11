@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <>
-      {user.displayName ? (
+      {user ? (
         <ScrollView style={styles.container}>
           <Text style={styles.title}>
             {` Bienvenido,${'\n'} ${user.displayName}`}

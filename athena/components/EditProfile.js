@@ -143,7 +143,7 @@ const EditProfile = ({ navigation }) => {
         </View>
         <View>
           <Pressable onPress={() => handleProfile()}>
-            <ProfilePicture user={user} />
+            <ProfilePicture />
           </Pressable>
         </View>
         <Pressable style={styles.projectBtn} onPress={() => handlePress()}>

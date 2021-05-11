@@ -55,9 +55,12 @@ const styles = StyleSheet.create({
 const Profile = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { user, projects, tasks } = firebaseContext;
+
+  if (!user) return null;
+
   return (
     <View style={styles.container}>
-      <ProfilePicture user={user} />
+      <ProfilePicture />
       <Text style={styles.name}>{user.displayName}</Text>
       <Pressable
         style={styles.editBtn}

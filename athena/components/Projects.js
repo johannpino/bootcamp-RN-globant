@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -65,6 +66,9 @@ const Projects = ({ navigation }) => {
 
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
+
+  // Projects has to be rendered first and then navigate to home in order for Items navigation to work
+  useEffect(() => navigation.navigate('Home'), []);
 
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {

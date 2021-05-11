@@ -73,9 +73,14 @@ const styles = StyleSheet.create({
 
 const ProjectScreen = ({ route, navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
+  const { isProject } = route.params;
   const { projects } = firebaseContext;
-
-  const { key } = route.params.item;
+  let key;
+  if (isProject) {
+    key = route.params.key;
+  } else {
+    key = route.params.projectId;
+  }
   const { name, color } = getCurrentProject(projects, key)[0];
 
   return (
