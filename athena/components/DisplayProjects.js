@@ -28,15 +28,14 @@ const DisplayProjects = ({ title, items }) => {
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
         {items.map((item) => {
-          const { name, tasksRemaining, color } = item._data;
-          const id = item._ref._documentPath._parts[1];
+          const { name, tasksRemaining, color, key } = item;
           return (
             <Item
               isProject
               title={name}
               secondary={formatDescription(tasksRemaining)}
               color={String(color)}
-              key={id}
+              key={key}
             />
           );
         })}

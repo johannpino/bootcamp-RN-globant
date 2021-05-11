@@ -24,15 +24,14 @@ const DisplayTasks = ({ title, items }) => {
       {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
         {items.map((item) => {
-          const { name, project, projectColor } = item._data;
-          const id = item._ref._documentPath._parts[1];
+          const { name, project, projectColor, key } = item;
           return (
             <Item
               isProject={false}
               title={name}
               secondary={project}
               color={projectColor}
-              key={id}
+              key={key}
             />
           );
         })}

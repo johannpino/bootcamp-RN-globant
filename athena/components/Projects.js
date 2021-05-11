@@ -12,7 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
-import { filterProjects } from '../utils/helpers';
+import { filterProjects, getUserProyects } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -62,27 +62,34 @@ const styles = StyleSheet.create({
 
 const Projects = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, getProjects, user } = firebaseContext;
+  const { projects, setProjects, user } = firebaseContext;
 
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
-      getProjects();
+      // setProjects();
     }
   }, [filteredProjects]);
 
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {
-      return <DisplayProjects title="" items={projects} />;
+      return (
+        <DisplayProjects
+          title=""
+          items={getUserProyects(projects, user.email)}
+        />
+      );
     }
     return <Text style={styles.notFound}>No se encontraron resultados</Text>;
   };
 
   const handleChange = (text) => {
     setSearch(text);
-    setFilteredProjects(filterProjects(projects, text));
+    setFilteredProjects(
+      filterProjects(getUserProyects(projects, user.email), text)
+    );
   };
 
   return (

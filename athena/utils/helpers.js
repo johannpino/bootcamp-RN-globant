@@ -5,8 +5,14 @@ export const capitalizeFirstLetter = (string) =>
 
 export const getFirstLetter = (string) => string.charAt(0);
 
+export const getUserProyects = (proyects, owner) =>
+  proyects.filter((proyect) => proyect.owner === owner);
+
+export const getUserTasks = (tasks, owner) =>
+  tasks.filter((task) => task.owner === owner);
+
 export const getCompletedTasks = (tasks) =>
-  tasks.filter((task) => task._data.completed);
+  tasks.filter((task) => task.completed);
 
 export const formatDescription = (tasksRemaining) => {
   if (tasksRemaining === 0) {
@@ -24,7 +30,7 @@ export const formatDescription = (tasksRemaining) => {
 export const filterProjects = (projects, query) => {
   if (query.trim() === '') return [];
   const result = projects.filter((project) => {
-    const { name } = project._data;
+    const { name } = project;
     return name.toLowerCase().includes(query.toLowerCase());
   });
   return result;
