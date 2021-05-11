@@ -63,7 +63,7 @@ const Item = ({ isProject, title, secondary, color }) => {
 
   return (
     <Animated.View style={defaultSpringStyles}>
-      <Pressable onPress={() => console.log(title)} style={styles.item}>
+      <View style={styles.item}>
         <View style={isProject ? notCircle : circle}>
           <Text style={styles.initial}>
             {isProject ? getFirstLetter(title) : getFirstLetter(secondary)}
@@ -73,7 +73,7 @@ const Item = ({ isProject, title, secondary, color }) => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.secondary}>{secondary}</Text>
         </View>
-      </Pressable>
+      </View>
     </Animated.View>
   );
 };
