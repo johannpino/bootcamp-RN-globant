@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
 import ProfilePicture from './ProfilePicture';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import { getCompletedTasks } from '../utils/helpers';
+import {
+  getCompletedTasks,
+  getUserProyects,
+  getUserTasks,
+} from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -63,11 +67,15 @@ const Profile = ({ navigation }) => {
       </Pressable>
       <View style={styles.row}>
         <View style={styles.statistics}>
-          <Text style={styles.number}>{projects.length}</Text>
+          <Text style={styles.number}>
+            {getUserProyects(projects, user.email).length}
+          </Text>
           <Text style={styles.text}>{` PROYECTOS${'\n'}ACTIVOS`}</Text>
         </View>
         <View style={styles.statistics}>
-          <Text style={styles.number}>{tasks.length}</Text>
+          <Text style={styles.number}>
+            {getUserTasks(tasks, user.email).length}
+          </Text>
           <Text style={styles.text}>{` TAREAS${'\n'}TOTALES`}</Text>
         </View>
         <View style={styles.statistics}>

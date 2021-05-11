@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView } from 'react-native';
-
+import { getUserProyects, getUserTasks } from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
 import DisplayTasks from './DisplayTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
@@ -22,14 +22,7 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, getProjects, tasks, getTasks, user } = firebaseContext;
-
-  useEffect(() => {
-    if (Object.keys(user).length > 0) {
-      getProjects();
-      getTasks();
-    }
-  }, []);
+  const { projects, tasks, setTasks, user } = firebaseContext;
 
   return (
     <>
@@ -38,8 +31,14 @@ const Home = () => {
           <Text style={styles.title}>
             {` Bienvenido,${'\n'} ${user.displayName}`}
           </Text>
-          <DisplayTasks title="Tareas recientes..." items={tasks} />
-          <DisplayProjects title="Tus proyectos" items={projects} />
+          <DisplayTasks
+            title="Tareas recientes..."
+            items={getUserTasks(tasks, user.email)}
+          />
+          <DisplayProjects
+            title="Tus proyectos"
+            items={getUserProyects(projects, user.email)}
+          />
         </ScrollView>
       ) : (
         <Text style={styles.title}>Loading...</Text> // spiner goes here

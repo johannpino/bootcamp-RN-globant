@@ -86,8 +86,6 @@ const NewProject = ({ navigation }) => {
     navigation.navigate('Projects');
   };
 
-  useEffect(() => {}, [selectedColor]);
-
   return (
     <ScrollView style={styles.container}>
       <Pressable onPress={() => navigation.navigate('Projects')}>
