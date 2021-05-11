@@ -110,6 +110,7 @@ const FirebaseState = (props) => {
         setUser,
         setInitializing,
         addProject,
+        addTask,
       }}
     >
       {props.children}

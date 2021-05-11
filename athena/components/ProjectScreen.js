@@ -60,12 +60,16 @@ const styles = StyleSheet.create({
     color: '#1B1B1B',
     width: '85%',
   },
-  taskSelectorTitle:{
+  taskSelectorTitle: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 22,
     opacity: 1,
     marginBottom: 8,
+  },
+  navigationView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
@@ -86,9 +90,14 @@ const ProjectScreen = ({ route, navigation }) => {
         style={styles.container}
         colors={[color, rgba(color, 0)]}
       >
-        <Pressable onPress={() => navigation.navigate('Projects')}>
-          <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
-        </Pressable>
+        <View style={styles.navigationView}>
+          <Pressable onPress={() => navigation.navigate('Projects')}>
+            <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate('NewTask', {id: route.params.id})}>
+            <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
+          </Pressable>
+        </View>
         <Text style={styles.title}>{name}</Text>
         <ShowTasks color={color}/>
       </LinearGradient>

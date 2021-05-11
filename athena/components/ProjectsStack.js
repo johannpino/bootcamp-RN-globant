@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Projects from './Projects';
 import NewProject from './NewProject';
 import ProjectScreen from './ProjectScreen';
+import NewTask from './NewTask';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,13 @@ const ProjectsStack = () => (
     <Stack.Screen
       name="NewProject"
       component={NewProject}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="NewTask"
+      component={NewTask}
       options={{
         headerShown: false,
       }}
