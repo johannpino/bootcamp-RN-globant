@@ -7,11 +7,14 @@ import {
   View,
   Pressable,
   TextInput,
+  Touchable,
 } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
-import { filterProjects, getUserProyects } from '../utils/helpers';
+import { filterProjects, getUserProyects, config } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +68,6 @@ const Projects = ({ navigation }) => {
 
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
-
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {
       return (
@@ -86,38 +88,50 @@ const Projects = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Proyectos</Text>
-        <Pressable onPress={() => navigation.navigate('NewProject')}>
+    <GestureRecognizer
+      onSwipeLeft={() => navigation.navigate('Profile')}
+      onSwipeRight={() => navigation.navigate('Home')}
+      config={config}
+      style={{
+        flex: 1,
+      }}
+    >
+      <ScrollView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Proyectos</Text>
+          <Pressable onPress={() => navigation.navigate('NewProject')}>
+            <Icon
+              style={styles.icon}
+              name="add-circle-outline"
+              size={52}
+              color="#FFFFFF"
+            />
+          </Pressable>
+        </View>
+        <View style={styles.search}>
           <Icon
-            style={styles.icon}
-            name="add-circle-outline"
-            size={52}
-            color="#FFFFFF"
+            style={styles.iconSearch}
+            name="search-outline"
+            size={35}
+            color="#000000"
           />
-        </Pressable>
-      </View>
-      <View style={styles.search}>
-        <Icon
-          style={styles.iconSearch}
-          name="search-outline"
-          size={35}
-          color="#000000"
-        />
-        <TextInput
-          onChangeText={(text) => handleChange(text)}
-          style={styles.input}
-          placeholder="Busca un proyecto..."
-          placeholderTextColor="#484848"
-        />
-      </View>
-      {filteredProjects.length > 0 ? (
-        <DisplayProjects title="" items={filteredProjects} />
-      ) : (
-        showProyectsNoFilter()
-      )}
-    </ScrollView>
+          <TextInput
+            onChangeText={(text) => handleChange(text)}
+            style={styles.input}
+            placeholder="Busca un proyecto..."
+            placeholderTextColor="#484848"
+          />
+        </View>
+
+        {filteredProjects.length > 0 ? (
+          <Touchable onPress={() => console.log('NewProject')}>
+            <DisplayProjects title="" items={filteredProjects} />
+          </Touchable>
+        ) : (
+          showProyectsNoFilter()
+        )}
+      </ScrollView>
+    </GestureRecognizer>
   );
 };
 
