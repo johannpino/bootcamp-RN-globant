@@ -30,6 +30,8 @@ const ProfilePicture = () => {
     },
   });
 
+  if (!user.displayName) return null;
+
   if (user.photoURL) {
     return <Image style={styles.circleImg} source={{ uri: user.photoURL }} />;
   }
