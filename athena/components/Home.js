@@ -7,6 +7,7 @@ import {
   getUserTasks,
   welcomeText,
   userHasProjects,
+  userHasTasks,
 } from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
 import DisplayRecentTasks from './DisplayRecentTasks';
@@ -71,10 +72,12 @@ const Home = () => {
         {user.displayName ? (
           <ScrollView style={styles.container}>
             <Title />
-            <DisplayRecentTasks
-              title="Tareas recientes..."
-              items={getUserTasks(tasks, user.email)}
-            />
+            {userHasTasks(tasks, user.email) ? (
+              <DisplayRecentTasks
+                title="Tareas recientes..."
+                items={getUserTasks(tasks, user.email)}
+              />
+            ) : null}
             <DisplayProjects
               title="Tus proyectos"
               items={getUserProyects(projects, user.email)}

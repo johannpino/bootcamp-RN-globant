@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 
 import {
   ScrollView,
@@ -143,6 +143,25 @@ const Projects = ({ navigation }) => {
               placeholderTextColor="#484848"
             />
           </View>
+          {filteredProjects.length > 0 ? (
+            <DisplayProjects title="" items={filteredProjects} />
+          ) : (
+            showProyectsNoFilter()
+          )}
+          {userHasTasks(tasks, user.email) ? null : (
+            <View style={styles.warning}>
+              <Icon
+                name="newspaper"
+                size={140}
+                color="white"
+                style={styles.icon}
+              />
+              <Text style={styles.warningText}>No tienes tareas</Text>
+              <Text style={styles.warningTextSubtitle}>
+                Has click en un proyecto
+              </Text>
+            </View>
+          )}
         </View>
       ) : (
         <View style={styles.warning}>
@@ -150,20 +169,6 @@ const Projects = ({ navigation }) => {
           <Text style={styles.warningText}>No hay nada por aquí</Text>
           <Text style={styles.warningTextSubtitle}>
             Usa el botón de agregar para crear un proyecto
-          </Text>
-        </View>
-      )}
-      {filteredProjects.length > 0 ? (
-        <DisplayProjects title="" items={filteredProjects} />
-      ) : (
-        showProyectsNoFilter()
-      )}
-      {userHasTasks(tasks, user.email) ? null : (
-        <View style={styles.warning}>
-          <Icon name="newspaper" size={140} color="white" style={styles.icon} />
-          <Text style={styles.warningText}>No tienes tareas</Text>
-          <Text style={styles.warningTextSubtitle}>
-            Has click en un proyecto
           </Text>
         </View>
       )}
