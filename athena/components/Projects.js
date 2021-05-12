@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useContext, useState, useEffect } from 'react';
+
 import {
   ScrollView,
   StyleSheet,
@@ -12,7 +13,12 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
-import { filterProjects, getUserProyects } from '../utils/helpers';
+import {
+  filterProjects,
+  getUserProyects,
+  userHasProjects,
+  userHasTasks,
+} from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,17 +70,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  icon: {
+    color: '#969696',
+  },
+  warning: {
+    marginTop: '30%',
+    alignItems: 'center',
+  },
+  warningText: {
+    paddingVertical: 10,
+
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  warningTextSubtitle: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'normal',
+    color: '#969696',
+  },
 });
 
 const Projects = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
-  const { projects, user } = firebaseContext;
+  const { projects, user, tasks } = firebaseContext;
 
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setSearch] = useState('');
-
-  // Projects has to be rendered first and then navigate to home in order for Items navigation to work
-  useEffect(() => navigation.navigate('Home'), []);
 
   const showProyectsNoFilter = () => {
     if (search.trim() === '') {
@@ -103,34 +127,45 @@ const Projects = ({ navigation }) => {
           <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
         </Pressable>
       </View>
-      <View style={styles.titleContainer}>
-        {/* <Pressable onPress={() => navigation.navigate('NewProject')}>
-          <Icon
-            style={styles.icon}
-            name="add-circle-outline"
-            size={52}
-            color="#FFFFFF"
-          />
-        </Pressable> */}
-      </View>
-      <View style={styles.search}>
-        <Icon
-          style={styles.iconSearch}
-          name="search-outline"
-          size={35}
-          color="#000000"
-        />
-        <TextInput
-          onChangeText={(text) => handleChange(text)}
-          style={styles.input}
-          placeholder="Busca un proyecto..."
-          placeholderTextColor="#484848"
-        />
-      </View>
+      {userHasProjects(projects, user.email) ? (
+        <View>
+          <View style={styles.search}>
+            <Icon
+              style={styles.iconSearch}
+              name="search-outline"
+              size={35}
+              color="#000000"
+            />
+            <TextInput
+              onChangeText={(text) => handleChange(text)}
+              style={styles.input}
+              placeholder="Busca un proyecto..."
+              placeholderTextColor="#484848"
+            />
+          </View>
+        </View>
+      ) : (
+        <View style={styles.warning}>
+          <Icon name="sad" size={140} color="white" style={styles.icon} />
+          <Text style={styles.warningText}>No hay nada por aquí</Text>
+          <Text style={styles.warningTextSubtitle}>
+            Usa el botón de agregar para crear un proyecto
+          </Text>
+        </View>
+      )}
       {filteredProjects.length > 0 ? (
         <DisplayProjects title="" items={filteredProjects} />
       ) : (
         showProyectsNoFilter()
+      )}
+      {userHasTasks(tasks, user.email) ? null : (
+        <View style={styles.warning}>
+          <Icon name="newspaper" size={140} color="white" style={styles.icon} />
+          <Text style={styles.warningText}>No tienes tareas</Text>
+          <Text style={styles.warningTextSubtitle}>
+            Has click en un proyecto
+          </Text>
+        </View>
       )}
     </ScrollView>
   );

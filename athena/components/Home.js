@@ -1,11 +1,16 @@
 /* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
-import { getUserProyects, getUserTasks, welcomeText } from '../utils/helpers';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  getUserProyects,
+  getUserTasks,
+  welcomeText,
+  userHasProjects,
+} from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
 import DisplayRecentTasks from './DisplayRecentTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,10 +65,7 @@ const Home = () => {
     </Text>
   );
 
-  const userHasProjects = () =>
-    getUserProyects(projects, user.email).length > 0;
-
-  if (userHasProjects()) {
+  if (userHasProjects(projects, user.email)) {
     return (
       <>
         {user.displayName ? (
@@ -97,7 +99,7 @@ const Home = () => {
             Parece que todavía no tienes proyectos
           </Text>
           <Text style={styles.warningTextSubtitle}>
-            Has click en el boton de la carpeta para gestionar tus proyectos
+            Has click en el botón de la carpeta para gestionar tus proyectos
           </Text>
         </ScrollView>
       ) : (

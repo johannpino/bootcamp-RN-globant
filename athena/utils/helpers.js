@@ -14,6 +14,11 @@ export const getCurrentProject = (projects, id) =>
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);
 
+export const projectHasTasks = (tasks, projectId) => {
+  const projectTasks = tasks.filter((task) => task.projectId === projectId);
+  return projectTasks.length > 0;
+};
+
 export const getProjectTasks = (tasks, projectId, completed) =>
   tasks.filter(
     (task) => task.projectId === projectId && task.completed === completed
@@ -56,3 +61,9 @@ export const welcomeText = () => {
   }
   return 'Buenas noches';
 };
+
+export const userHasProjects = (projects, owner) =>
+  getUserProyects(projects, owner).length > 0;
+
+export const userHasTasks = (tasks, owner) =>
+  getUserTasks(tasks, owner).length > 0;

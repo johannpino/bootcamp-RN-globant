@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { rgba } from 'polished';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import { getCurrentProject } from '../utils/helpers';
+import { getCurrentProject, projectHasTasks } from '../utils/helpers';
 import DisplayProjectTasks from './DisplayProjectTasks';
 
 const styles = StyleSheet.create({
@@ -69,12 +69,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  icon: {
+    color: '#969696',
+  },
+  warning: {
+    marginTop: '30%',
+    alignItems: 'center',
+  },
+  warningText: {
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  warningTextSubtitle: {
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'normal',
+    color: '#969696',
+  },
 });
 
 const ProjectScreen = ({ route, navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { isProject } = route.params;
-  const { projects } = firebaseContext;
+  const { projects, tasks, user } = firebaseContext;
   let key;
   if (isProject) {
     key = route.params.key;
@@ -100,6 +121,15 @@ const ProjectScreen = ({ route, navigation }) => {
         </View>
         <Text style={styles.title}>{name}</Text>
         <DisplayProjectTasks color={color} projectId={key} />
+        {projectHasTasks(tasks, key) ? null : (
+          <View style={styles.warning}>
+            <Icon name="sad" size={140} color="white" style={styles.icon} />
+            <Text style={styles.warningText}>No hay nada por aquí</Text>
+            <Text style={styles.warningTextSubtitle}>
+              Usa el botón de agregar para crear una tarea
+            </Text>
+          </View>
+        )}
       </LinearGradient>
     </ScrollView>
   );
