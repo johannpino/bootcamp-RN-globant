@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     color: '#969696',
   },
   warning: {
-    marginTop: '30%',
+    marginTop: '10%',
     alignItems: 'center',
   },
   warningText: {
@@ -90,7 +90,7 @@ const Home = () => {
         <ScrollView style={styles.container}>
           <Title />
           <View style={styles.warning}>
-            <Icon name="flag" size={140} color="white" style={styles.icon} />
+            <Icon name="flag" size={120} color="white" style={styles.icon} />
           </View>
           <Text style={styles.warningText}>
             Parece que todavía no tienes proyectos

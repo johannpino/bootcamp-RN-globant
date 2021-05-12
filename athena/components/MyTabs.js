@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
 import ProfileStack from './ProfileStack';
 import ProjectsStack from './ProjectsStack';
-import Settings from './Settings';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import Auth from './Auth';
 
@@ -50,12 +49,6 @@ const MyTabs = () => {
               color = '#FFFFFF';
               iconName = 'person';
             }
-          } else if (route.name === 'Settings') {
-            iconName = 'settings-outline';
-            if (focused) {
-              color = '#FFFFFF';
-              iconName = 'settings';
-            }
           }
 
           return <Icon name={iconName} size={size} color={color} />;
@@ -65,7 +58,6 @@ const MyTabs = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Projects" component={ProjectsStack} />
       <Tab.Screen name="Profile" component={ProfileStack} />
-      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 };

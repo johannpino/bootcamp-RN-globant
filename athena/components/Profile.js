@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
 import ProfilePicture from './ProfilePicture';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import AuthContext from '../context/auth/authContext';
 import {
   getCompletedTasks,
   getUserProyects,
@@ -50,11 +51,28 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
   },
+  logoutBtn: {
+    margin: '20%',
+    borderWidth: 2,
+    borderColor: '#FF2626',
+    backgroundColor: 'transparent',
+    borderRadius: 6,
+    padding: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoutBtnText: {
+    fontSize: 18,
+    color: '#FF2626',
+  },
 });
 
 const Profile = ({ navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { user, projects, tasks } = firebaseContext;
+
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
 
   if (!user) return null;
 
@@ -88,6 +106,9 @@ const Profile = ({ navigation }) => {
           <Text style={styles.text}>{` TAREAS${'\n'}COMPLETADAS`}</Text>
         </View>
       </View>
+      <Pressable style={styles.logoutBtn} onPress={() => logout()}>
+        <Text style={styles.logoutBtnText}>CERRAR SESIÓN</Text>
+      </Pressable>
     </View>
   );
 };
