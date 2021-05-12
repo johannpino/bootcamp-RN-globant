@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 24,
     marginBottom: 24,
-    fontSize: 48,
+    fontSize: 44,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -59,10 +59,11 @@ const styles = StyleSheet.create({
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, tasks, user } = firebaseContext;
+  const date = Date.now();
 
   const Title = () => (
     <Text style={styles.title}>
-      {` ${welcomeText()},${'\n'} ${user.displayName}`}
+      {`${welcomeText()},${'\n'}${user.displayName}`}
     </Text>
   );
 
