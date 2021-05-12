@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   projectBtn: {
+    marginTop: 20,
     backgroundColor: '#5014FC',
     borderRadius: 6,
     padding: 12,

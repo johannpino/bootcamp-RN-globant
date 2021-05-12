@@ -1,7 +1,14 @@
 /* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
-import { StyleSheet, Text, ScrollView } from 'react-native';
-import { getUserProyects, getUserTasks } from '../utils/helpers';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  getUserProyects,
+  getUserTasks,
+  welcomeText,
+  userHasProjects,
+  userHasTasks,
+} from '../utils/helpers';
 import DisplayProjects from './DisplayProjects';
 import DisplayRecentTasks from './DisplayRecentTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
@@ -18,30 +25,82 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  icon: {
+    color: '#969696',
+  },
+  warning: {
+    marginTop: '30%',
+    alignItems: 'center',
+  },
+  warningText: {
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  warningTextSubtitle: {
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'normal',
+    color: '#969696',
+  },
+  loading: {
+    marginTop: 24,
+    marginBottom: 24,
+    fontSize: 48,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+  },
 });
 
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, tasks, user } = firebaseContext;
 
-  return (
-    <>
-      {user ? (
-        <ScrollView style={styles.container}>
-          <Text style={styles.title}>
-            {` Bienvenido,${'\n'} ${user.displayName}`}
-          </Text>
+  const Title = () => (
+    <Text style={styles.title}>
+      {` ${welcomeText()},${'\n'} ${user.displayName}`}
+    </Text>
+  );
+
+  if (userHasProjects(projects, user.email)) {
+    return (
+      <ScrollView style={styles.container}>
+        <Title />
+        {userHasTasks(tasks, user.email) ? (
           <DisplayRecentTasks
             title="Tareas recientes..."
             items={getUserTasks(tasks, user.email)}
           />
-          <DisplayProjects
-            title="Tus proyectos"
-            items={getUserProyects(projects, user.email)}
-          />
+        ) : null}
+        <DisplayProjects
+          title="Tus proyectos"
+          items={getUserProyects(projects, user.email)}
+        />
+      </ScrollView>
+    );
+  }
+
+  return (
+    <>
+      {user.displayName ? (
+        <ScrollView style={styles.container}>
+          <Title />
+          <View style={styles.warning}>
+            <Icon name="flag" size={140} color="white" style={styles.icon} />
+          </View>
+          <Text style={styles.warningText}>
+            Parece que todavía no tienes proyectos
+          </Text>
+          <Text style={styles.warningTextSubtitle}>
+            Has click en el botón de la carpeta para gestionar tus proyectos
+          </Text>
         </ScrollView>
       ) : (
-        <Text style={styles.title}>Loading...</Text> // spiner goes here
+        <Text style={styles.loading}>Guardando tus datos...</Text> // spinner goes here
       )}
     </>
   );

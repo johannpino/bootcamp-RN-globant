@@ -14,6 +14,11 @@ export const getCurrentProject = (projects, id) =>
 export const getUserTasks = (tasks, owner) =>
   tasks.filter((task) => task.owner === owner);
 
+export const projectHasTasks = (tasks, projectId) => {
+  const projectTasks = tasks.filter((task) => task.projectId === projectId);
+  return projectTasks.length > 0;
+};
+
 export const getProjectTasks = (tasks, projectId, completed) =>
   tasks.filter(
     (task) => task.projectId === projectId && task.completed === completed
@@ -43,3 +48,22 @@ export const filterProjects = (projects, query) => {
   });
   return result;
 };
+
+export const welcomeText = () => {
+  const today = new Date();
+  const current = today.getHours();
+
+  if (current < 12) {
+    return 'Buenos días';
+  }
+  if (current < 18) {
+    return 'Buenas tardes';
+  }
+  return 'Buenas noches';
+};
+
+export const userHasProjects = (projects, owner) =>
+  getUserProyects(projects, owner).length > 0;
+
+export const userHasTasks = (tasks, owner) =>
+  getUserTasks(tasks, owner).length > 0;
