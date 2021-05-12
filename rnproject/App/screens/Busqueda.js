@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Papa from 'papaparse';
 import colors from '../constants/colors';
+import { removeAccents, handlePress, faseActual } from '../util/helper';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,9 +45,6 @@ const Filter = () => {
   const [data, setData] = useState('');
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState([]);
-  const removeAccents = str => {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  };
 
   const handleChange = e => {
     setQuery(e);
@@ -78,23 +76,6 @@ const Filter = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  const faseActual = item => {
-    const index = parseInt(data.data[3].indexOf(item), 10);
-    return data.data[data.data.length - 2][index];
-  };
-
-  const handlePress = item => {
-    Alert.alert(
-      '¡Hola! Te informamos que',
-      `La comuna se encuentra en: ${faseActual(item)}`,
-      [
-        {
-          text: 'Aceptar',
-          style: 'ok',
-        },
-      ],
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -102,7 +83,7 @@ const Filter = () => {
       <TextInput onChangeText={handleChange} style={styles.input} />
       <ScrollView style={styles.list}>
         {filter.map((item, idx) => (
-          <Pressable onPress={() => handlePress(item)} key={idx}>
+          <Pressable onPress={() => handlePress(faseActual(item, data))} key={idx}>
             <Text style={styles.text}>{item}</Text>
           </Pressable>
         ))}
