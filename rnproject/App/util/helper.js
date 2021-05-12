@@ -23,3 +23,29 @@ export const handlePress = (actualPhase) => {
         ],
     );
 };
+
+export const canTravelMessage = () => {
+    Alert.alert(
+        '¡Hola! Te informamos que',
+        `Puedes viajar a tu destino`,
+        [
+            {
+                text: 'Aceptar',
+                style: 'ok',
+            },
+        ],
+    );
+};
+
+export const canNotTravelMessage = () => {
+    Alert.alert(
+        '¡Hola! Te informamos que',
+        `No puedes viajar a esta comuna`,
+        [
+            {
+                text: 'Aceptar',
+                style: 'ok',
+            },
+        ],
+    );
+};

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Papa from 'papaparse';
 import colors from '../constants/colors';
+import { removeAccents, faseActual, canTravelMessage, canNotTravelMessage } from '../util/helper';
 
 
 const styles = StyleSheet.create({
@@ -52,9 +53,6 @@ const Travel = () => {
 
   const [fromPhase, setFromPhase] = useState(null);
   let toPhase;
-  const removeAccents = str => {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  };
 
   const handleChange = e => {
     setQueryFrom(e);
@@ -103,58 +101,17 @@ const Travel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryTo]);
 
-  const faseActualFrom = item => {
-    const index = parseInt(dataFrom.data[3].indexOf(item), 10);
-    return dataFrom.data[dataFrom.data.length - 2][index];
-  };
-
-  const faseActualTo = item => {
-    const index = parseInt(dataTo.data[3].indexOf(item), 10);
-    return dataTo.data[dataTo.data.length - 2][index];
-  };
-
-  const canTravelMessage = () => {
-    Alert.alert(
-      '¡Hola! Te informamos que',
-      `Puedes viajar a tu destino`,
-      [
-        {
-          text: 'Aceptar',
-          style: 'ok',
-        },
-      ],
-    );
-  };
-  const canNotTravelMessage = () => {
-    Alert.alert(
-      '¡Hola! Te informamos que',
-      `No puedes viajar a esta comuna`,
-      [
-        {
-          text: 'Aceptar',
-          style: 'ok',
-        },
-      ],
-    );
-  };
   const updateFromPhase = item => {
-
-    let actualFromPhase = faseActualFrom(item);
+    let actualFromPhase = faseActual(item, dataFrom);
     setFromPhase(actualFromPhase);
-    console.log("Desde: " + fromPhase);
-    console.log("Hasta: " + toPhase);
   };
 
   const updateToPhase = item => {
-    let actualToPhase = faseActualTo(item);
+    let actualToPhase = faseActual(item, dataTo);
     toPhase = actualToPhase;
-    console.log("Desde: " + fromPhase);
-    console.log("Hasta: " + toPhase);
     if (toPhase <= fromPhase) {
-      console.log("Se puede")
       canTravelMessage();
     } else {
-      console.log("No se puede")
       canNotTravelMessage();
     }
   };
