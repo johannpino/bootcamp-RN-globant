@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import Home from '../screens/Home';
-import Comunas from '../screens/Comunas';
+import React, {useEffect, useState} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import OnboardingScreen from '../screens/OnBoardingScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Home from '../screens/Home';
+import Viajes from '../screens/Viajes';
+import Busqueda from '../screens/Busqueda';
+import C19 from '../screens/C19';
+import Comisaria from '../screens/Comisaria';
+import FAQ from '../screens/FAQ';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 
@@ -17,7 +21,7 @@ const MainStackScreen = () => {
   let routeName;
 
   useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+    AsyncStorage.getItem('alreadyLaunched').then(value => {
       if (value == null) {
         AsyncStorage.setItem('alreadyLaunched', 'true');
         setIsFirstLaunch(true);
@@ -25,13 +29,12 @@ const MainStackScreen = () => {
         setIsFirstLaunch(false);
       }
     });
-
-
   }, []);
 
   if (isFirstLaunch === null) {
     return null;
-  } else if (isFirstLaunch == true) {
+  }
+  if (isFirstLaunch === true) {
     routeName = 'Onboarding';
   } else {
     routeName = 'Login';
@@ -39,15 +42,23 @@ const MainStackScreen = () => {
 
   return (
     <MainStack.Navigator initialRouteName={routeName}>
-      <MainStack.Screen name="Onboarding" component={OnboardingScreen} options={{ header: () => null }} />
-      <MainStack.Screen name="Login" component={LoginScreen} options={{ header: () => null }} />
-      <MainStack.Screen name="Signup" component={SignupScreen} options={{ header: () => null }} />
-      <MainStack.Screen name="MyAppInfo" component={Home} />
-      <MainStack.Screen name="Comunas" component={Comunas} />
+      <MainStack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{header: () => null}}
+      />
+      <MainStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{header: () => null}}
+      />
+      <MainStack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{header: () => null}}
+      />
     </MainStack.Navigator>
   );
-
-
 };
 
 export default MainStackScreen;

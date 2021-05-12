@@ -1,101 +1,66 @@
-import React, { useContext } from 'react';
-import { SafeAreaView, Linking, Alert, ImageBackground, View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import React, {useContext} from 'react';
+import {
+  View,
+  ImageBackground,
+  StatusBar,
+  Text,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import colors from '../constants/colors';
-import { RowItem, RowSeparator } from '../components/RowItem';
-import { AuthContext } from '../config/AuthProvider';
+import {AuthContext} from '../config/AuthProvider';
 import FormButton from '../components/FormButton';
 
-const openURL = url => {
-  return Linking.openURL(url).catch(() => {
-    Alert.alert('OOPS! Algo salio mal.', 'Porfavor vuelva a intentar');
-  });
-};
+const screen = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  title: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    alignContent: 'center',
+    paddingBottom: 50,
+  },
+  p: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    alignContent: 'center',
+    padding: 30,
+    paddingVertical: 20,
+  },
+  background: {
+    width: screen.width * 1,
+    height: screen.height * 1,
+    position: 'relative',
+    alignItems: 'center',
+    paddingTop: 200,
+  },
+});
 
 export default () => {
-  const { user, logout } = useContext(AuthContext);
+  const {logout} = useContext(AuthContext);
   return (
-    <SafeAreaView>
+    <View styles={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.text} />
+
       <ImageBackground
         source={require('../assets/images/background.png')}
-        style={{ width: '100%', height: '100%' }}
-        imageStyle={{ opacity: 0.3 }}>
-        <RowItem
-          text="HOME SCREEN"
-          onPress={() => alert('TEST ON PRESS!')}
-          rightIcon={<Icon name="home" size={20} color={colors.blue} />}
-        />
-
-        <RowSeparator />
-
-        {/* <TouchableOpacity style={styles.row}>
-        <Text style={styles.text}>Estado de tú comuna</Text>
-        <Icon name="map-marker-alt" size={20} color={colors.red} />
-      </TouchableOpacity> */}
-
-        <RowItem
-          text="¿En que fase se encuentra mi comuna?"
-          onPress={() => alert('TEST ON PRESS!')}
-          rightIcon={
-            <Icon name="map-marker-alt" size={20} color={colors.red} />
-          }
-        />
-
-        <RowSeparator />
-
-        {/* <TouchableOpacity style={styles.row}>
-        <Text style={styles.text}>Busqueda por Región</Text>
-        <Icon name="search" size={20} />
-      </TouchableOpacity> */}
-
-        <RowItem
-          text="Busqueda por Region"
-          onPress={() => alert('TEST ON PRESS!')}
-          rightIcon={<Icon name="search" size={20} color="white" />}
-        />
-
-        <RowSeparator />
-
-        {/* <TouchableOpacity style={styles.row}>
-        <Text style={styles.text}>¿Quieres viajar?</Text>
-        <Icon name="route" size={20} />
-      </TouchableOpacity> */}
-        <RowItem
-          text="¿Quieres viajar?"
-          onPress={() => alert('TEST ON PRESS!')}
-          rightIcon={<Icon name="route" size={20} color="white" />}
-        />
-
-        <RowSeparator />
-
-        <RowItem
-          text="C19: Pasaporte Sanitario. Obtenlo Aqui"
-          onPress={() => openURL('https://c19.cl/')}
-          rightIcon={<Icon name="passport" size={20} color="white" />}
-        />
-
-        <RowSeparator />
-
-        <RowItem
-          text="¿Permiso de desplazamiento? ¡Presiona Aqui!"
-          onPress={() => openURL('https://comisariavirtual.cl/')}
-          rightIcon={<Icon name="id-card" size={20} color="white" />}
-        />
-
-        <RowSeparator />
-
-        <RowItem
-          text="Preguntas Frecuentes"
-          onPress={() => openURL('https://www.gob.cl/pasoapaso#preguntas/')}
-          rightIcon={<Icon name="question" size={20} />}
-        />
+        style={styles.background}
+        imageStyle={{opacity: 0.4}}
+        // eslint-disable-next-line react/jsx-closing-bracket-location
+      >
+        <Text style={styles.title}>¡Bienvenido!</Text>
+        <Text style={styles.p}>
+          ¡Tú nueva experienca para realizar tramites online acaba de comenzar!
+        </Text>
         <View>
-          <Text>
-            BIENVENIDO {user.uid}
-          </Text>
-          <FormButton buttonTitle='Logout' onPress={() => logout()} />
+          <Text>BIENVENIDO</Text>
+          <FormButton buttonTitle="Logout" onPress={() => logout()} />
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </View>
   );
 };
