@@ -90,10 +90,15 @@ const Register = ({ navigation }) => {
     if (name === '' || email === '' || pass === '' || repeatPass === '') {
       setErrorMessage('Todos los campos son requeridos');
       return;
-    } if (!emailIsValid(email)) {
-      setErrorMessage('Correo electronico invalido');
     }
-
+    if (!emailIsValid(email)) {
+      setErrorMessage('Correo electronico invalido');
+      return;
+    }
+    if (!(pass === repeatPass)) {
+      setErrorMessage('Las contraseñas no son iguales');
+      return;
+    }
     register(name, email, pass, repeatPass);
     setErrorMessage('');
   };
@@ -105,13 +110,14 @@ const Register = ({ navigation }) => {
 
       <Formik
         initialValues={{
-          name: '', email: '', pass: '', repeatPass: '',
+          name: '',
+          email: '',
+          pass: '',
+          repeatPass: '',
         }}
         onSubmit={(values) => handlePress(values)}
       >
-        {({
-          handleChange, handleBlur, handleSubmit, values,
-        }) => (
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
             <View style={styles.inputView}>
               <Icon name="person" size={24} color="white" style={styles.icon} />
@@ -136,23 +142,39 @@ const Register = ({ navigation }) => {
               />
             </View>
             <View style={styles.inputView}>
-              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <Icon
+                name="lock-closed"
+                size={24}
+                color="white"
+                style={styles.icon}
+              />
               <TextInput
                 style={styles.input}
                 onChangeText={handleChange('pass')}
                 onBlur={handleBlur('pass')}
                 value={values.pass}
+                ref={(ref) =>
+                  ref && ref.setNativeProps({ style: { fontFamily: 'normal' } })
+                }
                 placeholder="Ingresa tu contraseña..."
                 placeholderTextColor="#484848"
                 secureTextEntry
               />
             </View>
             <View style={styles.inputView}>
-              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <Icon
+                name="lock-closed"
+                size={24}
+                color="white"
+                style={styles.icon}
+              />
               <TextInput
                 onChangeText={handleChange('repeatPass')}
                 onBlur={handleBlur('repeatPass')}
                 value={values.repeatPass}
+                ref={(ref) =>
+                  ref && ref.setNativeProps({ style: { fontFamily: 'normal' } })
+                }
                 style={styles.input}
                 placeholder="Repite tu contraseña..."
                 placeholderTextColor="#484848"

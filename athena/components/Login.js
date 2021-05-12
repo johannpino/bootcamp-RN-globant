@@ -96,14 +96,12 @@ const Login = ({ navigation }) => {
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
       <Formik
         initialValues={{
-          email: '', pass: '',
+          email: '',
+          pass: '',
         }}
         onSubmit={(values) => handlePress(values)}
       >
-
-        {({
-          handleChange, handleBlur, handleSubmit, values,
-        }) => (
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
             <View style={styles.inputView}>
               <Icon name="mail" size={24} color="white" style={styles.icon} />
@@ -118,12 +116,20 @@ const Login = ({ navigation }) => {
             </View>
 
             <View style={styles.inputView}>
-              <Icon name="lock-closed" size={24} color="white" style={styles.icon} />
+              <Icon
+                name="lock-closed"
+                size={24}
+                color="white"
+                style={styles.icon}
+              />
               <TextInput
                 style={styles.input}
                 onChangeText={handleChange('pass')}
                 onBlur={handleBlur('pass')}
                 value={values.pass}
+                ref={(ref) =>
+                  ref && ref.setNativeProps({ style: { fontFamily: 'normal' } })
+                }
                 placeholder="Ingresa tu contraseña..."
                 placeholderTextColor="#484848"
                 secureTextEntry
@@ -135,9 +141,7 @@ const Login = ({ navigation }) => {
               </Pressable>
             </View>
           </View>
-
         )}
-
       </Formik>
 
       <Pressable
