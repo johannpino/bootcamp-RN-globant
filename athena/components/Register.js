@@ -12,6 +12,7 @@ import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AuthContext from '../context/auth/authContext';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -82,7 +83,7 @@ const Register = ({ navigation }) => {
   const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handlePress = (registerObj) => {
-    const name = registerObj.name.trim();
+    const name = capitalizeFirstLetter(registerObj.name.trim());
     const email = registerObj.email.trim();
     const pass = registerObj.pass.trim();
     const repeatPass = registerObj.repeatPass.trim();
