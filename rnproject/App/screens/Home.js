@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   ImageBackground,
@@ -8,15 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 import colors from '../constants/colors';
-// import {RowItem, RowSeparator} from '../components/RowItem';
-
-/* const openURL = url => {
-  return Linking.openURL(url).catch(() => {
-    Alert.alert('OOPS! Algo salio mal.', 'Porfavor vuelva a intentar');
-  });
-}; */
-
-/* Prop para la función cuando se usa Screens normales con touch {navigation} */
+import {AuthContext} from '../config/AuthProvider';
+import FormButton from '../components/FormButton';
 
 const screen = Dimensions.get('window');
 
@@ -48,6 +41,7 @@ const styles = StyleSheet.create({
 });
 
 export default () => {
+  const {logout} = useContext(AuthContext);
   return (
     <View styles={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.text} />
@@ -56,11 +50,16 @@ export default () => {
         source={require('../assets/images/background.png')}
         style={styles.background}
         imageStyle={{opacity: 0.4}}
+        // eslint-disable-next-line react/jsx-closing-bracket-location
       >
         <Text style={styles.title}>¡Bienvenido!</Text>
         <Text style={styles.p}>
           ¡Tú nueva experienca para realizar tramites online acaba de comenzar!
         </Text>
+        <View>
+          <Text>BIENVENIDO</Text>
+          <FormButton buttonTitle="Logout" onPress={() => logout()} />
+        </View>
       </ImageBackground>
     </View>
   );

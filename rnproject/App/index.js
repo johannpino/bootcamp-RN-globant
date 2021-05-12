@@ -1,4 +1,13 @@
 import React from 'react';
-import Navigation from './config/Navigation';
+import Routes from './config/Routes';
+import {AuthProvider} from './config/AuthProvider';
 
-export default () => <Navigation />;
+const Providers = () => {
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
+};
+
+export default Providers;
