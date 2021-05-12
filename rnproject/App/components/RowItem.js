@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     height: StyleSheet.hairlineWidth,
     marginLeft: 15,
+    marginRight: 15,
   },
 });
 

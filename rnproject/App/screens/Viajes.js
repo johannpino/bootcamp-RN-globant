@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: screen.width * 0.4,
-    height: screen.height * 0.4,
+    width: screen.width * 0.7,
+    height: screen.width * 0.7,
   },
   titleComunas: {
-    color: colors.blue,
-    fontSize: 20,
+    color: colors.white,
+    fontSize: 18,
     textAlign: 'center',
   },
 });

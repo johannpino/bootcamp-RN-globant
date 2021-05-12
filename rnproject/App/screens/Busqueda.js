@@ -1,49 +1,42 @@
 import React, {useState, useEffect} from 'react';
 import {
+  View,
   Text,
   StyleSheet,
   TextInput,
   ScrollView,
   Pressable,
   Alert,
-  Image,
-  Dimensions,
-  SafeAreaView,
-  FlatList,
-  VirtualizedView,
 } from 'react-native';
 import Papa from 'papaparse';
 import colors from '../constants/colors';
 
-const screen = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    paddingTop: 5,
-    paddingHorizontal: 55,
+    backgroundColor: colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 40,
+    paddingHorizontal: 20,
   },
   input: {
-    width: 290,
-    borderColor: colors.black,
+    width: 300,
+    borderColor: 'red',
     borderWidth: 1,
     borderRadius: 20,
-    padding: 10,
+    padding: 8,
   },
-  searchTitle: {
-    fontSize: 20,
+  search: {
+    paddingBottom: 30,
+    fontSize: 25,
+    padding: 10,
   },
   list: {
     paddingTop: 10,
   },
   text: {
-    fontSize: 18,
-  },
-  logo: {
-    width: screen.width * 0.7,
-    height: screen.width * 0.7,
-    marginBottom: 10,
+    fontSize: 20,
   },
 });
 
@@ -51,7 +44,6 @@ const Filter = () => {
   const [data, setData] = useState('');
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState([]);
-  const [comunas, setComunas] = useState([]);
   const removeAccents = str => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   };
@@ -76,7 +68,6 @@ const Filter = () => {
   useEffect(() => {
     if (data) {
       const allComunas = data.data[3];
-      // setComunas(allComunas);
       const result = allComunas.filter(comuna => {
         const lower = removeAccents(comuna.toLowerCase());
         return lower.includes(query.toLowerCase());
@@ -94,48 +85,30 @@ const Filter = () => {
 
   const handlePress = item => {
     Alert.alert(
-      'Te informamos que',
+      '¡Hola! Te informamos que',
       `La comuna se encuentra en: ${faseActual(item)}`,
       [
         {
           text: 'Aceptar',
+          style: 'ok',
         },
       ],
     );
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.searchTitle}>
-          ¡Hola! Ingresa la Comuna que buscas
-        </Text>
-        <Image
-          style={styles.logo}
-          source={require('../assets/images/family.png')}
-        />
-        <TextInput onChangeText={handleChange} style={styles.input} />
-        <SafeAreaView style={styles.list}>
-          <FlatList
-            data={filter}
-            renderItem={({item}) => (
-              <Pressable key={item}>
-                <Text style={styles.text} onPress={() => handlePress(item)}>
-                  {item}
-                </Text>
-              </Pressable>
-            )}
-            keyExtractor={item => item.id}
-          />
-        </SafeAreaView>
+    <View style={styles.container}>
+      <Text style={styles.search}>Porfavor Ingresa la Comuna que buscas</Text>
+      <TextInput onChangeText={handleChange} style={styles.input} />
+      <ScrollView style={styles.list}>
+        {filter.map((item, idx) => (
+          <Pressable onPress={() => handlePress(item)} key={idx}>
+            <Text style={styles.text}>{item}</Text>
+          </Pressable>
+        ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default Filter;
-
-/* {filter.map((item, idx) => (
-            <Pressable onPress={() => handlePress(item)} key={idx.id}>
-              <Text style={styles.text}>{item}</Text>
-            </Pressable> */

@@ -10,7 +10,7 @@ import colors from '../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.red,
+    backgroundColor: colors.white,
     marginHorizontal: 10,
     marginVertical: 20,
     borderRadius: 10,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    borderRightColor: colors.blue,
+    borderRightColor: colors.border,
     borderRightWidth: 1,
   },
   buttonText: {
