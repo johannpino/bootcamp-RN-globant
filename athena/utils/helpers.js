@@ -43,3 +43,16 @@ export const filterProjects = (projects, query) => {
   });
   return result;
 };
+
+export const welcomeText = () => {
+  const today = new Date();
+  const current = today.getHours();
+
+  if (current < 12) {
+    return 'Buenos días';
+  }
+  if (current < 18) {
+    return 'Buenas tardes';
+  }
+  return 'Buenas noches';
+};
