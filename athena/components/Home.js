@@ -68,25 +68,19 @@ const Home = () => {
 
   if (userHasProjects(projects, user.email)) {
     return (
-      <>
-        {user.displayName ? (
-          <ScrollView style={styles.container}>
-            <Title />
-            {userHasTasks(tasks, user.email) ? (
-              <DisplayRecentTasks
-                title="Tareas recientes..."
-                items={getUserTasks(tasks, user.email)}
-              />
-            ) : null}
-            <DisplayProjects
-              title="Tus proyectos"
-              items={getUserProyects(projects, user.email)}
-            />
-          </ScrollView>
-        ) : (
-          <Text style={styles.title}>Loading...</Text> // spiner goes here
-        )}
-      </>
+      <ScrollView style={styles.container}>
+        <Title />
+        {userHasTasks(tasks, user.email) ? (
+          <DisplayRecentTasks
+            title="Tareas recientes..."
+            items={getUserTasks(tasks, user.email)}
+          />
+        ) : null}
+        <DisplayProjects
+          title="Tus proyectos"
+          items={getUserProyects(projects, user.email)}
+        />
+      </ScrollView>
     );
   }
 
