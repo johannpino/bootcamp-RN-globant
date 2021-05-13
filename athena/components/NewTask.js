@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 const NewTask = ({ navigation, route }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { key, tasksRemaining, color, name } = route.params.item;
-  const { addTask, user } = firebaseContext;
+  const { addTask, user, addMessage } = firebaseContext;
   const [error, setError] = useState(false);
   const [taskName, setTaskName] = useState('');
 
@@ -81,6 +81,15 @@ const NewTask = ({ navigation, route }) => {
     });
     updateDocument('projects', key, {
       tasksRemaining: tasksRemaining + 1,
+      lastUpdated: Date.now(),
+    });
+    addMessage({
+      name: user.displayName,
+      photoURL: user.photoURL,
+      projectId: key,
+      text: `agregó ${capitalizeFirstLetter(taskName)}`,
+      date: Date.now(),
+      isMessage: false,
     });
     setError(false);
     navigation.navigate('ProjectScreen');

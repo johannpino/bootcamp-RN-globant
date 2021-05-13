@@ -1,5 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 
+export const limitChar = (n, str) =>
+  str.length > n ? `${str.substr(0, n - 1)}... ` : str;
+
 export const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 export const capitalizeFirstLetter = (string) =>

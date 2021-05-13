@@ -71,7 +71,6 @@ const NewTask = ({ navigation, route }) => {
       return;
     }
     updateDocument('projects', key, {
-      tasksRemaining: tasksRemaining + 1,
       owners: [...owners, collabEmail.trim().toLocaleLowerCase()],
       lastUpdated: Date.now(),
     });
