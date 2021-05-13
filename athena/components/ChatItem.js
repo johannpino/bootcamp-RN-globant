@@ -1,17 +1,16 @@
 /* eslint-disable object-curly-newline */
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
-import { getFirstLetter } from '../utils/helpers';
+import {
+  getFirstLetter,
+  getProjectMessages,
+  limitChar,
+  formatTime,
+} from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 import NavbarContext from '../context/navbar/navbarContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import { getProjectMessages, limitChar } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   item: {
@@ -23,14 +22,22 @@ const styles = StyleSheet.create({
     color: '#1B1B1B',
   },
   info: {
+    maxWidth: '100%',
     marginLeft: 12,
   },
   title: {
+    fontWeight: 'bold',
     fontSize: 18,
     color: 'white',
   },
   secondary: {
+    maxWidth: '100%',
     fontSize: 14,
+    color: 'white',
+  },
+  date: {
+    opacity: 0.4,
+    fontSize: 12,
     color: 'white',
   },
   center: {
@@ -42,6 +49,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: '90%',
   },
+  preview: {
+    width: '80%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
 });
 
 const Item = ({ item }) => {
@@ -49,6 +61,9 @@ const Item = ({ item }) => {
 
   const { setNavbarHidden } = useContext(NavbarContext);
   const { messages } = useContext(FireBaseContext);
+
+  const getFormmatedDate = (date) =>
+    ` ${date.getHours()}:${formatTime(date.getMinutes())}`;
 
   const circle = {
     height: 44,
@@ -59,20 +74,14 @@ const Item = ({ item }) => {
     borderRadius: 48,
   };
 
-  const offset = useSharedValue(1);
-
-  useEffect(() => {
-    offset.value = 0;
-    return () => {
-      offset.value = 10;
-    };
-  }, []);
-
   if (!messages) return null;
-  const dateObj = new Date(item.date);
   if (item.owners.length < 2) return null;
 
   const lastMessage = getProjectMessages(messages, key).slice(-1).pop();
+  let dateObj;
+  if (lastMessage) {
+    dateObj = new Date(lastMessage.date);
+  }
   return (
     <View>
       <Pressable
@@ -87,14 +96,19 @@ const Item = ({ item }) => {
         </View>
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.secondary}>
-            {lastMessage
-              ? `${lastMessage.name}: ${limitChar(
-                  22,
-                  lastMessage.text
-                )} • ${dateObj.getHours()}:${dateObj.getMinutes()}`
-              : null}
-          </Text>
+          <View style={styles.preview}>
+            <Text style={styles.secondary}>
+              {lastMessage
+                ? `${limitChar(10, lastMessage.name)}: ${limitChar(
+                    10,
+                    lastMessage.text
+                  )}`
+                : null}
+            </Text>
+            <Text style={styles.date}>
+              {lastMessage ? `${getFormmatedDate(dateObj)}` : null}
+            </Text>
+          </View>
         </View>
       </Pressable>
       <View style={styles.center}>
