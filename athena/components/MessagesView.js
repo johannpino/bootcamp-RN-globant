@@ -24,13 +24,15 @@ const MessagesView = ({ filteredMessages }) => (
     }}
   >
     {filteredMessages.map((message, index) => {
-      const { isMessage, text } = message;
+      const { isMessage, text, photoURL, date } = message;
       return (
         <MessageItem
           isMessage={isMessage}
           author={message.name}
           text={text}
           key={index}
+          date={date}
+          image={photoURL}
         />
       );
     })}
