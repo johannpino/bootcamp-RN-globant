@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { getFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   messageItem: {
     padding: 8,
-    marginVertical: 6,
+    marginVertical: 2,
     marginHorizontal: 6,
     flexDirection: 'row',
     alignItems: 'center',
@@ -79,7 +80,7 @@ const MessageItem = ({
     <View>
       <View style={styles.messageItem}>
         <View style={styles.circle}>
-          <Text style={styles.itemCircleText}>P</Text>
+          <Text style={styles.itemCircleText}>{getFirstLetter(author)}</Text>
         </View>
         <View style={styles.messageTextView}>
           <Text style={styles.messageAuthor}>{author}</Text>

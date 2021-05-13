@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   Pressable,
   TextInput,
   BackHandler,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavbarContext from '../context/navbar/navbarContext';
@@ -145,13 +145,13 @@ const Chat = ({ route, navigation }) => {
       name: user.displayName,
       photoURL: user.photoURL,
       projectId: key,
-      text: text,
+      text,
       date: Date.now(),
       isMessage: true,
     });
     setText('');
     Keyboard.dismiss();
-  }
+  };
 
   const circle = {
     height: 44,
@@ -161,6 +161,14 @@ const Chat = ({ route, navigation }) => {
     alignItems: 'center',
     borderRadius: 48,
     marginRight: '4%',
+  };
+
+  const scrollToBottom = () => {
+    return this.scrollView.scrollToEnd({ animated: false, index: -1 });
+  };
+
+  const scrollToBottomAnimated = () => {
+    return this.scrollView.scrollToEnd({ animated: true, index: -1 }, 200);
   };
 
   return (
@@ -182,12 +190,17 @@ const Chat = ({ route, navigation }) => {
         </View>
       </View>
       <View style={styles.chatContainer}>
-        <ScrollView style={styles.messagesView}>
-
+        <ScrollView
+          style={styles.messagesView}
+          ref={(ref) => (this.scrollView = ref)}
+          onContentSizeChange={() => {
+            scrollToBottom()
+          }}
+        >
           {filteredMessages.map((message) => {
             const { isMessage, text } = message;
             return (
-              <MessageItem isMessage={isMessage} author={user.displayName} text={text} />
+              <MessageItem isMessage={isMessage} author={message.name} text={text} />
             );
           })}
         </ScrollView>
