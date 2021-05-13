@@ -18,6 +18,8 @@ const AuthState = (props) => {
     if (initializing) setInitializing(false);
   };
 
+  const getUser = (email) => auth().getUserByEmail(email);
+
   // updates user after signup
   const onUserChanged = (user) => {
     setUser(user);
@@ -100,6 +102,7 @@ const AuthState = (props) => {
         logout,
         register,
         setErrorMessage,
+        getUser,
         errorMessage,
       }}
     >

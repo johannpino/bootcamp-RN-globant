@@ -68,19 +68,8 @@ const Item = ({ item }) => {
     };
   }, []);
 
-  const customSpringStyles = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX: withSpring(offset.value * 255, {
-          damping: 20,
-          stiffness: 90,
-        }),
-      },
-    ],
-  }));
-
   if (!messages) return null;
-
+  const dateObj = new Date(item.date);
   if (item.owners.length < 2) return null;
 
   const lastMessage = getProjectMessages(messages, key).slice(-1).pop();
@@ -99,7 +88,11 @@ const Item = ({ item }) => {
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>
-            {lastMessage ? `${lastMessage.name}: ${lastMessage.text}` : null}
+            {lastMessage
+              ? `${lastMessage.name}: ${
+                  lastMessage.text
+                } • ${dateObj.getHours()}:${dateObj.getMinutes()}`
+              : null}
           </Text>
         </View>
       </Pressable>

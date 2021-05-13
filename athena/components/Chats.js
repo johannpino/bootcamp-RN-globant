@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 const Chats = () => {
   const { projects, user } = useContext(FireBaseContext);
   const items = getUserProjects(projects, user.email);
+  items.sort((a, b) => b.lastUpdated - a.lastUpdated);
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Chats</Text>
