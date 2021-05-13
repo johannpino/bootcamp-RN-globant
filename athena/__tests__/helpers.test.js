@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const {
   capitalizeFirstLetter,
   getFirstLetter,
@@ -11,7 +12,6 @@ const {
   userHasProjects,
   userHasTasks,
   formatDescription,
-  welcomeText,
 } = require('../utils/helpers');
 
 test('should return string with capitalized first letter', () => {

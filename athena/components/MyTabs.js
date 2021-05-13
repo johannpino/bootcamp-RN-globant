@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
 import ProfileStack from './ProfileStack';
 import ProjectsStack from './ProjectsStack';
+import ChatStack from './ChatStack';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import Auth from './Auth';
 
@@ -49,6 +50,12 @@ const MyTabs = () => {
               color = '#FFFFFF';
               iconName = 'person';
             }
+          } else if (route.name === 'Chats') {
+            iconName = 'chatbubbles-outline';
+            if (focused) {
+              color = '#FFFFFF';
+              iconName = 'chatbubbles';
+            }
           }
 
           return <Icon name={iconName} size={size} color={color} />;
@@ -57,6 +64,7 @@ const MyTabs = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Projects" component={ProjectsStack} />
+      <Tab.Screen name="Chats" component={ChatStack} />
       <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
