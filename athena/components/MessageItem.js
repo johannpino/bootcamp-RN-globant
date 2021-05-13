@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View, Text, StyleSheet, Image,
+} from 'react-native';
 import { getFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -58,11 +60,20 @@ const styles = StyleSheet.create({
     color: '#555555',
     fontSize: 18,
   },
+  circleImg: {
+    height: 44,
+    width: 44,
+    borderRadius: 48,
+    marginRight: '4%',
+  },
 });
 
 const MessageItem = ({
-  isMessage, text, author, date,
+  isMessage, text, author, date, image,
 }) => {
+
+    const dateObj = new Date(date);
+
   if (!isMessage) {
     return (
       <View style={styles.notificationItem}>
@@ -79,11 +90,16 @@ const MessageItem = ({
   return (
     <View>
       <View style={styles.messageItem}>
-        <View style={styles.circle}>
-          <Text style={styles.itemCircleText}>{getFirstLetter(author)}</Text>
-        </View>
+        {image ? (
+          <Image style={styles.circleImg} source={{ uri: image }} />
+        ) : (
+          <View style={styles.circle}>
+            <Text style={styles.itemCircleText}>{getFirstLetter(author)}</Text>
+          </View>
+        )}
+
         <View style={styles.messageTextView}>
-          <Text style={styles.messageAuthor}>{author}</Text>
+          <Text style={styles.messageAuthor}>{`${author} • ${dateObj.getHours()}:${dateObj.getMinutes()}`}</Text>
           <View style={styles.subMessageTextView}>
             <Text style={styles.messageText}>{text}</Text>
           </View>
