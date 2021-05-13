@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, tasks, user } = firebaseContext;
-  const date = Date.now();
 
   const Title = () => (
     <Text style={styles.title}>

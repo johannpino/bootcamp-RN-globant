@@ -6,7 +6,6 @@ import {
   getFirstLetter,
   getProjectMessages,
   limitChar,
-  formatTime,
 } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 import NavbarContext from '../context/navbar/navbarContext';
@@ -56,18 +55,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ item }) => {
+const ChatItem = ({ item }) => {
   const { name, color, key } = item;
 
   const { setNavbarHidden } = useContext(NavbarContext);
   const { messages } = useContext(FireBaseContext);
-
-  const getFormmatedDate = (date) =>
-    `${date.getUTCDate()}/${
-      date.getUTCMonth() + 1
-    }/${date.getFullYear()} • ${date.getHours()}:${formatTime(
-      date.getMinutes()
-    )}`;
 
   const circle = {
     height: 44,
@@ -84,6 +76,7 @@ const Item = ({ item }) => {
   const lastMessage = getProjectMessages(messages, key).slice(-1).pop();
   let dateObj;
   if (lastMessage) {
+    // eslint-disable-next-line no-unused-vars
     dateObj = new Date(lastMessage.date);
   }
   return (
@@ -100,16 +93,11 @@ const Item = ({ item }) => {
         </View>
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
-          <View style={styles.preview}>
-            <Text style={styles.secondary}>
-              {lastMessage
-                ? `${lastMessage.name}: ${limitChar(18, lastMessage.text)}`
-                : null}
-            </Text>
-            <Text style={styles.date}>
-              {lastMessage ? `${getFormmatedDate(dateObj)}` : null}
-            </Text>
-          </View>
+          <Text style={styles.secondary}>
+            {lastMessage
+              ? `${lastMessage.name}: ${limitChar(18, lastMessage.text)}`
+              : null}
+          </Text>
         </View>
       </Pressable>
       <View style={styles.center}>
@@ -119,8 +107,8 @@ const Item = ({ item }) => {
   );
 };
 
-Item.propTypes = {
+ChatItem.propTypes = {
   item: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default Item;
+export default ChatItem;

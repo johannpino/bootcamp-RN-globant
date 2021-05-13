@@ -1,5 +1,5 @@
-/* eslint-disable implicit-arrow-linebreak */
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   ScrollView,
   StyleSheet,
@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import { updateDocument, addMessage } from '../utils/firebase';
-import { capitalizeFirstLetter } from '../utils/helpers';
+import { updateDocument } from '../utils/firebase';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,10 +57,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewTask = ({ navigation, route }) => {
+const AddCollaborator = ({ navigation, route }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { user, addMessage } = firebaseContext;
-  const { key, tasksRemaining, owners } = route.params.item;
+  const { key, owners } = route.params.item;
   const [error, setError] = useState(false);
   const [collabEmail, setCollabEmail] = useState('');
 
@@ -117,4 +116,8 @@ const NewTask = ({ navigation, route }) => {
   );
 };
 
-export default NewTask;
+AddCollaborator.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+  route: PropTypes.instanceOf(Object).isRequired,
+};
+export default AddCollaborator;

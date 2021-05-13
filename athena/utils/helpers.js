@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-
+// eslint-disable-next-line no-confusing-arrow
 export const limitChar = (n, str) =>
   str.length > n ? `${str.substr(0, n - 1)}... ` : str;
 
@@ -26,6 +26,7 @@ export const projectHasTasks = (tasks, projectId) => {
 
 export const getProjectTasks = (tasks, projectId, completed) =>
   tasks.filter(
+    // eslint-disable-next-line comma-dangle
     (task) => task.projectId === projectId && task.completed === completed
   );
 

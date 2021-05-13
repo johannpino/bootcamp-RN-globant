@@ -1,9 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 
 import React, { useEffect, useReducer } from 'react';
-import firestore from '@react-native-firebase/firestore';
 import PropTypes from 'prop-types';
-import { addDocument } from '../../utils/firebase';
 import {
   SET_PROJECTS,
   SET_TASKS,
@@ -11,6 +9,12 @@ import {
   SET_USER,
   SET_MESSAGES,
 } from '../../types';
+import {
+  addProject,
+  addTask,
+  addMessage,
+  subscribe,
+} from '../../utils/firebase';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
 
@@ -30,18 +34,6 @@ const FirebaseState = (props) => {
       payload,
       type: SET_PROJECTS,
     });
-  };
-
-  const addProject = (project) => {
-    addDocument('projects', project);
-  };
-
-  const addTask = (task) => {
-    addDocument('tasks', task);
-  };
-
-  const addMessage = (message) => {
-    addDocument('messages', message);
   };
 
   const setTasks = (tasks) => {
@@ -72,67 +64,23 @@ const FirebaseState = (props) => {
     });
   };
 
-  // Observer
+  // OBSERVERS
+
+  // Projects
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('projects')
-      .orderBy('date', 'desc')
-      .onSnapshot((querySnapshot) => {
-        const projects = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          projects.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setProjects(projects);
-      });
-
-    // Unsubscribe
+    const subscriber = subscribe('projects', 'date', 'desc', setProjects);
     return () => subscriber();
   }, []);
 
+  // Tasks
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('tasks')
-      .orderBy('date', 'desc')
-      .onSnapshot((querySnapshot) => {
-        const tasks = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          tasks.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setTasks(tasks);
-      });
-
-    // Unsubscribe
+    const subscriber = subscribe('tasks', 'date', 'desc', setTasks);
     return () => subscriber();
   }, []);
 
+  // Messages
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('messages')
-      .orderBy('date', 'asc')
-      .onSnapshot((querySnapshot) => {
-        const messages = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          messages.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setMessages(messages);
-      });
-
-    // Unsubscribe
+    const subscriber = subscribe('messages', 'date', 'asc', setMessages);
     return () => subscriber();
   }, []);
 

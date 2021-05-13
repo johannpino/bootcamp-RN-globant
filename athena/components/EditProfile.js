@@ -3,6 +3,7 @@
 import React, { useContext, useState } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
+import PropTypes from 'prop-types';
 
 import {
   ScrollView,
@@ -109,6 +110,7 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         if (err.code !== 'E_PICKER_CANCELLED') {
+          // eslint-disable-next-line no-alert
           alert('Error subiendo tu imagen... Inténtalo de nuevo');
         }
       });
@@ -154,4 +156,7 @@ const EditProfile = ({ navigation }) => {
   );
 };
 
+EditProfile.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+};
 export default EditProfile;

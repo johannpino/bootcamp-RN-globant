@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Item from './Item';
-import { formatDescription } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   itemContainer: {

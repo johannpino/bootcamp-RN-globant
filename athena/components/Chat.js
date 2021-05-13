@@ -1,21 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
+/* eslint-disable no-shadow */
+import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   Pressable,
   TextInput,
-  BackHandler,
   Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavbarContext from '../context/navbar/navbarContext';
 import MessagesView from './MessagesView';
-import MessageItem from './MessageItem';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getProjectMessages, getFirstLetter } from '../utils/helpers';
-import { updateDocument, addMessage } from '../utils/firebase';
+import { updateDocument } from '../utils/firebase';
 
 const styles = StyleSheet.create({
   container: {
@@ -205,6 +204,11 @@ const Chat = ({ route, navigation }) => {
       </View>
     </View>
   );
+};
+
+Chat.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+  route: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Chat;
