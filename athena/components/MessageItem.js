@@ -5,7 +5,7 @@ import { getFirstLetter } from '../utils/helpers';
 const styles = StyleSheet.create({
   messageItem: {
     padding: 8,
-    marginVertical: 2,
+    marginVertical: 4,
     marginHorizontal: 6,
     flexDirection: 'row',
     alignItems: 'center',
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   circle: {
     height: 44,
     width: 44,
-    backgroundColor: '#CF6AFF',
+    backgroundColor: '#E022FF',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 48,

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavbarContext from '../context/navbar/navbarContext';
+import MessagesView from './MessagesView';
 import MessageItem from './MessageItem';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getProjectMessages, getFirstLetter } from '../utils/helpers';
@@ -163,13 +164,6 @@ const Chat = ({ route, navigation }) => {
     marginRight: '4%',
   };
 
-  const scrollToBottom = () => {
-    return this.scrollView.scrollToEnd({ animated: false, index: -1 });
-  };
-
-  const scrollToBottomAnimated = () => {
-    return this.scrollView.scrollToEnd({ animated: true, index: -1 }, 200);
-  };
 
   return (
     <View style={styles.container}>
@@ -190,20 +184,7 @@ const Chat = ({ route, navigation }) => {
         </View>
       </View>
       <View style={styles.chatContainer}>
-        <ScrollView
-          style={styles.messagesView}
-          ref={(ref) => (this.scrollView = ref)}
-          onContentSizeChange={() => {
-            scrollToBottom()
-          }}
-        >
-          {filteredMessages.map((message) => {
-            const { isMessage, text } = message;
-            return (
-              <MessageItem isMessage={isMessage} author={message.name} text={text} />
-            );
-          })}
-        </ScrollView>
+        <MessagesView filteredMessages={filteredMessages} />
         <View style={styles.sendMsgView}>
           <View style={styles.inputView}>
             <TextInput
