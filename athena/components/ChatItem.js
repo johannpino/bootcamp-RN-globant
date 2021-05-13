@@ -63,7 +63,11 @@ const Item = ({ item }) => {
   const { messages } = useContext(FireBaseContext);
 
   const getFormmatedDate = (date) =>
-    ` ${date.getHours()}:${formatTime(date.getMinutes())}`;
+    `${date.getUTCDate()}/${
+      date.getUTCMonth() + 1
+    }/${date.getFullYear()} • ${date.getHours()}:${formatTime(
+      date.getMinutes()
+    )}`;
 
   const circle = {
     height: 44,
@@ -99,10 +103,7 @@ const Item = ({ item }) => {
           <View style={styles.preview}>
             <Text style={styles.secondary}>
               {lastMessage
-                ? `${limitChar(10, lastMessage.name)}: ${limitChar(
-                    10,
-                    lastMessage.text
-                  )}`
+                ? `${lastMessage.name}: ${limitChar(18, lastMessage.text)}`
                 : null}
             </Text>
             <Text style={styles.date}>
