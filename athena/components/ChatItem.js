@@ -11,7 +11,7 @@ import { getFirstLetter } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 import NavbarContext from '../context/navbar/navbarContext';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import { getProjectMessages } from '../utils/helpers';
+import { getProjectMessages, limitChar } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   item: {
@@ -89,9 +89,10 @@ const Item = ({ item }) => {
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>
             {lastMessage
-              ? `${lastMessage.name}: ${
+              ? `${lastMessage.name}: ${limitChar(
+                  22,
                   lastMessage.text
-                } • ${dateObj.getHours()}:${dateObj.getMinutes()}`
+                )} • ${dateObj.getHours()}:${dateObj.getMinutes()}`
               : null}
           </Text>
         </View>
