@@ -5,6 +5,7 @@ import { navigationRef } from './utils/RootNavigation';
 import MyTabs from './components/MyTabs';
 import FirebaseState from './context/firebase/firebaseState';
 import AuthState from './context/auth/authState';
+import NavbarState from './context/navbar/navbarState';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -17,9 +18,11 @@ const MyTheme = {
 const App = () => (
   <FirebaseState>
     <AuthState>
-      <NavigationContainer theme={MyTheme} ref={navigationRef}>
-        <MyTabs />
-      </NavigationContainer>
+      <NavbarState>
+        <NavigationContainer theme={MyTheme} ref={navigationRef}>
+          <MyTabs />
+        </NavigationContainer>
+      </NavbarState>
     </AuthState>
   </FirebaseState>
 );

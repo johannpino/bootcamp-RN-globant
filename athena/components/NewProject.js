@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import ColorContainer from './ColorContainer';
@@ -81,6 +82,7 @@ const NewProject = ({ navigation }) => {
       owners: [user.email],
       tasksRemaining: 0,
       date: Date.now(),
+      lastUpdated: Date.now(),
     });
     setError(false);
     navigation.navigate('Projects');
@@ -120,6 +122,10 @@ const NewProject = ({ navigation }) => {
       </View>
     </ScrollView>
   );
+};
+
+NewProject.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default NewProject;

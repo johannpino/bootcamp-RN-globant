@@ -1,9 +1,13 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { rgba } from 'polished';
+import PropTypes from 'prop-types';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getCurrentProject, projectHasTasks } from '../utils/helpers';
 import DisplayProjectTasks from './DisplayProjectTasks';
@@ -71,6 +75,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#969696',
+    marginHorizontal: 5,
   },
   warning: {
     marginTop: '30%',
@@ -90,12 +95,16 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#969696',
   },
+  right: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
 });
 
 const ProjectScreen = ({ route, navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { isProject } = route.params;
-  const { projects, tasks, user } = firebaseContext;
+  const { projects, tasks } = firebaseContext;
   let key;
   if (isProject) {
     key = route.params.key;
@@ -111,13 +120,23 @@ const ProjectScreen = ({ route, navigation }) => {
           <Pressable onPress={() => navigation.navigate('Projects')}>
             <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
           </Pressable>
-          <Pressable
-            onPress={() =>
-              navigation.navigate('NewTask', { item: route.params })
-            }
-          >
-            <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
-          </Pressable>
+          <View style={styles.right}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('AddCollaborator', { item: route.params })
+              }
+              style={styles.icon}
+            >
+              <Icon name="people-circle-outline" size={44} color="#FFFFFF" />
+            </Pressable>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('NewTask', { item: route.params })
+              }
+            >
+              <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
+            </Pressable>
+          </View>
         </View>
         <Text style={styles.title}>{name}</Text>
         <DisplayProjectTasks color={color} projectId={key} />
@@ -133,6 +152,11 @@ const ProjectScreen = ({ route, navigation }) => {
       </LinearGradient>
     </ScrollView>
   );
+};
+
+ProjectScreen.propTypes = {
+  route: PropTypes.instanceOf(Object).isRequired,
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ProjectScreen;

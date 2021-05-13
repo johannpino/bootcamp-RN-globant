@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import Item from './Item';
+import ChatItem from './ChatItem';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -15,27 +15,24 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginTop: 8,
     marginBottom: 16,
-    backgroundColor: '#D4D4D4',
   },
 });
 
-const DisplayProjects = ({ title, items }) => {
+const DisplayChats = ({ items }) => {
   if (!items || items === '') return null;
   return (
     <View style={styles.itemContainer}>
-      {title ? <Text style={styles.secondary}>{title}</Text> : null}
       <View style={styles.displayItems}>
         {items.map((item) => (
-          <Item isProject key={item.key} item={item} />
+          <ChatItem key={item.key} item={item} />
         ))}
       </View>
     </View>
   );
 };
 
-DisplayProjects.propTypes = {
-  title: PropTypes.string.isRequired,
+DisplayChats.propTypes = {
   items: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default DisplayProjects;
+export default DisplayChats;

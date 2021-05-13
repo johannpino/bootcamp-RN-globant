@@ -1,11 +1,13 @@
+/* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import ProfilePicture from './ProfilePicture';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import AuthContext from '../context/auth/authContext';
 import {
   getCompletedTasks,
-  getUserProyects,
+  getUserProjects,
   getUserTasks,
 } from '../utils/helpers';
 
@@ -19,6 +21,10 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFF',
+  },
+  email: {
+    fontSize: 18,
+    color: '#555555',
   },
   editBtn: {
     borderWidth: 2,
@@ -80,6 +86,7 @@ const Profile = ({ navigation }) => {
     <View style={styles.container}>
       <ProfilePicture />
       <Text style={styles.name}>{user.displayName}</Text>
+      <Text style={styles.email}>{user.email}</Text>
       <Pressable
         style={styles.editBtn}
         onPress={() => navigation.navigate('EditProfile')}
@@ -89,7 +96,7 @@ const Profile = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.statistics}>
           <Text style={styles.number}>
-            {getUserProyects(projects, user.email).length}
+            {getUserProjects(projects, user.email).length}
           </Text>
           <Text style={styles.text}>{` PROYECTOS${'\n'}ACTIVOS`}</Text>
         </View>
@@ -111,6 +118,10 @@ const Profile = ({ navigation }) => {
       </Pressable>
     </View>
   );
+};
+
+Profile.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Profile;

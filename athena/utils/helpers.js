@@ -1,12 +1,17 @@
 /* eslint-disable implicit-arrow-linebreak */
+// eslint-disable-next-line no-confusing-arrow
+export const limitChar = (n, str) =>
+  str.length > n ? `${str.substr(0, n - 1)}... ` : str;
+
+export const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 export const capitalizeFirstLetter = (string) =>
   `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 export const getFirstLetter = (string) => string.charAt(0);
 
-export const getUserProyects = (proyects, owner) =>
-  proyects.filter((proyect) => proyect.owners.includes(owner));
+export const getUserProjects = (projects, owner) =>
+  projects.filter((project) => project.owners.includes(owner));
 
 export const getCurrentProject = (projects, id) =>
   projects.filter((project) => project.key === id);
@@ -21,6 +26,7 @@ export const projectHasTasks = (tasks, projectId) => {
 
 export const getProjectTasks = (tasks, projectId, completed) =>
   tasks.filter(
+    // eslint-disable-next-line comma-dangle
     (task) => task.projectId === projectId && task.completed === completed
   );
 
@@ -63,7 +69,10 @@ export const welcomeText = () => {
 };
 
 export const userHasProjects = (projects, owner) =>
-  getUserProyects(projects, owner).length > 0;
+  getUserProjects(projects, owner).length > 0;
 
 export const userHasTasks = (tasks, owner) =>
   getUserTasks(tasks, owner).length > 0;
+
+export const getProjectMessages = (messages, key) =>
+  messages.filter((message) => message.projectId === key);

@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
 });
 
 const Item = ({ isProject, item }) => {
-  const { user, projects, tasks } = useContext(FireBaseContext);
+  const { tasks } = useContext(FireBaseContext);
   const { name, color } = item;
   let secondary;
   if (isProject) {

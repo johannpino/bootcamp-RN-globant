@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { getFirstLetter } from '../utils/helpers';

@@ -1,15 +1,20 @@
 /* eslint-disable react/destructuring-assignment */
 
 import React, { useEffect, useReducer } from 'react';
-import firestore from '@react-native-firebase/firestore';
 import PropTypes from 'prop-types';
-import { addDocument } from '../../utils/firebase';
 import {
   SET_PROJECTS,
   SET_TASKS,
   SET_INITIALIZING,
   SET_USER,
+  SET_MESSAGES,
 } from '../../types';
+import {
+  addProject,
+  addTask,
+  addMessage,
+  subscribe,
+} from '../../utils/firebase';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
 
@@ -18,6 +23,7 @@ const FirebaseState = (props) => {
     projects: [],
     user: {},
     tasks: [],
+    messages: [],
     initializing: true,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
@@ -30,17 +36,9 @@ const FirebaseState = (props) => {
     });
   };
 
-  const addProject = (project) => {
-    addDocument('projects', project);
-  };
-
-  const addTask = (task) => {
-    addDocument('tasks', task);
-  };
-
-  const setTasks = async (payload) => {
+  const setTasks = (tasks) => {
     dispatch({
-      payload,
+      payload: tasks,
       type: SET_TASKS,
     });
   };
@@ -52,6 +50,13 @@ const FirebaseState = (props) => {
     });
   };
 
+  const setMessages = (messages) => {
+    dispatch({
+      payload: messages,
+      type: SET_MESSAGES,
+    });
+  };
+
   const setInitializing = (bool) => {
     dispatch({
       type: SET_INITIALIZING,
@@ -59,46 +64,23 @@ const FirebaseState = (props) => {
     });
   };
 
-  // Observer
+  // OBSERVERS
+
+  // Projects
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('projects')
-      .orderBy('date', 'desc')
-      .onSnapshot((querySnapshot) => {
-        const projects = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          projects.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setProjects(projects);
-      });
-
-    // Unsubscribe
+    const subscriber = subscribe('projects', 'date', 'desc', setProjects);
     return () => subscriber();
   }, []);
 
+  // Tasks
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('tasks')
-      .orderBy('date', 'desc')
-      .onSnapshot((querySnapshot) => {
-        const tasks = [];
+    const subscriber = subscribe('tasks', 'date', 'desc', setTasks);
+    return () => subscriber();
+  }, []);
 
-        querySnapshot.forEach((documentSnapshot) => {
-          tasks.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setTasks(tasks);
-      });
-
-    // Unsubscribe
+  // Messages
+  useEffect(() => {
+    const subscriber = subscribe('messages', 'date', 'asc', setMessages);
     return () => subscriber();
   }, []);
 
@@ -109,10 +91,12 @@ const FirebaseState = (props) => {
         tasks: state.tasks,
         initializing: state.initializing,
         user: state.user,
+        messages: state.messages,
         setUser,
         setInitializing,
         addProject,
         addTask,
+        addMessage,
       }}
     >
       {props.children}

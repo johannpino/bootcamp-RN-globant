@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 import ColorSquare from './ColorSquare';
 
 const styles = StyleSheet.create({
@@ -26,4 +27,9 @@ const ColorContainer = ({ colors, selectedHandler, selectedColor }) => (
   </View>
 );
 
+ColorContainer.propTypes = {
+  colors: PropTypes.instanceOf(Object).isRequired,
+  selectedHandler: PropTypes.instanceOf(Function).isRequired,
+  selectedColor: PropTypes.instanceOf(String).isRequired,
+};
 export default ColorContainer;

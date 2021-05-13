@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 const {
   capitalizeFirstLetter,
   getFirstLetter,
-  getUserProyects,
+  getUserProjects,
   getCurrentProject,
   getUserTasks,
   projectHasTasks,
@@ -11,7 +12,6 @@ const {
   userHasProjects,
   userHasTasks,
   formatDescription,
-  welcomeText,
 } = require('../utils/helpers');
 
 test('should return string with capitalized first letter', () => {
@@ -31,7 +31,7 @@ test('should return only the users projects', () => {
     { key: '3', owners: ['sophie', 'john'] },
   ];
   const owner = 'john';
-  const filteredProjects = getUserProyects(projects, owner);
+  const filteredProjects = getUserProjects(projects, owner);
   expect(filteredProjects).toStrictEqual([
     { key: '1', owners: ['john'] },
     { key: '3', owners: ['sophie', 'john'] },

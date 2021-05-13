@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
-  getUserProyects,
+  getUserProjects,
   getUserTasks,
   welcomeText,
   userHasProjects,
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
 const Home = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { projects, tasks, user } = firebaseContext;
-  const date = Date.now();
 
   const Title = () => (
     <Text style={styles.title}>
@@ -79,7 +78,7 @@ const Home = () => {
         ) : null}
         <DisplayProjects
           title="Tus proyectos"
-          items={getUserProyects(projects, user.email)}
+          items={getUserProjects(projects, user.email)}
         />
       </ScrollView>
     );

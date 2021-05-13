@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Pressable } from 'react-native';
+import PropTypes from 'prop-types';
 
 const ColorSquare = ({ color, isSelected, selectedHandler }) => {
   const styles = StyleSheet.create({
@@ -25,4 +26,9 @@ const ColorSquare = ({ color, isSelected, selectedHandler }) => {
   );
 };
 
+ColorSquare.propTypes = {
+  color: PropTypes.instanceOf(Object).isRequired,
+  selectedHandler: PropTypes.instanceOf(Function).isRequired,
+  isSelected: PropTypes.instanceOf(Boolean).isRequired,
+};
 export default ColorSquare;

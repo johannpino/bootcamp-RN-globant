@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+// eslint-disable-next-line object-curly-newline
 import { View, Pressable, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Animated, {
   useSharedValue,
@@ -83,7 +85,7 @@ const DisplayProjectTasks = ({ color, projectId }) => {
   const [incomplete, setInclomplete] = useState(true);
 
   const firebaseContext = useContext(FireBaseContext);
-  const { user, tasks } = firebaseContext;
+  const { tasks } = firebaseContext;
 
   return (
     <View>
@@ -126,8 +128,11 @@ const DisplayProjectTasks = ({ color, projectId }) => {
               <Pressable
                 key={key}
                 style={styles.task}
-                onPress={() =>
-                  updateDocument('tasks', key, { completed: !completed })
+                onPress={
+                  () =>
+                    // eslint-disable-next-line implicit-arrow-linebreak
+                    updateDocument('tasks', key, { completed: !completed })
+                  // eslint-disable-next-line react/jsx-curly-newline
                 }
               >
                 <Text style={styles.taskText}>{name}</Text>
@@ -143,6 +148,11 @@ const DisplayProjectTasks = ({ color, projectId }) => {
       </Animated.View>
     </View>
   );
+};
+
+DisplayProjectTasks.propTypes = {
+  color: PropTypes.string.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default DisplayProjectTasks;
