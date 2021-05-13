@@ -15,6 +15,7 @@ import MessagesView from './MessagesView';
 import MessageItem from './MessageItem';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getProjectMessages, getFirstLetter } from '../utils/helpers';
+import { updateDocument, addMessage } from '../utils/firebase';
 
 const styles = StyleSheet.create({
   container: {
@@ -150,6 +151,9 @@ const Chat = ({ route, navigation }) => {
       date: Date.now(),
       isMessage: true,
     });
+    updateDocument('projects', key, {
+      lastUpdated: Date.now(),
+    });
     setText('');
     Keyboard.dismiss();
   };
@@ -163,7 +167,6 @@ const Chat = ({ route, navigation }) => {
     borderRadius: 48,
     marginRight: '4%',
   };
-
 
   return (
     <View style={styles.container}>

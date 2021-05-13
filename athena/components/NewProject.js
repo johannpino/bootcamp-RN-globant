@@ -81,6 +81,7 @@ const NewProject = ({ navigation }) => {
       owners: [user.email],
       tasksRemaining: 0,
       date: Date.now(),
+      lastUpdated: Date.now(),
     });
     setError(false);
     navigation.navigate('Projects');
