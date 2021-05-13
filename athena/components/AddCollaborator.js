@@ -80,7 +80,7 @@ const NewTask = ({ navigation, route }) => {
         photoURL: user.photoURL,
         projectId: key,
         text: `${user.displayName} agregó a ${collabEmail}`,
-        date: date.now(),
+        date: Date.now(),
         isMessage: false,
       });
     }

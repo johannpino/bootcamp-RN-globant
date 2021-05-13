@@ -79,10 +79,12 @@ const Item = ({ item }) => {
     ],
   }));
 
+  if (!messages) return null;
+
   if (item.owners.length < 2) return null;
 
   return (
-    <Animated.View style={customSpringStyles}>
+    <View>
       <Pressable
         onPress={() => {
           setNavbarHidden(true);
@@ -96,14 +98,16 @@ const Item = ({ item }) => {
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>
-            {getProjectMessages(messages, key)}
+            {getProjectMessages(messages, key)[0]
+              ? getProjectMessages(messages, key)[0].text
+              : null}
           </Text>
         </View>
       </Pressable>
       <View style={styles.center}>
         <View style={styles.separator} />
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
