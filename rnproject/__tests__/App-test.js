@@ -1,14 +1,44 @@
-/**
- * @format
- */
+import { removeAccents, faseActual } from '../App/util/helper'
 
-import 'react-native';
-import React from 'react';
-import App from '../App';
+const testExample = {
+  data: [
+    { "TestExample": 1 },
+    { "TestExample": 1 },
+    { "TestExample": 1 },
+    ["comuna_residencia", "Santiago"],
+    ["1", "4"],
+    { "TestExample": 1 },
+  ]
+}
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  renderer.create(<App />);
+describe("helper", () => {
+  test("Removing accents", () => {
+    const word = "Hélló";
+    const actual = removeAccents(word);
+    const expected = "Hello";
+    expect(actual).toEqual(expected);
+  });
+  test("Removing accents fail", () => {
+    const word = "Hélló";
+    const actual = removeAccents(word);
+    const expected = "Hélló";
+    expect(actual).toEqual(expect.not.stringMatching(expected));
+  });
+  test("Word without accents", () => {
+    const word = "Test";
+    const actual = removeAccents(word);
+    const expected = "Test";
+    expect(actual).toEqual(expected);
+  });
+  test("Comuna Test", () => {
+    const faseNow = faseActual('Santiago', testExample);
+    const expected = "4";
+    expect(faseNow).toEqual(expected);
+  });
+  test("Comuna Test undefined", () => {
+    const faseNow = faseActual('Pica', testExample);
+    const expected = undefined;
+    expect(faseNow).toEqual(expected);
+  });
 });
+
