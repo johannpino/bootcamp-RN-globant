@@ -14,6 +14,7 @@ import {
 } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import NavbarContext from '../context/navbar/navbarContext';
 
 const styles = StyleSheet.create({
   item: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#1B1B1B',
+    color: 'white',
   },
   secondary: {
     fontSize: 14,
@@ -40,14 +41,11 @@ const styles = StyleSheet.create({
 const Item = ({ isProject, item }) => {
   const { tasks } = useContext(FireBaseContext);
   const { name, color } = item;
+
+  const { setNavbarHidden } = useContext(NavbarContext);
+
   let secondary;
-  if (isProject) {
-    secondary = formatDescription(
-      getProjectTasks(tasks, item.key, false).length
-    );
-  } else {
-    secondary = item.projectName;
-  }
+
   const circle = {
     height: 44,
     width: 44,
@@ -57,13 +55,6 @@ const Item = ({ isProject, item }) => {
     borderRadius: 48,
   };
 
-  const notCircle = {
-    height: 44,
-    width: 44,
-    backgroundColor: color,
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
   const offset = useSharedValue(1);
 
   useEffect(() => {
@@ -88,21 +79,17 @@ const Item = ({ isProject, item }) => {
     <Animated.View style={customSpringStyles}>
       <Pressable
         onPress={() => {
-          RootNavigation.navigate('ProjectScreen', {
-            ...item,
-            isProject,
-          });
+          setNavbarHidden(true);
+          RootNavigation.navigate('Chat', { item });
         }}
         style={styles.item}
       >
-        <View style={isProject ? notCircle : circle}>
-          <Text style={styles.initial}>
-            {isProject ? getFirstLetter(name) : getFirstLetter(secondary)}
-          </Text>
+        <View style={circle}>
+          <Text style={styles.initial}>{getFirstLetter(name)}</Text>
         </View>
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.secondary}>{secondary}</Text>
+          <Text style={styles.secondary}>ultimo mensaje</Text>
         </View>
       </Pressable>
     </Animated.View>

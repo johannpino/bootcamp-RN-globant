@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
@@ -8,12 +8,17 @@ import ProjectsStack from './ProjectsStack';
 import ChatStack from './ChatStack';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import Auth from './Auth';
+import NavbarContext from '../context/navbar/navbarContext';
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   const firebaseContext = useContext(FireBaseContext);
   const { user } = firebaseContext;
+
+  const navbarContext = useContext(NavbarContext);
+  const { navbarHidden } = navbarContext;
+
   if (!user) return <Auth />;
 
   return (
@@ -64,7 +69,11 @@ const MyTabs = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Projects" component={ProjectsStack} />
-      <Tab.Screen name="Chats" component={ChatStack} />
+      <Tab.Screen
+        name="Chats"
+        component={ChatStack}
+        options={{ tabBarVisible: !navbarHidden }}
+      />
       <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
