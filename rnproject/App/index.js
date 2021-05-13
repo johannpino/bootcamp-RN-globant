@@ -1,6 +1,6 @@
 import React from 'react';
 import Routes from './config/Routes';
-import {AuthProvider} from './config/AuthProvider';
+import { AuthProvider } from './config/AuthProvider';
 
 const Providers = () => {
   return (
