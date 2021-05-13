@@ -83,6 +83,7 @@ const Item = ({ item }) => {
 
   if (item.owners.length < 2) return null;
 
+  const lastMessage = getProjectMessages(messages, key).slice(-1).pop();
   return (
     <View>
       <Pressable
@@ -98,9 +99,7 @@ const Item = ({ item }) => {
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.secondary}>
-            {getProjectMessages(messages, key)[0]
-              ? getProjectMessages(messages, key)[0].text
-              : null}
+            {lastMessage ? `${lastMessage.name}: ${lastMessage.text}` : null}
           </Text>
         </View>
       </Pressable>

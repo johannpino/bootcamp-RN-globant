@@ -74,16 +74,14 @@ const NewTask = ({ navigation, route }) => {
       tasksRemaining: tasksRemaining + 1,
       owners: [...owners, collabEmail.toLocaleLowerCase()],
     });
-    if (owners.length === 1) {
-      addMessage({
-        name: user.displayName,
-        photoURL: user.photoURL,
-        projectId: key,
-        text: `${user.displayName} agregó a ${collabEmail}`,
-        date: Date.now(),
-        isMessage: false,
-      });
-    }
+    addMessage({
+      name: user.displayName,
+      photoURL: user.photoURL,
+      projectId: key,
+      text: `agregó a ${collabEmail}`,
+      date: Date.now(),
+      isMessage: false,
+    });
     setError(false);
     navigation.navigate('ProjectScreen');
   };
