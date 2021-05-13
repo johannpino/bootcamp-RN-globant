@@ -1,7 +1,9 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable comma-dangle */
+/* eslint-disable react/require-default-props */
 import React from 'react';
-import {
-  View, Text, StyleSheet, Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import PropTypes from 'prop-types';
 import { getFirstLetter, formatTime } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -69,16 +71,14 @@ const styles = StyleSheet.create({
   },
   notificationDate: {
     alignItems: 'center',
-},
+  },
   notificationDateText: {
     fontSize: 16,
     color: '#555555',
   },
 });
 
-const MessageItem = ({
-  isMessage, text, author, date, image,
-}) => {
+const MessageItem = ({ isMessage, text, author, date, image }) => {
   const dateObj = new Date(date);
 
   if (!isMessage) {
@@ -86,18 +86,12 @@ const MessageItem = ({
       <View>
         <View style={styles.notificationDate}>
           <Text style={styles.notificationDateText}>
-            {`${dateObj.getHours()}:${formatTime(
-              dateObj.getMinutes(),
-            )}`}
+            {`${dateObj.getHours()}:${formatTime(dateObj.getMinutes())}`}
           </Text>
         </View>
         <View style={styles.notificationItem}>
           <View style={styles.notificationTextView}>
-            <Text style={styles.notificationText}>
-              {author}
-              {' '}
-              {text}
-            </Text>
+            <Text style={styles.notificationText}>{`${author} ${text}`}</Text>
           </View>
         </View>
       </View>
@@ -117,7 +111,7 @@ const MessageItem = ({
         <View style={styles.messageTextView}>
           <Text style={styles.messageAuthor}>
             {`${author} • ${dateObj.getHours()}:${formatTime(
-              dateObj.getMinutes(),
+              dateObj.getMinutes()
             )}`}
           </Text>
           <View style={styles.subMessageTextView}>
@@ -127,6 +121,14 @@ const MessageItem = ({
       </View>
     </View>
   );
+};
+
+MessageItem.propTypes = {
+  isMessage: PropTypes.bool,
+  text: PropTypes.string,
+  author: PropTypes.string,
+  date: PropTypes.number,
+  image: PropTypes.string,
 };
 
 export default MessageItem;

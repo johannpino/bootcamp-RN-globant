@@ -1,5 +1,12 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/no-this-in-sfc */
+/* eslint-disable no-return-assign */
+/* eslint-disable react/prop-types */
+/* eslint-disable implicit-arrow-linebreak */
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import MessageItem from './MessageItem';
 
 const styles = StyleSheet.create({
@@ -12,8 +19,8 @@ const styles = StyleSheet.create({
 const scrollToBottom = () =>
   this.scrollView.scrollToEnd({ animated: false, index: -1 });
 
-const scrollToBottomAnimated = () =>
-  this.scrollView.scrollToEnd({ animated: true, index: -1 }, 200);
+// const scrollToBottomAnimated = () =>
+//   this.scrollView.scrollToEnd({ animated: true, index: -1 }, 200);
 
 const MessagesView = ({ filteredMessages }) => (
   <ScrollView
@@ -38,5 +45,9 @@ const MessagesView = ({ filteredMessages }) => (
     })}
   </ScrollView>
 );
+
+MessageItem.propTypes = {
+  filteredMessages: PropTypes.instanceOf(Array),
+};
 
 export default MessagesView;

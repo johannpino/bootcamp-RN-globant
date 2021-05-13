@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useContext, useState } from 'react';
 import {
@@ -8,6 +9,7 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { updateDocument } from '../utils/firebase';
@@ -122,6 +124,11 @@ const NewTask = ({ navigation, route }) => {
       </View>
     </ScrollView>
   );
+};
+
+NewTask.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+  route: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default NewTask;

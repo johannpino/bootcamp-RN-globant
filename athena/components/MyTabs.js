@@ -1,6 +1,9 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-param-reassign */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
 import ProfileStack from './ProfileStack';
@@ -77,6 +80,10 @@ const MyTabs = () => {
       <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
+};
+
+MyTabs.propTypes = {
+  focused: PropTypes.bool,
 };
 
 export default MyTabs;

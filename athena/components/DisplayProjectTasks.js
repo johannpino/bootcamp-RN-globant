@@ -151,8 +151,8 @@ const DisplayProjectTasks = ({ color, projectId }) => {
 };
 
 DisplayProjectTasks.propTypes = {
-  color: PropTypes.instanceOf(Object).isRequired,
-  projectId: PropTypes.instanceOf(String).isRequired,
+  color: PropTypes.string.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default DisplayProjectTasks;

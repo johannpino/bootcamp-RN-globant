@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';

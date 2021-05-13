@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useContext, useState } from 'react';
@@ -11,6 +12,7 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
 import {
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 24,
     marginLeft: 90,
+    color: '#969696',
   },
   iconSearch: {
     marginVertical: 8,
@@ -69,9 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  icon: {
-    color: '#969696',
   },
   warning: {
     marginTop: '30%',
@@ -174,6 +174,10 @@ const Projects = ({ navigation }) => {
       )}
     </ScrollView>
   );
+};
+
+Projects.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Projects;

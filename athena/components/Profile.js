@@ -1,5 +1,7 @@
+/* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import ProfilePicture from './ProfilePicture';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import AuthContext from '../context/auth/authContext';
@@ -116,6 +118,10 @@ const Profile = ({ navigation }) => {
       </Pressable>
     </View>
   );
+};
+
+Profile.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Profile;

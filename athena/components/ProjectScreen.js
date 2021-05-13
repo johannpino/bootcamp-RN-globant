@@ -1,9 +1,13 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { rgba } from 'polished';
+import PropTypes from 'prop-types';
 import FireBaseContext from '../context/firebase/firebaseContext';
 import { getCurrentProject, projectHasTasks } from '../utils/helpers';
 import DisplayProjectTasks from './DisplayProjectTasks';
@@ -71,6 +75,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#969696',
+    marginHorizontal: 5,
   },
   warning: {
     marginTop: '30%',
@@ -94,15 +99,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  icon: {
-    marginHorizontal: 5,
-  },
 });
 
 const ProjectScreen = ({ route, navigation }) => {
   const firebaseContext = useContext(FireBaseContext);
   const { isProject } = route.params;
-  const { projects, tasks, user } = firebaseContext;
+  const { projects, tasks } = firebaseContext;
   let key;
   if (isProject) {
     key = route.params.key;
@@ -150,6 +152,11 @@ const ProjectScreen = ({ route, navigation }) => {
       </LinearGradient>
     </ScrollView>
   );
+};
+
+ProjectScreen.propTypes = {
+  route: PropTypes.instanceOf(Object).isRequired,
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ProjectScreen;
