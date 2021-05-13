@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import {
+  View, Text, StyleSheet, Image,
+} from 'react-native';
 import { getFirstLetter, formatTime } from '../utils/helpers';
 
 const styles = StyleSheet.create({
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   notificationItem: {
-    marginVertical: 12,
+    marginTop: 2,
+    marginBottom: 12,
     marginHorizontal: 12,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -64,18 +67,38 @@ const styles = StyleSheet.create({
     borderRadius: 48,
     marginRight: '4%',
   },
+  notificationDate: {
+    alignItems: 'center',
+},
+  notificationDateText: {
+    fontSize: 16,
+    color: '#555555',
+  },
 });
 
-const MessageItem = ({ isMessage, text, author, date, image }) => {
+const MessageItem = ({
+  isMessage, text, author, date, image,
+}) => {
   const dateObj = new Date(date);
 
   if (!isMessage) {
     return (
-      <View style={styles.notificationItem}>
-        <View style={styles.notificationTextView}>
-          <Text style={styles.notificationText}>
-            {author} {text}
+      <View>
+        <View style={styles.notificationDate}>
+          <Text style={styles.notificationDateText}>
+            {`${dateObj.getHours()}:${formatTime(
+              dateObj.getMinutes(),
+            )}`}
           </Text>
+        </View>
+        <View style={styles.notificationItem}>
+          <View style={styles.notificationTextView}>
+            <Text style={styles.notificationText}>
+              {author}
+              {' '}
+              {text}
+            </Text>
+          </View>
         </View>
       </View>
     );
@@ -94,7 +117,7 @@ const MessageItem = ({ isMessage, text, author, date, image }) => {
         <View style={styles.messageTextView}>
           <Text style={styles.messageAuthor}>
             {`${author} • ${dateObj.getHours()}:${formatTime(
-              dateObj.getMinutes()
+              dateObj.getMinutes(),
             )}`}
           </Text>
           <View style={styles.subMessageTextView}>
