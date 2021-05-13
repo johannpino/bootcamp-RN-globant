@@ -6,9 +6,14 @@ import {
   ScrollView,
   Pressable,
   TextInput,
+  BackHandler,
+  Keyboard
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavbarContext from '../context/navbar/navbarContext';
+import MessageItem from './MessageItem';
+import FireBaseContext from '../context/firebase/firebaseContext';
+import { getProjectMessages, getFirstLetter } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,15 +39,6 @@ const styles = StyleSheet.create({
     width: '75%',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  circle: {
-    height: 44,
-    width: 44,
-    backgroundColor: '#CF6AFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 48,
-    marginRight: '4%',
   },
   circleText: {
     fontSize: 24,
@@ -94,12 +90,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   messageItem: {
-    marginVertical: 12,
-    marginHorizontal: 12,
+    padding: 8,
+    marginVertical: 6,
+    marginHorizontal: 6,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  messageTextView: {
   },
   messageAuthor: {
     color: '#676767',
@@ -110,16 +105,63 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
   },
+  messageTextView: {
+    maxWidth: '80%',
+  },
   subMessageTextView: {
     backgroundColor: '#07001C',
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
     borderRadius: 18,
-    maxWidth: '85%',
+  },
+  notificationItem: {
+    marginVertical: 12,
+    marginHorizontal: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  notificationTextView: {
+    backgroundColor: '#101010',
+    paddingVertical: 4,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+  },
+  notificationText: {
+    color: '#555555',
+    fontSize: 18,
   },
 });
 
-const Chat = ({ navigation }) => {
+const Chat = ({ route, navigation }) => {
   const { navbarHidden, setNavbarHidden } = useContext(NavbarContext);
+  const [text, setText] = useState('');
+
+  const { messages, addMessage, user } = useContext(FireBaseContext);
+  const { key, name, color } = route.params.item;
+  const filteredMessages = getProjectMessages(messages, key);
+
+  const handlePress = () => {
+    addMessage({
+      name: user.displayName,
+      photoURL: user.photoURL,
+      projectId: key,
+      text: text,
+      date: Date.now(),
+      isMessage: true,
+    });
+    setText('');
+    Keyboard.dismiss();
+  }
+
+  const circle = {
+    height: 44,
+    width: 44,
+    backgroundColor: color,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 48,
+    marginRight: '4%',
+  };
 
   return (
     <View style={styles.container}>
@@ -133,39 +175,34 @@ const Chat = ({ navigation }) => {
           <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
         </Pressable>
         <View style={styles.projectView}>
-          <View style={styles.circle}>
-            <Text style={styles.circleText}>C</Text>
+          <View style={circle}>
+            <Text style={styles.circleText}>{getFirstLetter(name)}</Text>
           </View>
-          <Text style={styles.projectTitle}>Chat App</Text>
+          <Text style={styles.projectTitle}>{name}</Text>
         </View>
       </View>
       <View style={styles.chatContainer}>
         <ScrollView style={styles.messagesView}>
 
-          <View style={styles.messageItem}>
-            <View style={styles.circle}>
-              <Text style={styles.itemCircleText}>P</Text>
-            </View>
-            <View style={styles.messageTextView}>
-              <Text style={styles.messageAuthor}>Pedro / 4:20 AM</Text>
-              <View style={styles.subMessageTextView}>
-                <Text style={styles.messageText}>Buenos dias chicos como les va</Text>
-              </View>
-            </View>
-          </View>
-
-
+          {filteredMessages.map((message) => {
+            const { isMessage, text } = message;
+            return (
+              <MessageItem isMessage={isMessage} author={user.displayName} text={text} />
+            );
+          })}
         </ScrollView>
         <View style={styles.sendMsgView}>
           <View style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder="Escribe tu mensaje..."
-              placeholderTextColor={'#484848'}
+              placeholderTextColor="#484848"
+              onChangeText={(text) => setText(text)}
+              value={text}
             />
           </View>
-          <Pressable style={styles.btnView}>
-            <Icon name="send" size={34} color="#7C4FFF"></Icon>
+          <Pressable style={styles.btnView} onPress={() => handlePress()}>
+            <Icon name="send" size={34} color="#7C4FFF" />
           </Pressable>
         </View>
       </View>
