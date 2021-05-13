@@ -72,7 +72,7 @@ const NewTask = ({ navigation, route }) => {
     }
     updateDocument('projects', key, {
       tasksRemaining: tasksRemaining + 1,
-      owners: [...owners, collabEmail.toLocaleLowerCase()],
+      owners: [...owners, collabEmail.trim().toLocaleLowerCase()],
       lastUpdated: Date.now(),
     });
     addMessage({
