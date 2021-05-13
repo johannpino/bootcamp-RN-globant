@@ -142,14 +142,16 @@ const Chat = ({ route, navigation }) => {
   const filteredMessages = getProjectMessages(messages, key);
 
   const handlePress = () => {
-    addMessage({
-      name: user.displayName,
-      photoURL: user.photoURL,
-      projectId: key,
-      text,
-      date: Date.now(),
-      isMessage: true,
-    });
+    if (!(text.trim() === '')) {
+      addMessage({
+        name: user.displayName,
+        photoURL: user.photoURL,
+        projectId: key,
+        text,
+        date: Date.now(),
+        isMessage: true,
+      });
+    }
     updateDocument('projects', key, {
       lastUpdated: Date.now(),
     });

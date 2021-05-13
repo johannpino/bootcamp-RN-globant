@@ -13,6 +13,11 @@ export const getFirstLetter = (string) => string.charAt(0);
 export const getUserProjects = (projects, owner) =>
   projects.filter((project) => project.owners.includes(owner));
 
+export const getUserGroupProjects = (projects, owner) =>
+  projects.filter(
+    (project) => project.owners.includes(owner) && project.owners.length > 1
+  );
+
 export const getCurrentProject = (projects, id) =>
   projects.filter((project) => project.key === id);
 

@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 30,
     marginBottom: 24,
-    marginLeft: 90,
     color: '#969696',
   },
   iconSearch: {
