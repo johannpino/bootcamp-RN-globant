@@ -67,3 +67,6 @@ export const userHasProjects = (projects, owner) =>
 
 export const userHasTasks = (tasks, owner) =>
   getUserTasks(tasks, owner).length > 0;
+
+export const getProjectMessages = (messages, key) =>
+  messages.filter((message) => message.projectId === key);

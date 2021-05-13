@@ -10,6 +10,8 @@ import Animated, {
 import { getFirstLetter } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
 import NavbarContext from '../context/navbar/navbarContext';
+import FireBaseContext from '../context/firebase/firebaseContext';
+import { getProjectMessages } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   item: {
@@ -43,9 +45,10 @@ const styles = StyleSheet.create({
 });
 
 const Item = ({ item }) => {
-  const { name, color } = item;
+  const { name, color, key } = item;
 
   const { setNavbarHidden } = useContext(NavbarContext);
+  const { messages } = useContext(FireBaseContext);
 
   const circle = {
     height: 44,
@@ -76,6 +79,8 @@ const Item = ({ item }) => {
     ],
   }));
 
+  if (item.owners.length < 2) return null;
+
   return (
     <Animated.View style={customSpringStyles}>
       <Pressable
@@ -90,7 +95,9 @@ const Item = ({ item }) => {
         </View>
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.secondary}>Pedro: Hola • 2 h</Text>
+          <Text style={styles.secondary}>
+            {getProjectMessages(messages, key)}
+          </Text>
         </View>
       </Pressable>
       <View style={styles.center}>
