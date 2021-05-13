@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFF',
   },
+  email: {
+    fontSize: 18,
+    color: '#555555',
+  },
   editBtn: {
     borderWidth: 2,
     borderColor: '#FFF',
@@ -80,6 +84,7 @@ const Profile = ({ navigation }) => {
     <View style={styles.container}>
       <ProfilePicture />
       <Text style={styles.name}>{user.displayName}</Text>
+      <Text style={styles.email}>{user.email}</Text>
       <Pressable
         style={styles.editBtn}
         onPress={() => navigation.navigate('EditProfile')}
