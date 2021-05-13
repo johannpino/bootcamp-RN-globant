@@ -24,19 +24,28 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     paddingBottom: 50,
   },
-  p: {
+  subTitle: {
     fontWeight: 'bold',
     fontSize: 20,
     alignContent: 'center',
     padding: 30,
     paddingVertical: 20,
+    paddingBottom: 15,
   },
   background: {
     width: screen.width * 1,
     height: screen.height * 1,
     position: 'relative',
     alignItems: 'center',
-    paddingTop: 200,
+    paddingTop: 100,
+  },
+  p: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    alignContent: 'center',
+    padding: 30,
+    paddingVertical: 20,
+    paddingBottom: 140,
   },
 });
 
@@ -53,9 +62,10 @@ export default () => {
         // eslint-disable-next-line react/jsx-closing-bracket-location
       >
         <Text style={styles.title}>¡Bienvenido!</Text>
-        <Text style={styles.p}>
-          ¡Tú nueva experienca para realizar tramites online acaba de comenzar!
+        <Text style={styles.subTitle}>
+          ¡Tú nueva experiencia para realizar tramites online acaba de comenzar!
         </Text>
+        <Text style={styles.p}>Desliza la barra lateral </Text>
         <View>
           <Text>BIENVENIDO</Text>
           <FormButton buttonTitle="Logout" onPress={() => logout()} />

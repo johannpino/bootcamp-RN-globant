@@ -11,7 +11,7 @@ import FAQ from '../screens/FAQ';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerStackScreen = () => (
+const DrawerNavigation = () => (
   <Drawer.Navigator
     drawerType="slide"
     edgeWidth={100}
@@ -27,7 +27,7 @@ const DrawerStackScreen = () => (
     }}
   >
     <Drawer.Screen
-      name="Home"
+      name="Inicio"
       component={Home}
       options={{
         drawerIcon: ({focused}) => (
@@ -37,10 +37,10 @@ const DrawerStackScreen = () => (
       }}
     />
     <Drawer.Screen
-      name="Busqueda"
+      name="Buscador"
       component={Busqueda}
       options={{
-        title: 'Search',
+        title: 'Buscador',
         drawerIcon: ({focused}) => (
           <Icon name="search" size={focused ? 25 : 20} />
         ),
@@ -50,7 +50,7 @@ const DrawerStackScreen = () => (
       name="Viajes"
       component={Viajes}
       options={{
-        title: 'Travel Companion',
+        title: '¿Quieres Viajar?',
         drawerIcon: ({focused}) => (
           <Icon name="route" size={focused ? 25 : 20} />
         ),
@@ -61,7 +61,7 @@ const DrawerStackScreen = () => (
       name="C19"
       component={C19}
       options={{
-        title: 'Pasaporte Sanitario',
+        title: 'C19: Pasaporte Sanitario',
         drawerIcon: ({focused}) => (
           <Icon name="passport" size={focused ? 25 : 20} />
         ),
@@ -71,7 +71,7 @@ const DrawerStackScreen = () => (
       name="Comisaria"
       component={Comisaria}
       options={{
-        title: 'Permisos',
+        title: 'Comisaria Virtual',
         drawerIcon: ({focused}) => (
           <Icon name="id-card" size={focused ? 25 : 20} />
         ),
@@ -90,4 +90,4 @@ const DrawerStackScreen = () => (
   </Drawer.Navigator>
 );
 
-export default () => <DrawerStackScreen />;
+export default () => <DrawerNavigation />;

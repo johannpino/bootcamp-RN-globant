@@ -74,7 +74,7 @@ const LoginScreen = ({navigation}) => {
         onChangeText={userPassword => setPassword(userPassword)}
         placeholderText="Password"
         iconType="lock"
-        secureTextEntry={true}
+        secureTextEntry
       />
 
       <FormButton
@@ -84,7 +84,8 @@ const LoginScreen = ({navigation}) => {
 
       <TouchableOpacity
         style={styles.forgotButton}
-        onPress={() => navigation.navigate('Signup')}>
+        onPress={() => navigation.navigate('Signup')}
+      >
         <Text style={styles.navButtonText}>
           Aún no tienes cuenta? Crea una aqui
         </Text>

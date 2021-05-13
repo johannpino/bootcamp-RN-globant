@@ -1,45 +1,48 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  TextInput,
-  View,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {Pressable, TextInput, View, StyleSheet, Text} from 'react-native';
 import colors from '../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
+    backgroundColor: 'gray',
     marginHorizontal: 10,
     marginVertical: 20,
-    borderRadius: 10,
+    borderRadius: 5,
     flexDirection: 'row',
   },
   button: {
     padding: 15,
-    borderRightColor: colors.border,
+    borderRightColor: colors.black,
     borderRightWidth: 1,
   },
   buttonText: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: colors.blue,
+    color: colors.black,
   },
   input: {
     flex: 1,
     padding: 12,
-    color: colors.lightcolor,
+    color: colors.black,
   },
 });
 
-export const UserInput = ({text, placeholder, onButtonPress}) => {
+export const UserInput = ({text, placeholder, onButtonPress, onChangeText}) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onButtonPress} style={styles.button}>
+      <Pressable
+        onPress={onButtonPress}
+        onChangeText={onChangeText}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>{text}</Text>
-      </TouchableOpacity>
-      <TextInput style={styles.input} placeholder={placeholder} />
+      </Pressable>
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+        onPress={onButtonPress}
+      />
     </View>
   );
 };

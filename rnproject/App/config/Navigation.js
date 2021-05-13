@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Home from '../screens/Home';
@@ -12,22 +11,8 @@ import FAQ from '../screens/FAQ';
 
 const Drawer = createDrawerNavigator();
 
-const MainStackScreen = () => (
-  <Drawer.Navigator
-    drawerType="slide"
-    edgeWidth={100}
-    // eslint-disable-next-line react/jsx-boolean-value
-    hideStatusBar={false}
-    overlayColor="#00000090"
-    drawerStyle={{
-      backgroundColor: '#e6e6e6',
-      width: 235,
-    }}
-    screenOptions={{
-      headerShown: true,
-      headerTitleAlign: 'center',
-    }}
-  >
+const Navigation = () => (
+  <Drawer.Navigator>
     <Drawer.Screen
       name="Home"
       component={Home}
@@ -94,7 +79,7 @@ const MainStackScreen = () => (
 
 export default () => (
   <NavigationContainer>
-    <MainStackScreen />
+    <Navigation />
   </NavigationContainer>
 );
 
