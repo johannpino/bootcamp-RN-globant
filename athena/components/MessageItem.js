@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  View, Text, StyleSheet, Image,
-} from 'react-native';
-import { getFirstLetter } from '../utils/helpers';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { getFirstLetter, formatTime } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   messageItem: {
@@ -68,20 +66,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const MessageItem = ({
-  isMessage, text, author, date, image,
-}) => {
-
-    const dateObj = new Date(date);
+const MessageItem = ({ isMessage, text, author, date, image }) => {
+  const dateObj = new Date(date);
 
   if (!isMessage) {
     return (
       <View style={styles.notificationItem}>
         <View style={styles.notificationTextView}>
           <Text style={styles.notificationText}>
-            {author}
-            {' '}
-            {text}
+            {author} {text}
           </Text>
         </View>
       </View>
@@ -99,7 +92,11 @@ const MessageItem = ({
         )}
 
         <View style={styles.messageTextView}>
-          <Text style={styles.messageAuthor}>{`${author} • ${dateObj.getHours()}:${dateObj.getMinutes()}`}</Text>
+          <Text style={styles.messageAuthor}>
+            {`${author} • ${dateObj.getHours()}:${formatTime(
+              dateObj.getMinutes()
+            )}`}
+          </Text>
           <View style={styles.subMessageTextView}>
             <Text style={styles.messageText}>{text}</Text>
           </View>

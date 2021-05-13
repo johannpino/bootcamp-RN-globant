@@ -1,5 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 
+export const formatTime = (time) => (time < 10 ? `0${time}` : time);
+
 export const capitalizeFirstLetter = (string) =>
   `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
