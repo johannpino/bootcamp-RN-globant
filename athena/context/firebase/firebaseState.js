@@ -9,6 +9,7 @@ import {
   SET_TASKS,
   SET_INITIALIZING,
   SET_USER,
+  SET_MESSAGES,
 } from '../../types';
 import FireBaseReducer from './firebaseReducer';
 import FireBaseContext from './firebaseContext';
@@ -18,6 +19,7 @@ const FirebaseState = (props) => {
     projects: [],
     user: {},
     tasks: [],
+    messages: [],
     initializing: true,
   };
   const [state, dispatch] = useReducer(FireBaseReducer, initialState);
@@ -38,9 +40,13 @@ const FirebaseState = (props) => {
     addDocument('tasks', task);
   };
 
-  const setTasks = async (payload) => {
+  const addMessage = (message) => {
+    addDocument('messages', message);
+  };
+
+  const setTasks = (tasks) => {
     dispatch({
-      payload,
+      payload: tasks,
       type: SET_TASKS,
     });
   };
@@ -49,6 +55,13 @@ const FirebaseState = (props) => {
     dispatch({
       payload: user,
       type: SET_USER,
+    });
+  };
+
+  const setMessages = (messages) => {
+    dispatch({
+      payload: messages,
+      type: SET_MESSAGES,
     });
   };
 
@@ -102,6 +115,27 @@ const FirebaseState = (props) => {
     return () => subscriber();
   }, []);
 
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('messages')
+      .orderBy('date', 'asc')
+      .onSnapshot((querySnapshot) => {
+        const messages = [];
+
+        querySnapshot.forEach((documentSnapshot) => {
+          messages.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setMessages(messages);
+      });
+
+    // Unsubscribe
+    return () => subscriber();
+  }, []);
+
   return (
     <FireBaseContext.Provider
       value={{
@@ -109,10 +143,12 @@ const FirebaseState = (props) => {
         tasks: state.tasks,
         initializing: state.initializing,
         user: state.user,
+        messages: state.messages,
         setUser,
         setInitializing,
         addProject,
         addTask,
+        addMessage,
       }}
     >
       {props.children}

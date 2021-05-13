@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import DisplayChats from '../components/DisplayChats';
+import { Text, StyleSheet, ScrollView } from 'react-native';
+import DisplayChats from './DisplayChats';
 import FireBaseContext from '../context/firebase/firebaseContext';
+import { getUserProjects } from '../utils/helpers';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -17,11 +19,12 @@ const styles = StyleSheet.create({
 });
 
 const Chats = () => {
-  const { projects } = useContext(FireBaseContext);
+  const { projects, user } = useContext(FireBaseContext);
+  const items = getUserProjects(projects, user.email);
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Chats</Text>
-      <DisplayChats items={projects} />
+      <DisplayChats items={items} />
     </ScrollView>
   );
 };

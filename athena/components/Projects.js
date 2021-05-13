@@ -15,7 +15,7 @@ import FireBaseContext from '../context/firebase/firebaseContext';
 import DisplayProjects from './DisplayProjects';
 import {
   filterProjects,
-  getUserProyects,
+  getUserProjects,
   userHasProjects,
   userHasTasks,
 } from '../utils/helpers';
@@ -105,7 +105,7 @@ const Projects = ({ navigation }) => {
       return (
         <DisplayProjects
           title=""
-          items={getUserProyects(projects, user.email)}
+          items={getUserProjects(projects, user.email)}
         />
       );
     }
@@ -115,7 +115,7 @@ const Projects = ({ navigation }) => {
   const handleChange = (text) => {
     setSearch(text);
     setFilteredProjects(
-      filterProjects(getUserProyects(projects, user.email), text)
+      filterProjects(getUserProjects(projects, user.email), text)
     );
   };
 

@@ -5,7 +5,7 @@ import FireBaseContext from '../context/firebase/firebaseContext';
 import AuthContext from '../context/auth/authContext';
 import {
   getCompletedTasks,
-  getUserProyects,
+  getUserProjects,
   getUserTasks,
 } from '../utils/helpers';
 
@@ -89,7 +89,7 @@ const Profile = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.statistics}>
           <Text style={styles.number}>
-            {getUserProyects(projects, user.email).length}
+            {getUserProjects(projects, user.email).length}
           </Text>
           <Text style={styles.text}>{` PROYECTOS${'\n'}ACTIVOS`}</Text>
         </View>

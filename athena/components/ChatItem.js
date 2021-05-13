@@ -7,13 +7,8 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import {
-  formatDescription,
-  getFirstLetter,
-  getProjectTasks,
-} from '../utils/helpers';
+import { getFirstLetter } from '../utils/helpers';
 import * as RootNavigation from '../utils/RootNavigation';
-import FireBaseContext from '../context/firebase/firebaseContext';
 import NavbarContext from '../context/navbar/navbarContext';
 
 const styles = StyleSheet.create({
@@ -34,17 +29,23 @@ const styles = StyleSheet.create({
   },
   secondary: {
     fontSize: 14,
-    color: '#4E4E4E',
+    color: 'white',
+  },
+  center: {
+    alignItems: 'center',
+  },
+  separator: {
+    opacity: 0.1,
+    borderBottomColor: '#C4C4C4',
+    borderBottomWidth: 1,
+    width: '90%',
   },
 });
 
-const Item = ({ isProject, item }) => {
-  const { tasks } = useContext(FireBaseContext);
+const Item = ({ item }) => {
   const { name, color } = item;
 
   const { setNavbarHidden } = useContext(NavbarContext);
-
-  let secondary;
 
   const circle = {
     height: 44,
@@ -89,15 +90,17 @@ const Item = ({ isProject, item }) => {
         </View>
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.secondary}>ultimo mensaje</Text>
+          <Text style={styles.secondary}>Pedro: Hola • 2 h</Text>
         </View>
       </Pressable>
+      <View style={styles.center}>
+        <View style={styles.separator} />
+      </View>
     </Animated.View>
   );
 };
 
 Item.propTypes = {
-  isProject: PropTypes.bool.isRequired,
   item: PropTypes.instanceOf(Object).isRequired,
 };
 

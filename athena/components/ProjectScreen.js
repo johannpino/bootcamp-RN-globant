@@ -90,6 +90,13 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#969696',
   },
+  right: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  icon: {
+    marginHorizontal: 5,
+  },
 });
 
 const ProjectScreen = ({ route, navigation }) => {
@@ -111,13 +118,23 @@ const ProjectScreen = ({ route, navigation }) => {
           <Pressable onPress={() => navigation.navigate('Projects')}>
             <Icon name="arrow-back-outline" size={44} color="#FFFFFF" />
           </Pressable>
-          <Pressable
-            onPress={() =>
-              navigation.navigate('NewTask', { item: route.params })
-            }
-          >
-            <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
-          </Pressable>
+          <View style={styles.right}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('AddCollaborator', { item: route.params })
+              }
+              style={styles.icon}
+            >
+              <Icon name="people-circle-outline" size={44} color="#FFFFFF" />
+            </Pressable>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('NewTask', { item: route.params })
+              }
+            >
+              <Icon name="add-circle-outline" size={44} color="#FFFFFF" />
+            </Pressable>
+          </View>
         </View>
         <Text style={styles.title}>{name}</Text>
         <DisplayProjectTasks color={color} projectId={key} />

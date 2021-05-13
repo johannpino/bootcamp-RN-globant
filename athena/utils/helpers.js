@@ -5,8 +5,8 @@ export const capitalizeFirstLetter = (string) =>
 
 export const getFirstLetter = (string) => string.charAt(0);
 
-export const getUserProyects = (proyects, owner) =>
-  proyects.filter((proyect) => proyect.owners.includes(owner));
+export const getUserProjects = (projects, owner) =>
+  projects.filter((project) => project.owners.includes(owner));
 
 export const getCurrentProject = (projects, id) =>
   projects.filter((project) => project.key === id);
@@ -63,7 +63,7 @@ export const welcomeText = () => {
 };
 
 export const userHasProjects = (projects, owner) =>
-  getUserProyects(projects, owner).length > 0;
+  getUserProjects(projects, owner).length > 0;
 
 export const userHasTasks = (tasks, owner) =>
   getUserTasks(tasks, owner).length > 0;

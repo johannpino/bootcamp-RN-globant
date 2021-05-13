@@ -202,7 +202,7 @@ export const capitalizeFirstLetter = (string) =&gt;
 &nbsp;
 export const getFirstLetter = (string) =&gt; string.charAt(0);
 &nbsp;
-export const getUserProyects = (proyects, owner) =&gt;
+export const getUserProjects = (proyects, owner) =&gt;
   proyects.filter((proyect) =&gt; proyect.owners.includes(owner));
 &nbsp;
 export const getCurrentProject = (projects, id) =&gt;
@@ -260,7 +260,7 @@ export const welcomeText = <span class="fstat-no" title="function not covered" >
 };
 &nbsp;
 export const userHasProjects = (projects, owner) =&gt;
-  getUserProyects(projects, owner).length &gt; 0;
+  getUserProjects(projects, owner).length &gt; 0;
 &nbsp;
 export const userHasTasks = (tasks, owner) =&gt;
   getUserTasks(tasks, owner).length &gt; 0;

@@ -2,7 +2,7 @@ TN:
 SF:utils\helpers.js
 FN:3,capitalizeFirstLetter
 FN:6,getFirstLetter
-FN:8,getUserProyects
+FN:8,getUserProjects
 FN:9,(anonymous_3)
 FN:11,getCurrentProject
 FN:12,(anonymous_5)
@@ -24,7 +24,7 @@ FNF:20
 FNH:19
 FNDA:1,capitalizeFirstLetter
 FNDA:1,getFirstLetter
-FNDA:3,getUserProyects
+FNDA:3,getUserProjects
 FNDA:9,(anonymous_3)
 FNDA:1,getCurrentProject
 FNDA:3,(anonymous_5)

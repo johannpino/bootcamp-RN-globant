@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import ChatItem from './ChatItem';
 
@@ -32,7 +32,6 @@ const DisplayChats = ({ items }) => {
 };
 
 DisplayChats.propTypes = {
-  title: PropTypes.string.isRequired,
   items: PropTypes.instanceOf(Array).isRequired,
 };
 

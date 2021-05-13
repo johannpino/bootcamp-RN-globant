@@ -3,6 +3,7 @@ import {
   SET_TASKS,
   SET_INITIALIZING,
   SET_USER,
+  SET_MESSAGES,
 } from '../../types';
 
 export default (state, action) => {
@@ -26,6 +27,11 @@ export default (state, action) => {
       return {
         ...state,
         initializing: action.payload,
+      };
+    case SET_MESSAGES:
+      return {
+        ...state,
+        messages: action.payload,
       };
     default:
       return state;

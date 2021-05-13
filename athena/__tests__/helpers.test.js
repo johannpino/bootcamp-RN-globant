@@ -2,7 +2,7 @@
 const {
   capitalizeFirstLetter,
   getFirstLetter,
-  getUserProyects,
+  getUserProjects,
   getCurrentProject,
   getUserTasks,
   projectHasTasks,
@@ -31,7 +31,7 @@ test('should return only the users projects', () => {
     { key: '3', owners: ['sophie', 'john'] },
   ];
   const owner = 'john';
-  const filteredProjects = getUserProyects(projects, owner);
+  const filteredProjects = getUserProjects(projects, owner);
   expect(filteredProjects).toStrictEqual([
     { key: '1', owners: ['john'] },
     { key: '3', owners: ['sophie', 'john'] },

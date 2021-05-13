@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
-  getUserProyects,
+  getUserProjects,
   getUserTasks,
   welcomeText,
   userHasProjects,
@@ -79,7 +79,7 @@ const Home = () => {
         ) : null}
         <DisplayProjects
           title="Tus proyectos"
-          items={getUserProyects(projects, user.email)}
+          items={getUserProjects(projects, user.email)}
         />
       </ScrollView>
     );
