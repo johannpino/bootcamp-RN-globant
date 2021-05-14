@@ -30,6 +30,6 @@ const ColorContainer = ({ colors, selectedHandler, selectedColor }) => (
 ColorContainer.propTypes = {
   colors: PropTypes.instanceOf(Object).isRequired,
   selectedHandler: PropTypes.instanceOf(Function).isRequired,
-  selectedColor: PropTypes.instanceOf(String).isRequired,
+  selectedColor: PropTypes.string.isRequired,
 };
 export default ColorContainer;
