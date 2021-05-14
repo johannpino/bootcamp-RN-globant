@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import Papa from 'papaparse';
 import colors from '../constants/colors';
-import { removeAccents, handlePress, faseActual } from '../util/helper';
+import {removeAccents, handlePress, faseActual} from '../util/helper';
 
 const screen = Dimensions.get('window');
 
@@ -77,13 +77,6 @@ const Filter = () => {
   const [data, setData] = useState('');
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState([]);
-<<<<<<< HEAD
-
-  const removeAccents = str => {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  };
-=======
->>>>>>> 4365842e0636bf2298c985d67f1a6991933133bc
 
   const handleChange = e => {
     setQuery(e);
@@ -115,7 +108,6 @@ const Filter = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-<<<<<<< HEAD
   const faseActual = item => {
     const index = parseInt(data.data[3].indexOf(item), 10);
     return data.data[data.data.length - 2][index];
@@ -176,19 +168,6 @@ const Filter = () => {
           </View>
           <View style={{height: screen.height}} />
         </View>
-=======
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.search}>Porfavor Ingresa la Comuna que buscas</Text>
-      <TextInput onChangeText={handleChange} style={styles.input} />
-      <ScrollView style={styles.list}>
-        {filter.map((item, idx) => (
-          <Pressable onPress={() => handlePress(faseActual(item, data))} key={idx}>
-            <Text style={styles.text}>{item}</Text>
-          </Pressable>
-        ))}
->>>>>>> 4365842e0636bf2298c985d67f1a6991933133bc
       </ScrollView>
     </SafeAreaView>
   );

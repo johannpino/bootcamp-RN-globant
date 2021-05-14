@@ -17,11 +17,13 @@ import {
 
 import Papa from 'papaparse';
 import colors from '../constants/colors';
-<<<<<<< HEAD
+import {
+  removeAccents,
+  faseActual,
+  canTravelMessage,
+  canNotTravelMessage,
+} from '../util/helper';
 import {UserInput} from '../components/UserInput';
-=======
-import { removeAccents, faseActual, canTravelMessage, canNotTravelMessage } from '../util/helper';
->>>>>>> 4365842e0636bf2298c985d67f1a6991933133bc
 
 const screen = Dimensions.get('window');
 
@@ -144,24 +146,8 @@ const Travel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryTo]);
 
-<<<<<<< HEAD
-  const faseActualFrom = item => {
-    const index = parseInt(dataFrom.data[3].indexOf(item), 10);
-    return dataFrom.data[dataFrom.data.length - 2][index];
-  };
-
-  const faseActualTo = item => {
-    const index = parseInt(dataTo.data[3].indexOf(item), 10);
-    return dataTo.data[dataTo.data.length - 2][index];
-  };
-
-  const updateFromPhase = item => {
-    setSelected(!selected);
-    let actualFromPhase = faseActualFrom(item);
-=======
   const updateFromPhase = item => {
     let actualFromPhase = faseActual(item, dataFrom);
->>>>>>> 4365842e0636bf2298c985d67f1a6991933133bc
     setFromPhase(actualFromPhase);
   };
 
@@ -182,12 +168,7 @@ const Travel = () => {
     ]);
   };
   const updateToPhase = item => {
-<<<<<<< HEAD
-    setSelectedDOS(!selectedDOS);
-    let actualToPhase = faseActualTo(item);
-=======
     let actualToPhase = faseActual(item, dataTo);
->>>>>>> 4365842e0636bf2298c985d67f1a6991933133bc
     toPhase = actualToPhase;
     if (toPhase <= fromPhase) {
       canTravelMessage();
