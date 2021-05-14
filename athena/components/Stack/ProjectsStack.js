@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Projects from './Projects';
-import NewProject from './NewProject';
-import ProjectScreen from './ProjectScreen';
-import NewTask from './NewTask';
-import AddCollaborator from './AddCollaborator';
+import Projects from '../Project/Projects';
+import NewProject from '../Project/NewProject';
+import ProjectScreen from '../Project/ProjectScreen';
+import NewTask from '../Project/NewTask';
+import AddCollaborator from '../Project/AddCollaborator';
 
 const Stack = createStackNavigator();
 

@@ -12,9 +12,9 @@ import {
   formatDescription,
   getFirstLetter,
   getProjectTasks,
-} from '../utils/helpers';
-import * as RootNavigation from '../utils/RootNavigation';
-import FireBaseContext from '../context/firebase/firebaseContext';
+} from '../../utils/helpers';
+import * as RootNavigation from '../../utils/RootNavigation';
+import FireBaseContext from '../../context/firebase/firebaseContext';
 
 const styles = StyleSheet.create({
   item: {

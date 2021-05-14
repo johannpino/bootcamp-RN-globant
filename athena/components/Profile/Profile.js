@@ -3,13 +3,13 @@ import React, { useContext } from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import ProfilePicture from './ProfilePicture';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import AuthContext from '../context/auth/authContext';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import AuthContext from '../../context/auth/authContext';
 import {
   getCompletedTasks,
   getUserProjects,
   getUserTasks,
-} from '../utils/helpers';
+} from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {

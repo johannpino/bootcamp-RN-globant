@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import ChatItem from './ChatItem';
+import ChatItem from '../Chat/ChatItem';
 
 const styles = StyleSheet.create({
   itemContainer: {

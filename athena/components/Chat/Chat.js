@@ -10,11 +10,11 @@ import {
   Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NavbarContext from '../context/navbar/navbarContext';
+import NavbarContext from '../../context/navbar/navbarContext';
 import MessagesView from './MessagesView';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import { getProjectMessages, getFirstLetter } from '../utils/helpers';
-import { updateDocument } from '../utils/firebase';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import { getProjectMessages, getFirstLetter } from '../../utils/helpers';
+import { updateDocument } from '../../utils/firebase';
 
 const styles = StyleSheet.create({
   container: {

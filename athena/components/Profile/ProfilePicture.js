@@ -1,8 +1,8 @@
 /* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { getFirstLetter } from '../utils/helpers';
-import FireBaseContext from '../context/firebase/firebaseContext';
+import { getFirstLetter } from '../../utils/helpers';
+import FireBaseContext from '../../context/firebase/firebaseContext';
 
 const ProfilePicture = () => {
   const { user } = useContext(FireBaseContext);

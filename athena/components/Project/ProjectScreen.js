@@ -8,9 +8,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { rgba } from 'polished';
 import PropTypes from 'prop-types';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import { getCurrentProject, projectHasTasks } from '../utils/helpers';
-import DisplayProjectTasks from './DisplayProjectTasks';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import { getCurrentProject, projectHasTasks } from '../../utils/helpers';
+import DisplayProjectTasks from '../Display/DisplayProjectTasks';
 
 const styles = StyleSheet.create({
   container: {

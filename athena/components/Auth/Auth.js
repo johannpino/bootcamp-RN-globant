@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import FireBaseContext from '../context/firebase/firebaseContext';
+import FireBaseContext from '../../context/firebase/firebaseContext';
 import Register from './Register';
 import Login from './Login';
 

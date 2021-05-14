@@ -4,7 +4,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { getFirstLetter, formatTime } from '../utils/helpers';
+import { getFirstLetter, formatTime } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   messageItem: {

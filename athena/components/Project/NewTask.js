@@ -1,5 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   ScrollView,
   StyleSheet,
@@ -8,9 +9,11 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import { updateDocument } from '../utils/firebase';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import { updateDocument } from '../../utils/firebase';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,27 +60,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddCollaborator = ({ navigation, route }) => {
+const NewTask = ({ navigation, route }) => {
   const firebaseContext = useContext(FireBaseContext);
-  const { user, addMessage } = firebaseContext;
-  const { key, owners } = route.params.item;
+  const { key, tasksRemaining, color, name } = route.params.item;
+  const { addTask, user, addMessage } = firebaseContext;
   const [error, setError] = useState(false);
-  const [collabEmail, setCollabEmail] = useState('');
+  const [taskName, setTaskName] = useState('');
 
   const handlePress = () => {
-    if (collabEmail.trim() === '') {
+    if (taskName.trim() === '') {
       setError(true);
       return;
     }
+    addTask({
+      completed: false,
+      name: capitalizeFirstLetter(taskName),
+      projectId: key,
+      projectName: name,
+      owner: user.email,
+      color,
+      date: Date.now(),
+    });
     updateDocument('projects', key, {
-      owners: [...owners, collabEmail.trim().toLocaleLowerCase()],
+      tasksRemaining: tasksRemaining + 1,
       lastUpdated: Date.now(),
     });
     addMessage({
       name: user.displayName,
       photoURL: user.photoURL,
       projectId: key,
-      text: `agregó a ${collabEmail}`,
+      text: `agregó ${capitalizeFirstLetter(taskName)}`,
       date: Date.now(),
       isMessage: false,
     });
@@ -96,28 +108,27 @@ const AddCollaborator = ({ navigation, route }) => {
         />
       </Pressable>
       <View style={styles.modalContainer}>
-        <Text style={styles.title}>{`Añadir${'\n'}colaborador`}</Text>
+        <Text style={styles.title}>{`Nueva${'\n'}tarea`}</Text>
         <View style={styles.inputView}>
           <TextInput
-            onChangeText={(text) => setCollabEmail(text)}
+            onChangeText={(text) => setTaskName(text)}
             style={styles.input}
-            placeholder="Email del colaborador"
+            placeholder="Nombre de la tarea"
             placeholderTextColor="#484848"
           />
         </View>
-        {error ? (
-          <Text style={styles.error}>Selecciona colaborador</Text>
-        ) : null}
+        {error ? <Text style={styles.error}>Selecciona nombre</Text> : null}
         <Pressable style={styles.projectBtn} onPress={() => handlePress()}>
-          <Text style={styles.projectBtnText}>AÑADIR COLABORADOR</Text>
+          <Text style={styles.projectBtnText}>CREAR TAREA</Text>
         </Pressable>
       </View>
     </ScrollView>
   );
 };
 
-AddCollaborator.propTypes = {
+NewTask.propTypes = {
   navigation: PropTypes.instanceOf(Object).isRequired,
   route: PropTypes.instanceOf(Object).isRequired,
 };
-export default AddCollaborator;
+
+export default NewTask;

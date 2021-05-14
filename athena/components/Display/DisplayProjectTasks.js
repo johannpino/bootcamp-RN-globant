@@ -10,9 +10,9 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import FireBaseContext from '../context/firebase/firebaseContext';
-import { getProjectTasks } from '../utils/helpers';
-import { updateDocument } from '../utils/firebase';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import { getProjectTasks } from '../../utils/helpers';
+import { updateDocument } from '../../utils/firebase';
 
 const styles = StyleSheet.create({
   taskSelectorView: {

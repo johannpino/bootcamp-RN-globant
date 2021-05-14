@@ -14,9 +14,9 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FireBaseContext from '../context/firebase/firebaseContext';
+import FireBaseContext from '../../context/firebase/firebaseContext';
 import ProfilePicture from './ProfilePicture';
-import { capitalizeFirstLetter } from '../utils/helpers';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
