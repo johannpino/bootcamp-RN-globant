@@ -76,7 +76,7 @@ const OnboardingScreen = ({navigation}) => {
           image: (
             <Image source={require('../assets/images/onboarding-img3.png')} />
           ),
-          title: '¡Bienvenido a MyAppInfo!',
+          title: '¡Bienvenido a MyInfoApp!',
           subtitle: '',
         },
       ]}
