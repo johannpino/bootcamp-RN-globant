@@ -6,11 +6,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
-import ProfileStack from './ProfileStack';
-import ProjectsStack from './ProjectsStack';
-import ChatStack from './ChatStack';
+import ProfileStack from './Stack/ProfileStack';
+import ProjectsStack from './Stack/ProjectsStack';
+import ChatStack from './Stack/ChatStack';
 import FireBaseContext from '../context/firebase/firebaseContext';
-import Auth from './Auth';
+import Auth from './Auth/Auth';
 import NavbarContext from '../context/navbar/navbarContext';
 
 const Tab = createBottomTabNavigator();

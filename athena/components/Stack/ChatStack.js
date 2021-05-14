@@ -1,22 +1,22 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Profile from './Profile';
-import EditProfile from './EditProfile';
+import Chats from '../Chat/Chats';
+import Chat from '../Chat/Chat';
 
 const Stack = createStackNavigator();
 
-const ProfileStack = () => (
+const ChatStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profile"
-      component={Profile}
+      name="Chats"
+      component={Chats}
       options={{
         headerShown: false,
       }}
     />
     <Stack.Screen
-      name="EditProfile"
-      component={EditProfile}
+      name="Chat"
+      component={Chat}
       options={{
         headerShown: false,
       }}
@@ -24,4 +24,4 @@ const ProfileStack = () => (
   </Stack.Navigator>
 );
 
-export default ProfileStack;
+export default ChatStack;

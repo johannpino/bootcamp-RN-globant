@@ -1,9 +1,10 @@
+/* eslint-disable object-curly-newline */
 import React, { useContext } from 'react';
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import DisplayChats from './DisplayChats';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import { getUserProjects, getUserGroupProjects } from '../utils/helpers';
+import DisplayChats from '../Display/DisplayChats';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import { getUserProjects, getUserGroupProjects } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {

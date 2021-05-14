@@ -6,10 +6,10 @@ import {
   getFirstLetter,
   getProjectMessages,
   limitChar,
-} from '../utils/helpers';
-import * as RootNavigation from '../utils/RootNavigation';
-import NavbarContext from '../context/navbar/navbarContext';
-import FireBaseContext from '../context/firebase/firebaseContext';
+} from '../../utils/helpers';
+import * as RootNavigation from '../../utils/RootNavigation';
+import NavbarContext from '../../context/navbar/navbarContext';
+import FireBaseContext from '../../context/firebase/firebaseContext';
 
 const styles = StyleSheet.create({
   item: {

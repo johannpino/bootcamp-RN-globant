@@ -13,14 +13,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import DisplayProjects from './DisplayProjects';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import DisplayProjects from '../Display/DisplayProjects';
 import {
   filterProjects,
   getUserProjects,
   userHasProjects,
   userHasTasks,
-} from '../utils/helpers';
+} from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {

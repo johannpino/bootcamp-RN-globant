@@ -9,8 +9,8 @@ import {
   userHasProjects,
   userHasTasks,
 } from '../utils/helpers';
-import DisplayProjects from './DisplayProjects';
-import DisplayRecentTasks from './DisplayRecentTasks';
+import DisplayProjects from './Display/DisplayProjects';
+import DisplayRecentTasks from './Display/DisplayRecentTasks';
 import FireBaseContext from '../context/firebase/firebaseContext';
 
 const styles = StyleSheet.create({

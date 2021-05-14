@@ -11,9 +11,11 @@ import {
   Pressable,
 } from 'react-native';
 import { Formik } from 'formik';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 import PropTypes from 'prop-types';
-import AuthContext from '../context/auth/authContext';
+import Icon from 'react-native-vector-icons/Ionicons';
+import AuthContext from '../../context/auth/authContext';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,10 +62,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textDecorationLine: 'underline',
   },
-  error: {
-    color: '#FF2626',
-    fontSize: 22,
-  },
   pressableButton: {
     backgroundColor: '#5014FC',
     height: 40,
@@ -75,37 +73,67 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  error: {
+    color: '#FF2626',
+    fontSize: 22,
+  },
 });
 
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
   const context = useContext(AuthContext);
-  const { login, errorMessage, setErrorMessage } = context;
+  const { register, errorMessage, setErrorMessage } = context;
 
-  const handlePress = (loginObj) => {
-    const email = loginObj.email.trim();
-    const pass = loginObj.pass.trim();
+  const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (email.trim() === '' || pass.trim() === '') {
-      setErrorMessage('Todos los campos son obligatorios');
+  const handlePress = (registerObj) => {
+    const name = capitalizeFirstLetter(registerObj.name.trim());
+    const email = registerObj.email.trim();
+    const pass = registerObj.pass.trim();
+    const repeatPass = registerObj.repeatPass.trim();
+
+    if (name === '' || email === '' || pass === '' || repeatPass === '') {
+      setErrorMessage('Todos los campos son requeridos');
       return;
     }
-    login(email, pass);
+    if (!emailIsValid(email)) {
+      setErrorMessage('Correo electronico invalido');
+      return;
+    }
+    if (!(pass === repeatPass)) {
+      setErrorMessage('Las contraseñas no son iguales');
+      return;
+    }
+    register(name, email, pass, repeatPass);
     setErrorMessage('');
   };
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Iniciar sesión</Text>
+      <Text style={styles.title}>Registrate</Text>
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+
       <Formik
         initialValues={{
+          name: '',
           email: '',
           pass: '',
+          repeatPass: '',
         }}
         onSubmit={(values) => handlePress(values)}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
+            <View style={styles.inputView}>
+              <Icon name="person" size={24} color="white" style={styles.icon} />
+              <TextInput
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+                style={styles.input}
+                placeholder="Ingresa tu nombre..."
+                placeholderTextColor="#484848"
+              />
+            </View>
             <View style={styles.inputView}>
               <Icon name="mail" size={24} color="white" style={styles.icon} />
               <TextInput
@@ -117,7 +145,6 @@ const Login = ({ navigation }) => {
                 placeholderTextColor="#484848"
               />
             </View>
-
             <View style={styles.inputView}>
               <Icon
                 name="lock-closed"
@@ -138,33 +165,52 @@ const Login = ({ navigation }) => {
                 secureTextEntry
               />
             </View>
+            <View style={styles.inputView}>
+              <Icon
+                name="lock-closed"
+                size={24}
+                color="white"
+                style={styles.icon}
+              />
+              <TextInput
+                onChangeText={handleChange('repeatPass')}
+                onBlur={handleBlur('repeatPass')}
+                value={values.repeatPass}
+                ref={(ref) =>
+                  ref && ref.setNativeProps({ style: { fontFamily: 'normal' } })
+                }
+                style={styles.input}
+                placeholder="Repite tu contraseña..."
+                placeholderTextColor="#484848"
+                secureTextEntry
+              />
+            </View>
             <View style={styles.buttonView}>
               <Pressable onPress={handleSubmit} style={styles.pressableButton}>
-                <Text style={styles.pressableButtonText}>INICIAR SESION</Text>
+                <Text style={styles.pressableButtonText}>REGISTRARME</Text>
               </Pressable>
             </View>
           </View>
         )}
       </Formik>
-
       <Pressable
         onPress={() => {
-          navigation.navigate('RegisterScreen');
+          navigation.navigate('LoginScreen');
           setErrorMessage('');
         }}
       >
         <Text style={styles.pressableText}>
-          ¿No tienes una cuenta?
+          ¿Ya tienes una cuenta?
           {'\n'}
-          Registrate
+          Inicia sesión
         </Text>
       </Pressable>
     </ScrollView>
   );
 };
 
-Login.propTypes = {
+Register.propTypes = {
   navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default Login;
+export default Register;

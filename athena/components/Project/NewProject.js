@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FireBaseContext from '../context/firebase/firebaseContext';
-import ColorContainer from './ColorContainer';
-import colors from '../utils/colors';
-import { capitalizeFirstLetter } from '../utils/helpers';
+import FireBaseContext from '../../context/firebase/firebaseContext';
+import ColorContainer from '../Color/ColorContainer';
+import colors from '../../utils/colors';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
