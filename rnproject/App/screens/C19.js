@@ -40,6 +40,7 @@ export default () => {
           source={{uri: 'https://c19.cl/'}}
           onLoadStart={() => setVisible(true)}
           onLoad={() => setVisible(false)}
+          pullToRefreshEnabled
         />
         {visible ? <ActivityIndicatorElement /> : null}
       </View>

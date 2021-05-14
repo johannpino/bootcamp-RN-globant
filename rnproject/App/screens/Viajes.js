@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -23,7 +23,7 @@ import {
   canTravelMessage,
   canNotTravelMessage,
 } from '../util/helper';
-import { UserInput } from '../components/UserInput';
+import {UserInput} from '../components/UserInput';
 
 const screen = Dimensions.get('window');
 
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#CACBF1',
     alignItems: 'center',
+    paddingTop: 20,
   },
   inputDesde: {
     width: 300,
@@ -48,16 +49,16 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   searchTitle: {
-    fontSize: 25,
+    fontSize: 20,
     textAlign: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: 30,
     paddingTop: 10,
     paddingBottom: 10,
   },
   p: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: 25,
   },
   list: {
     paddingTop: 10,
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   logo: {
-    width: screen.width * 0.5,
-    height: screen.width * 0.5,
+    width: screen.width * 0.6,
+    height: screen.width * 0.6,
   },
   logoContainer: {
     alignItems: 'center',
@@ -147,27 +148,13 @@ const Travel = () => {
   }, [queryTo]);
 
   const updateFromPhase = item => {
+    setSelected(!selected);
     let actualFromPhase = faseActual(item, dataFrom);
     setFromPhase(actualFromPhase);
   };
 
-  const canTravelMessage = () => {
-    Alert.alert('¡Hola! Te informamos que', `Puedes viajar a esta Comuna`, [
-      {
-        text: 'Aceptar',
-        style: 'ok',
-      },
-    ]);
-  };
-  const canNotTravelMessage = () => {
-    Alert.alert('¡Hola! Te informamos que', `No puedes viajar a esta comuna`, [
-      {
-        text: 'Aceptar',
-        style: 'ok',
-      },
-    ]);
-  };
   const updateToPhase = item => {
+    setSelectedDOS(!selectedDOS);
     let actualToPhase = faseActual(item, dataTo);
     toPhase = actualToPhase;
     if (fromPhase > 2 && toPhase == fromPhase) {
@@ -182,9 +169,13 @@ const Travel = () => {
       <StatusBar barStyle="light-content" backgroundColor="#CACBF1" />
       <ScrollView>
         <View style={styles.content}>
-          <Text style={styles.searchTitle}>¡Bienvenido!</Text>
+          <Text style={styles.searchTitle}>
+            ¡Averigua si puedes realizar viajes interregionales!
+          </Text>
           <Text style={styles.p}>
-            Elije la comuna de inicio y de destino para ayudarte
+            Primero busca la comuna de Inicio y presionala para que ¡cambie de
+            color! Luego encuentra la de Destino y presionala para conocer si es
+            factible que viajes
           </Text>
           <View style={styles.logoContainer}>
             <Image
@@ -204,7 +195,7 @@ const Travel = () => {
             <View style={styles.list}>
               <FlatList
                 data={filterFrom}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <View style={styles.listContainer}>
                     <Pressable
                       key={item.id}
@@ -241,7 +232,7 @@ const Travel = () => {
             <View style={styles.list}>
               <FlatList
                 data={filterTo}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <View style={styles.listContainer}>
                     <Pressable
                       key={item}
@@ -266,7 +257,7 @@ const Travel = () => {
               />
             </View>
           </SafeAreaView>
-          <View style={{ height: screen.height }} />
+          <View style={{height: screen.height}} />
         </View>
       </ScrollView>
     </View>

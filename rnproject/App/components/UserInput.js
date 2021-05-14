@@ -4,7 +4,7 @@ import colors from '../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
+    backgroundColor: '#AA8AED',
     marginHorizontal: 10,
     marginVertical: 20,
     borderRadius: 5,
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     padding: 12,
-    color: colors.black,
+    color: 'black',
   },
 });
 

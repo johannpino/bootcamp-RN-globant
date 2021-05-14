@@ -16,6 +16,7 @@ import {
 import Papa from 'papaparse';
 import colors from '../constants/colors';
 import {removeAccents, handlePress, faseActual} from '../util/helper';
+import {KeyboardMod} from '../components/KeyboardMod';
 
 const screen = Dimensions.get('window');
 
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#EBEBF8',
     alignItems: 'center',
-    paddingVertical: 10,
   },
   input: {
     width: 300,
@@ -35,30 +35,34 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   searchTitle: {
-    fontSize: 25,
-    textAlign: 'center',
-    paddingHorizontal: 20,
-  },
-  searchSubtitle: {
     fontSize: 20,
     textAlign: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  searchSubtitle: {
+    fontSize: 15,
+    textAlign: 'center',
     paddingHorizontal: 50,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   list: {
-    paddingTop: 5,
+    paddingTop: 10,
     alignItems: 'center',
   },
   listText: {
     fontSize: 25,
   },
   logo: {
-    width: screen.width * 0.6,
-    height: screen.width * 0.6,
+    width: screen.width * 0.7,
+    height: screen.width * 0.7,
   },
   logoContainer: {
     alignItems: 'center',
     alignContent: 'center',
-    paddingBottom: 10,
+    paddingBottom: 15,
     paddingTop: 10,
   },
   listContainer: {
@@ -77,6 +81,7 @@ const Filter = () => {
   const [data, setData] = useState('');
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState([]);
+  const [scrollEnabled, setScrollEnabled] = useState(false);
 
   const handleChange = e => {
     setQuery(e);
@@ -129,16 +134,17 @@ const Filter = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#EBEBF8" />
-      <ScrollView>
+      <ScrollView scrollEnabled={scrollEnabled}>
         <View style={styles.content}>
           <Text style={styles.searchTitle}>¡Hola!</Text>
           <Text style={styles.searchSubtitle}>
-            Ingresa una comuna para saber en que fase se encuentra
+            Busca una comuna y luego presionala para saber en que fase se
+            encuentra
           </Text>
           <View style={styles.logoContainer}>
             <Image
               style={styles.logo}
-              source={require('../assets/images/familia.png')}
+              source={require('../assets/images/family.png')}
             />
           </View>
 
@@ -161,9 +167,10 @@ const Filter = () => {
                 )}
                 keyExtractor={item => item.id}
                 initialNumToRender={3}
-                maxToRenderPerBatch={5}
+                maxToRenderPerBatch={3}
                 windowSize={1}
               />
+              <KeyboardMod onToggle={visible => setScrollEnabled(visible)} />
             </ScrollView>
           </View>
           <View style={{height: screen.height}} />

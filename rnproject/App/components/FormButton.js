@@ -4,8 +4,8 @@ import {windowHeight} from '../util/Dimentions';
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 10,
-    width: '100%',
+    marginTop: 20,
+    width: '50%',
     height: windowHeight / 15,
     backgroundColor: '#2e64e5',
     padding: 10,
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#ffffff',
-    fontFamily: 'Lato-Regular',
   },
 });
 

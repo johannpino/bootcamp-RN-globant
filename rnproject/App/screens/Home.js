@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     alignContent: 'center',
-    padding: 30,
-    paddingVertical: 20,
-    paddingBottom: 15,
+    padding: 20,
+    paddingVertical: 30,
+    paddingBottom: 200,
   },
   background: {
     width: screen.width * 1,
@@ -58,17 +58,16 @@ export default () => {
       <ImageBackground
         source={require('../assets/images/background.png')}
         style={styles.background}
-        imageStyle={{opacity: 0.4}}
+        imageStyle={{opacity: 0.6}}
         // eslint-disable-next-line react/jsx-closing-bracket-location
       >
         <Text style={styles.title}>¡Bienvenido!</Text>
         <Text style={styles.subTitle}>
           ¡Tú nueva experiencia para realizar tramites online acaba de comenzar!
         </Text>
-        <Text style={styles.p}>Desliza la barra lateral </Text>
+
         <View>
-          <Text>BIENVENIDO</Text>
-          <FormButton buttonTitle="Logout" onPress={() => logout()} />
+          <FormButton buttonTitle="Cerrar Sesion" onPress={() => logout()} />
         </View>
       </ImageBackground>
     </View>

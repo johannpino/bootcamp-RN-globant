@@ -36,6 +36,7 @@ export default () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
         <WebView
+          pullToRefreshEnabled
           style={{flex: 1}}
           source={{
             uri:

@@ -40,6 +40,7 @@ export default () => {
           source={{uri: 'https://comisariavirtual.cl/'}}
           onLoadStart={() => setVisible(true)}
           onLoad={() => setVisible(false)}
+          pullToRefreshEnabled
         />
         {visible ? <ActivityIndicatorElement /> : null}
       </View>
