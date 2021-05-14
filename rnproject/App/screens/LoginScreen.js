@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
-import {AuthContext} from '../config/AuthProvider';
+import { AuthContext } from '../config/AuthProvider';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,11 +47,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const {login} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.text}>MyInfoApp</Text>
@@ -72,13 +72,13 @@ const LoginScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={userPassword => setPassword(userPassword)}
-        placeholderText="Password"
+        placeholderText="Contaseña"
         iconType="lock"
         secureTextEntry
       />
 
       <FormButton
-        buttonTitle="Sign In"
+        buttonTitle="Ingresar"
         onPress={() => login(email, password)}
       />
 

@@ -1,8 +1,8 @@
-import React, {useContext, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import {AuthContext} from '../config/AuthProvider';
+import { AuthContext } from '../config/AuthProvider';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const {register} = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -64,7 +64,7 @@ const SignupScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={userPassword => setPassword(userPassword)}
-        placeholderText="Password"
+        placeholderText="Contraseña"
         iconType="lock"
         secureTextEntry={true}
       />
@@ -72,28 +72,28 @@ const SignupScreen = ({navigation}) => {
       <FormInput
         labelValue={confirmPassword}
         onChangeText={userPassword => setConfirmPassword(userPassword)}
-        placeholderText="Confirm Password"
+        placeholderText="Confirmar contraseña"
         iconType="lock"
         secureTextEntry={true}
       />
 
       <FormButton
-        buttonTitle="Sign Up"
+        buttonTitle="Registrar"
         onPress={() => register(email, password)}
       />
 
       <View style={styles.textPrivate}>
         <Text style={styles.color_textPrivate}>
-          By registering, you confirm that you accept our{' '}
+          Registrandote, confirmas que tu aceptas nuestros{' '}
         </Text>
         <TouchableOpacity onPress={() => alert('Terms Clicked!')}>
-          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
-            Terms of service
+          <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
+            Terminos de servicio
           </Text>
         </TouchableOpacity>
-        <Text style={styles.color_textPrivate}> and </Text>
-        <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
-          Privacy Policy
+        <Text style={styles.color_textPrivate}> y </Text>
+        <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
+          Politicas de Privacidad
         </Text>
       </View>
 
