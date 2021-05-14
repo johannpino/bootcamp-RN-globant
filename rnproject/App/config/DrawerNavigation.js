@@ -21,6 +21,10 @@ const DrawerNavigation = () => (
       backgroundColor: '#e6e6e6',
       width: 235,
     }}
+    drawerContentOptions={{
+      activeTintColor: '#e91e63',
+      itemStyle: {marginVertical: 10},
+    }}
     screenOptions={{
       headerShown: true,
       headerTitleAlign: 'center',
