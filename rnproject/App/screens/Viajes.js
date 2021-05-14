@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -23,7 +23,7 @@ import {
   canTravelMessage,
   canNotTravelMessage,
 } from '../util/helper';
-import {UserInput} from '../components/UserInput';
+import { UserInput } from '../components/UserInput';
 
 const screen = Dimensions.get('window');
 
@@ -170,7 +170,7 @@ const Travel = () => {
   const updateToPhase = item => {
     let actualToPhase = faseActual(item, dataTo);
     toPhase = actualToPhase;
-    if (toPhase <= fromPhase) {
+    if (fromPhase > 2 && toPhase == fromPhase) {
       canTravelMessage();
     } else {
       canNotTravelMessage();
@@ -204,7 +204,7 @@ const Travel = () => {
             <View style={styles.list}>
               <FlatList
                 data={filterFrom}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <View style={styles.listContainer}>
                     <Pressable
                       key={item.id}
@@ -241,7 +241,7 @@ const Travel = () => {
             <View style={styles.list}>
               <FlatList
                 data={filterTo}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <View style={styles.listContainer}>
                     <Pressable
                       key={item}
@@ -266,7 +266,7 @@ const Travel = () => {
               />
             </View>
           </SafeAreaView>
-          <View style={{height: screen.height}} />
+          <View style={{ height: screen.height }} />
         </View>
       </ScrollView>
     </View>
